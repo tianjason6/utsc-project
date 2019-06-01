@@ -1,0 +1,40 @@
+.Content {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  height: 100vh;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Content .ConsoleDisplay {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 100%;
+  background-color: beige;
+
+}
+
+@media (max-width: 1610px) {
+  .Content {
+    flex-direction: column;
+  }
+
+  .Content .ConsoleDisplay {
+    width: 99vw;
+  }
+}
+
+@media (max-width: 1450px) {
+  .Content .ConsoleDisplay {
+    width: 98vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .Content .ConsoleDisplay {
+    width: 96vw;
+  }
+}
