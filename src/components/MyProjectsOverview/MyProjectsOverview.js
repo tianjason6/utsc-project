@@ -32,7 +32,7 @@ class MyProjectsOverview extends Component {
             <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
             <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
 
-        </section>
+          </section>
         </div>
       </div>
 

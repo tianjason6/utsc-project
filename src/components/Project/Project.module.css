@@ -13,6 +13,7 @@
   background-image: url('../../assests/images/addProject.svg');
   background-repeat: no-repeat;
   background-position-y: 50%;
+  background-position-x: 50%;
 }
 
 .AddProject:hover {
@@ -101,7 +102,7 @@
 
 .Box div.Content p{
   min-height: 200px;
-  font-size: 18px
+  font-size: 18px;
 }
 
 .Box div button.ViewProject {
