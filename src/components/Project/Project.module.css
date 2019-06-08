@@ -10,7 +10,7 @@
 }
 
 .AddProject {
-  background-image: url('../../assests/images/addProject.svg');
+  background-image: url("../../assests/images/addProject.svg");
   background-repeat: no-repeat;
   background-position-y: 50%;
   background-position-x: 50%;
@@ -31,20 +31,20 @@
 @media (min-width: 500px) {
   .Box {
     margin-bottom: 5px;
-    width:400px;
+    width: 400px;
   }
 }
 
 @media (min-width: 768px) {
   .Box {
-    width: 550px;
+    width: 450px;
     margin-bottom: 5px;
   }
 }
 
 @media (min-width: 900px) {
   .Box {
-    width: 550px;
+    width: 450px;
     margin: 10px 20px;
   }
 }
@@ -65,8 +65,8 @@
 
 @media (min-width: 767px) {
   .Box div img {
-    width: 550px;
-    height: 550px;
+    width: 450px;
+    height: 450px;
   }
 }
 
@@ -100,7 +100,7 @@
   background-color: white;
 }
 
-.Box div.Content p{
+.Box div.Content p {
   min-height: 200px;
   font-size: 18px;
 }
@@ -121,4 +121,3 @@
   background-color: rgb(163, 62, 15);
   cursor: pointer;
 }
-
