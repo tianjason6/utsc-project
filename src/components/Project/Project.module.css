@@ -37,14 +37,14 @@
 
 @media (min-width: 768px) {
   .Box {
-    width: 450px;
+    width: 350px;
     margin-bottom: 5px;
   }
 }
 
 @media (min-width: 900px) {
   .Box {
-    width: 450px;
+    width: 350px;
     margin: 10px 20px;
   }
 }
@@ -65,8 +65,8 @@
 
 @media (min-width: 767px) {
   .Box div img {
-    width: 450px;
-    height: 450px;
+    width: 350px;
+    height: 350px;
   }
 }
 
@@ -102,7 +102,7 @@
 
 .Box div.Content p {
   min-height: 200px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .Box div button.ViewProject {
@@ -120,4 +120,8 @@
 .Box div button.ViewProject:hover {
   background-color: rgb(163, 62, 15);
   cursor: pointer;
+}
+
+h1 {
+  font-size: 20px;
 }
