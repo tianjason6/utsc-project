@@ -24,28 +24,21 @@
 @media (min-width: 300px) {
   .Box {
     margin-bottom: 5px;
-    width: 280px;
-  }
-}
-
-@media (min-width: 500px) {
-  .Box {
-    margin-bottom: 5px;
-    width: 400px;
+    width: 200px;
   }
 }
 
 @media (min-width: 768px) {
   .Box {
-    width: 350px;
+    width: 225px;
     margin-bottom: 5px;
   }
 }
 
 @media (min-width: 900px) {
   .Box {
-    width: 350px;
-    margin: 10px 20px;
+    width: 250px;
+    margin-bottom: 5px;
   }
 }
 
@@ -63,24 +56,24 @@
   cursor: pointer;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 300px) {
   .Box div img {
-    width: 350px;
-    height: 350px;
+    width: 200px;
+    height: 200px;
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .Box div img {
-    width: 400px;
-    height: 400px;
+    width: 225px;
+    height: 225px;
   }
 }
 
-@media (max-width: 500px) {
+@media (min-width: 900px) {
   .Box div img {
-    width: 280px;
-    height: 280px;
+    width: 250px;
+    height: 250px;
   }
 }
 
@@ -103,6 +96,8 @@
 .Box div.Content p {
   min-height: 200px;
   font-size: 16px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .Box div button.ViewProject {
@@ -112,7 +107,7 @@
   transition: background-color 0.2s ease;
   border-radius: 5px;
   box-shadow: 3px 3px 10px darkgrey;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
 }
@@ -123,5 +118,5 @@
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 16px;
 }
