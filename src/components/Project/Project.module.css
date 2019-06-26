@@ -24,28 +24,21 @@
 @media (min-width: 300px) {
   .Box {
     margin-bottom: 5px;
-    width: 280px;
-  }
-}
-
-@media (min-width: 500px) {
-  .Box {
-    margin-bottom: 5px;
-    width: 400px;
+    width: 200px;
   }
 }
 
 @media (min-width: 768px) {
   .Box {
-    width: 350px;
+    width: 225px;
     margin-bottom: 5px;
   }
 }
 
 @media (min-width: 900px) {
   .Box {
-    width: 350px;
-    margin: 10px 20px;
+    width: 250px;
+    margin-bottom: 10px;
   }
 }
 
@@ -63,33 +56,26 @@
   cursor: pointer;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 300px) {
   .Box div img {
-    width: 350px;
-    height: 350px;
+    width: 200px;
+    height: 200px;
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .Box div img {
-    width: 400px;
-    height: 400px;
+    width: 225px;
+    height: 225px;
   }
 }
 
-@media (max-width: 500px) {
+@media (min-width: 900px) {
   .Box div img {
-    width: 280px;
-    height: 280px;
+    width: 250px;
+    height: 250px;
   }
 }
-
-/* @media (max-width: 550px) {
-  .Box div img {
-    width: 400px;
-    height: 400px;
-  }
-} */
 
 .Box div.Content {
   padding-top: 20px;
