@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ConsoleSideMenu from '../ConsoleSideMenu/ConsoleSideMenu';
 import MyProjects from '../MyProjects/MyProjects';
 import ConsoleLogout from '../ConsoleLogout/ConsoleLogout';
-import ProjectFullDetail from '../ProjectFullDetailEdit/ProjectFullDetailEdit';
+import ProjectFullDetailEdit from '../ProjectFullDetailEdit/ProjectFullDetailEdit';
 
 class Console extends Component {
   render() {
@@ -18,7 +18,7 @@ class Console extends Component {
             <Switch>
               <Route path="/test/MyProjects" component={MyProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
-              <Route path="/test/ProjectFullDetailEdit" component={ProjectFullDetail} />
+              <Route path="/test/EditMyProjectFullDetail" component={ProjectFullDetailEdit} />
               <Redirect to="/test/MyProjects" />
             </Switch>
           }
