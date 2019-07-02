@@ -11,42 +11,18 @@ class ProjectAdd extends Component {
 
   };
 
-  componentDidMount() {
-    this.props.onInitProject(this.state.projectTitle);
-  }
-
-  componentDidUpdate() {
-    if (this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
-      this.setState({ mainImgURL: this.props.project.imgs[0] });
-    }
-  }
-
-  selectPicture = (imgURL) => {
-    this.setState({ mainImgURL: imgURL });
-  }
-
   render() {
     return (
       <div className={styles.Content}>
-        <div className={styles.TitleImgs}>
-          <h1>{this.props.project.title}</h1>
-          {this.props.error ? <p>Error loading project</p> : null}
-          <img className={styles.imgEnlarge} src={this.state.mainImgURL} alt="Main Img"></img>
-          <div className={styles.imgSelect}>
-            {
-              this.props.project.imgs ?
-                this.props.project.imgs.map((imgURL, i) => {
-                  return <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
-                })
-                : null
-            }
-
+        <form action="">
+          <div className={styles.TitleImgs}>
+            <input type="text" name="title" placeholder="Project Name"></input>
+            <input type="file" name="image" accept="image/*"></input>
           </div>
-        </div>
-        <h1>Description</h1>
-        <p className={styles.Description}>{this.props.project.description}</p>
+          <textarea type="text" name="description" placeholder="Enter project description"></textarea>
 
-        <button>Join Project</button>
+          <button>Add Project</button>
+        </form>
       </div>
     )
   }

@@ -19,7 +19,7 @@ class Console extends Component {
             <Switch>
               <Route path="/test/MyProjects" component={MyProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
-              <Route path="/test/EditMyProjectFullDetail?addNewProject=true" component={ProjectAdd} />
+              <Route path="/test/MyProjectFullDetail" component={ProjectAdd} />
               <Route path="/test/EditMyProjectFullDetail" component={ProjectFullDetailEdit} />
               <Redirect to="/test/MyProjects" />
             </Switch>
