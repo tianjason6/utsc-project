@@ -7,7 +7,7 @@ class ProjectFullDetailEdit extends Component {
 
   constructor(props) {
     super(props);
-    console.log("helloooooooooo");
+    console.log("testing" + props);
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
@@ -17,11 +17,11 @@ class ProjectFullDetailEdit extends Component {
   };
 
   componentDidMount() {
-    this.props.onInitProject(this.state.projectTitle);
+    this.props.onInitProject(this.props.project.title);
   }
 
   componentDidUpdate() {
-    if (this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
+    if (this.state.mainImgURL === '' && this.props.imgs !== undefined) {
       this.setState({ mainImgURL: this.props.project.imgs[0] });
     }
   }
@@ -31,18 +31,15 @@ class ProjectFullDetailEdit extends Component {
   }
 
   render() {
-    console.log("helloooooooooo");
-
     return (
-
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
-          <h1>{this.props.project.title}</h1>
+          <h1>{this.state.projectTitle}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
           <img className={styles.imgEnlarge} src={this.state.mainImgURL} alt="Main Img"></img>
           <div className={styles.imgSelect}>
             {
-              this.props.project.imgs ?
+              this.props.imgs ?
                 this.props.project.imgs.map((imgURL, i) => {
                   return <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
                 })
@@ -52,7 +49,7 @@ class ProjectFullDetailEdit extends Component {
           </div>
         </div>
         <h1>Description</h1>
-        <p className={styles.Description}>{this.props.project.description}</p>
+        <p className={styles.Description}>{this.props.description}</p>
 
         <button>Join Project</button>
       </div>

@@ -8,7 +8,7 @@ class Project extends Component {
 
   routeProjectFullDetail = () => {
     if (this.props.editProject === true) {
-      history.push('/test/EditMyProjectFullDetail?projectTitle=' + this.props.projectInfo.title);
+      history.push('/test/EditMyProjectFullDetail?projectTitle=' + this.props.title);
     } else {
       history.push('/ProjectFullDetail?projectTitle=' + this.props.projectInfo.title);
     }
