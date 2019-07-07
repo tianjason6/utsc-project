@@ -17,7 +17,7 @@ class ProjectFullDetailEdit extends Component {
   };
 
   componentDidMount() {
-    this.props.onInitProject(this.props.project.title);
+    this.props.onInitProject(this.state.projectTitle);
   }
 
   componentDidUpdate() {

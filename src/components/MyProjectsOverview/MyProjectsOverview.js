@@ -22,16 +22,16 @@ class MyProjectsOverview extends Component {
             {/* {this.props.featuredProjects.map((featuredProject) => {
               return <Project key={featuredProject.title} title={featuredProject.title} description={featuredProject.description} img={featuredProject.imgs[0]} projectInfo={featuredProject} />
             }) } */}
-            <Project addProject img={AddProject1Img} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
-            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
 
+            <Project addProject img={AddProject1Img} />
+            <Project editProject title={'A'} description={'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various version'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1Project11234'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
+            <Project editProject title={'Project1'} description={'hello'} img={Project1Img} projectInfo={'helo'} />
           </section>
         </div>
       </div>
