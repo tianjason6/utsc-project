@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectAdd.module.css';
 import * as projectActions from '../../store/actions/project';
+import AddProject1Img from '../../assests/images/addProject.svg';
 
 class ProjectAdd extends Component {
 
@@ -16,17 +17,18 @@ class ProjectAdd extends Component {
       <div className={styles.Content}>
         <form action="">
           <div className={styles.TitleImgs}>
-            <h2>Create a New Project</h2>
-
             <input type="text" name="title" placeholder="Project Name"></input>
+            <img src={AddProject1Img}></img>
             <input type="file" name="image" accept="image/*"></input>
+            <h1>Description</h1>
+            <textarea className={styles.Description} type="text" name="description" placeholder="Enter project description"></textarea>
+            <button>Add Project</button>
           </div>
-          <textarea type="text" name="description" placeholder="Enter project description"></textarea>
-
-          <button>Add Project</button>
         </form>
       </div>
     )
+
+
   }
 }
 

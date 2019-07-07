@@ -7,7 +7,6 @@ class ProjectFullDetailEdit extends Component {
 
   constructor(props) {
     super(props);
-    console.log("testing" + props);
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
