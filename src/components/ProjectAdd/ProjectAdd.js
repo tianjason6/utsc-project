@@ -8,21 +8,42 @@ class ProjectAdd extends Component {
 
   constructor(props) {
     super(props);
-    this.params = new URLSearchParams(this.props.location.search);
+    this.state = {
+      title: '',
+      description: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
   };
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const project = {
+      title: this.state.title,
+      description: this.state.body
+    }
+    console.log("Project Title: " + project.title);
+    console.log("Project Description: " + project.description);
+
+  }
 
   render() {
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
-          <input type="text" name="title" placeholder="Project Name"></input>
+          <input type="text" name="title" placeholder="Project Name" onChange={this.onChange} value={this.state.title}></input>
           <img src={AddProject1Img}></img>
           <input type="file" name="image" accept="image/*"></input>
         </div>
         <h1>Description</h1>
-        <textarea className={styles.Description} type="text" name="description" placeholder="Enter project description"></textarea>
-        <button className={styles.ViewProject}>Add Project</button>
+        <textarea className={styles.Description} type="text" name="description" placeholder="Enter project description" onChange={this.onChange} value={this.state.description}></textarea>
+        <button className={styles.ViewProject} onClick={this.onSubmit}>Add Project</button>
       </div>
     )
 
