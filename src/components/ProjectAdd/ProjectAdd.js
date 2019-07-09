@@ -15,16 +15,14 @@ class ProjectAdd extends Component {
   render() {
     return (
       <div className={styles.Content}>
-        <form action="">
-          <div className={styles.TitleImgs}>
-            <input type="text" name="title" placeholder="Project Name"></input>
-            <img src={AddProject1Img}></img>
-            <input type="file" name="image" accept="image/*"></input>
-            <h1>Description</h1>
-            <textarea className={styles.Description} type="text" name="description" placeholder="Enter project description"></textarea>
-            <button>Add Project</button>
-          </div>
-        </form>
+        <div className={styles.TitleImgs}>
+          <input type="text" name="title" placeholder="Project Name"></input>
+          <img src={AddProject1Img}></img>
+          <input type="file" name="image" accept="image/*"></input>
+        </div>
+        <h1>Description</h1>
+        <textarea className={styles.Description} type="text" name="description" placeholder="Enter project description"></textarea>
+        <button className={styles.ViewProject}>Add Project</button>
       </div>
     )
 

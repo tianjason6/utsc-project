@@ -20,8 +20,8 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
-      this.setState({mainImgURL: this.props.project.imgs[0]});
+    if (this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
+      this.setState({ mainImgURL: this.props.project.imgs[0] });
     }
   }
 
@@ -38,11 +38,11 @@ class ProjectFullDetail extends Component {
           <img className={styles.imgEnlarge} src={this.state.mainImgURL} alt="Main Img"></img>
           <div className={styles.imgSelect}>
             {
-              this.props.project.imgs ? 
-              this.props.project.imgs.map((imgURL, i) => {
-                return  <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
-              })
-              : null
+              this.props.project.imgs ?
+                this.props.project.imgs.map((imgURL, i) => {
+                  return <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
+                })
+                : null
             }
 
           </div>
