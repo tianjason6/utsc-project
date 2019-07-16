@@ -41,7 +41,8 @@ class ProjectAdd extends Component {
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
-          <input type="text" name="title" placeholder="Project Name" onChange={this.onChange} value={this.state.title}></input>
+          <input type="text" name="title" placeholder="Project Name" onChange={this.onChange}
+            value={this.state.title} maxLength="25"></input>
           <img className={styles.imgEnlarge} src={this.state.mainImage}></img>
           <span>
             <h2>Upload Main Project Image</h2>
@@ -65,15 +66,13 @@ class ProjectAdd extends Component {
 
         <span>
           <textarea id="message" className={styles.Description} maxlength="200"
-            type="text" name="description" placeholder="Enter a description for your project and any open positions." onChange={this.onChange} value={this.state.description}></textarea>
+            type="text" name="description" placeholder="Enter a description for your project and describe any open positions." onChange={this.onChange} value={this.state.description}></textarea>
           <p>Characters Remaining: {200 - this.state.characters}
           </p>
         </span>
         <button className={styles.ViewProject} onClick={this.onSubmit}>Add Project</button>
       </div>
     )
-
-
   }
 }
 
