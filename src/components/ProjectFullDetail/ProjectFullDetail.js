@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectFullDetail.module.css';
 import * as projectActions from '../../store/actions/project';
+import Modal from '../Modal/Modal';
 
 class ProjectFullDetail extends Component {
 
@@ -11,7 +12,8 @@ class ProjectFullDetail extends Component {
 
     this.state = {
       mainImgURL: '',
-      projectTitle: this.params.get('projectTitle').replace('%20', ' ')
+      projectTitle: this.params.get('projectTitle').replace('%20', ' '),
+      showModal: false
     }
   };
 
@@ -29,9 +31,18 @@ class ProjectFullDetail extends Component {
     this.setState({ mainImgURL: imgURL });
   }
 
+  showModal = () => {
+    console.log('show modal woop');
+    this.setState({ showModal: true});
+  }
+  closeModal = ()  => {
+    this.setState({showModal: false});
+  }
+
   render() {
     return (
       <div className={styles.Content}>
+        
         <div className={styles.TitleImgs}>
           <h1>{this.props.project.title}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
@@ -50,7 +61,10 @@ class ProjectFullDetail extends Component {
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
 
-        <button>Join Project</button>
+        <Modal show={this.state.showModal} closeModal={this.closeModal} >
+          Project Owner Info goes Here
+        </Modal>
+        <button onClick={this.showModal} >Join Project</button>
       </div>
     )
   }
