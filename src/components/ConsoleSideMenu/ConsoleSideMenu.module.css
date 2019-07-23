@@ -8,7 +8,7 @@
   .Content {
     flex-direction: column;
     width: 10vw;
-    min-height: 100%;
+    min-height: 90%;
     border-right: 2px solid black;
     padding-top: 30px;
   }

@@ -52,14 +52,16 @@ class ProjectAdd extends Component {
             <img className={styles.imgItem} src={this.state.sideImage1}></img>
             <img className={styles.imgItem} src={this.state.sideImage2}></img>
             <img className={styles.imgItem} src={this.state.sideImage3}></img>
+            <img className={styles.imgItem} src={this.state.sideImage3}></img>
           </div>
           <span>
             <div className={styles.imgUpload}>
               <input type="file" classname={styles.uploadItem} accept="image/*"></input>
               <input type="file" classname={styles.uploadItem} accept="image/*"></input>
               <input type="file" classname={styles.uploadItem} accept="image/*"></input>
+              <input type="file" classname={styles.uploadItem} accept="image/*"></input>
             </div>
-            <h2>Upload up to 3 project images</h2>
+            <h2>Upload up to 4 project images</h2>
           </span>
         </div>
         <h1>Description</h1>
