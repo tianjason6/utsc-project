@@ -32,7 +32,6 @@ class ProjectFullDetail extends Component {
   }
 
   showModal = () => {
-    console.log('show modal woop');
     this.setState({ showModal: true});
   }
   closeModal = ()  => {
@@ -62,7 +61,11 @@ class ProjectFullDetail extends Component {
         <p className={styles.Description}>{this.props.project.description}</p>
 
         <Modal show={this.state.showModal} closeModal={this.closeModal} >
-          Project Owner Info goes Here
+          <h3> {this.state.projectTitle} </h3>
+          <div>Additional Information (description will temporarily fill this spot)</div>
+          <div>{this.props.project.project}</div>
+
+          <button onClick={this.closeModal}>Exit</button>
         </Modal>
         <button onClick={this.showModal} >Join Project</button>
       </div>

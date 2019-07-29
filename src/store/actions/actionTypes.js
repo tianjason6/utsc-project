@@ -17,3 +17,6 @@ export const SIGN_IN_RESET = 'SIGN_IN_RESET';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+
+export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USERS = 'FETCH_USERS';

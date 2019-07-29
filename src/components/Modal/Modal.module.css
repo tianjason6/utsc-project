@@ -8,53 +8,15 @@
     background-color: white;
     border: 3px solid  black;
     border-radius: 10px;
+    overflow: scroll;
+    text-align: center;
     
     z-index: 500;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*    position: fixed;
-    z-index: 500;
-    background-color: red;
-    width: 70%;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px black;
-    padding: 16px;
-    left: 15%;
-    top: 30%;
-    box-sizing: border-box;
-    transition: all 0.3s ease-out;
-    */
+.Content{
+    position: relative;
+    top: 3%;
+    left: 3%;;
+    width: 90%;
 }
