@@ -32,9 +32,16 @@ class ProjectAdd extends Component {
       title: this.state.title,
       description: this.state.description
     }
-    console.log("Project Title: " + project.title);
-    console.log("Project Description: " + project.description);
 
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(project)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   }
 
   render() {
@@ -67,9 +74,9 @@ class ProjectAdd extends Component {
         <h1>Description</h1>
 
         <span>
-          <textarea id="message" className={styles.Description} maxlength="200"
+          <textarea id="message" className={styles.Description} maxlength="800"
             type="text" name="description" placeholder="Enter a description for your project and describe any open positions." onChange={this.onChange} value={this.state.description}></textarea>
-          <p>Characters Remaining: {200 - this.state.characters}
+          <p>Characters Remaining: {800 - this.state.characters}
           </p>
         </span>
         <button className={styles.ViewProject} onClick={this.onSubmit}>Add Project</button>
@@ -77,6 +84,10 @@ class ProjectAdd extends Component {
     )
   }
 }
+
+window.onbeforeunload = function () {
+  return true;
+};
 
 const mapStateToProps = state => {
   return {

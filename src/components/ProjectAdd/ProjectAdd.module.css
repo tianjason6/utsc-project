@@ -4,7 +4,7 @@
   justify-content: center;
   height: 100%;
   overflow-y: scroll;
-  padding-top: 800px;
+  padding-top: 930px;
 }
 
 .Content .TitleImgs {
@@ -30,7 +30,6 @@ input[type="file"] {
   margin-left: 10px;
   margin-right: 10px;
   width: 200px;
-  height: 200px;
 }
 
 
@@ -39,7 +38,7 @@ input[type="file"] {
   margin-left: auto;
   margin-right: auto;
   width: 1200px;
-  height: 100px;
+  height: 300px;
   font-size: 26px;
   font-family: sans-serif;
   resize: none;
@@ -91,6 +90,7 @@ input[type="file"] {
 .Content button {
   width: 70%;
   height: 60px;
+  padding: 15px;
   background-color: rgb(247, 103, 36);
   transition: background-color 0.2s ease;
   border-radius: 5px;
