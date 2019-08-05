@@ -8,8 +8,10 @@ const inititalState={
 }
 
 const reducer = (state=inititalState, action) => {
-    switch(action){
+    console.log("USER REDUCEr");
+    switch(action.type){
         case actionTypes.FETCH_USER:
+            console.log("FETCH USER CASE");
             return{
                 ...state,
                 user: action.user,
@@ -20,3 +22,4 @@ const reducer = (state=inititalState, action) => {
             return state
     }
 }
+export default reducer;

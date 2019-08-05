@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../../../store/actions/user';
-import axios from '../../../axios-projects';
+
 class ProjectOwnerDetail extends Component{
     constructor(props) {
         super(props);
@@ -26,7 +26,8 @@ class ProjectOwnerDetail extends Component{
         
         //this.props.getUser(this.props.owner);
         console.log("after getUser");
-        console.log("3: " +this.props.user);
+        console.log("3: " + this.props.user);
+        console.log(this.props.user);
         console.log("69" + this.state.userData);
     }
     // componentDidUpdate() {
@@ -41,12 +42,14 @@ class ProjectOwnerDetail extends Component{
         console.log("420: " + this.state.userData);
         console.log(this.state.userData);
 
+
+
         let ownerDetails = (<div>Loading...</div>);
-        if(this.props.user){
-            ownerDetails = (
-                <div>{this.props.user}</div>
-            )
-        }
+        // if(this.props.user){
+        //     ownerDetails = (
+        //         <div>{this.props.user}</div>
+        //     )
+        // }
 
         return(
             <div>
@@ -61,10 +64,11 @@ class ProjectOwnerDetail extends Component{
 
 const mapStateToProps = state => {
     return{
-        user: state.user
+        user: state.userReducer.user
     };
 }
 const mapDispatchToProps = dispatch => {
+    console.log("map to dispatch to props");
     return{
         getUser: (username) => dispatch(userActions.fetchUser(username))
     }

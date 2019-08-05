@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectFullDetail.module.css';
 import * as projectActions from '../../store/actions/project';
-import * as userActions from '../../store/actions/user';
 import Modal from '../Modal/Modal';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
@@ -80,15 +79,13 @@ class ProjectFullDetail extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projectReducer.project,
-    user: state.user,
     error: state.projectsReducer.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
-    getUser: (username) => dispatch(userActions.fetchUser(username))
+    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle))
   }
 }
 

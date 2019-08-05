@@ -12,6 +12,7 @@ import featuredProjectsReducer from './store/reducers/featuredProjects';
 import signUpReducer from './store/reducers/signUp';
 import signInReducer from './store/reducers/signIn';
 import authReducer from './store/reducers/auth';
+import userReducer from './store/reducers/user';
 
 
 import './index.css';
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   featuredProjectsReducer: featuredProjectsReducer,
   signUpReducer: signUpReducer,
   signInReducer: signInReducer,
-  authReducer: authReducer
+  authReducer: authReducer,
+  userReducer: userReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
