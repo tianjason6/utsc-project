@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectFullDetail.module.css';
 import * as projectActions from '../../store/actions/project';
+import * as userActions from '../../store/actions/user';
 import Modal from '../Modal/Modal';
+
+import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
 
 class ProjectFullDetail extends Component {
 
@@ -13,7 +16,8 @@ class ProjectFullDetail extends Component {
     this.state = {
       mainImgURL: '',
       projectTitle: this.params.get('projectTitle').replace('%20', ' '),
-      showModal: false
+      showModal: false,
+      projectOwner: ''
     }
   };
 
@@ -41,7 +45,6 @@ class ProjectFullDetail extends Component {
   render() {
     return (
       <div className={styles.Content}>
-        
         <div className={styles.TitleImgs}>
           <h1>{this.props.project.title}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
@@ -63,7 +66,8 @@ class ProjectFullDetail extends Component {
         <Modal show={this.state.showModal} closeModal={this.closeModal} >
           <h3> {this.state.projectTitle} </h3>
           <div>Additional Information (description will temporarily fill this spot)</div>
-          <div>{this.props.project.project}</div>
+          <div>{this.props.project.description}</div>
+          <ProjectOwnerDetail owner={this.props.project.owner} />
 
           <button onClick={this.closeModal}>Exit</button>
         </Modal>
@@ -76,13 +80,15 @@ class ProjectFullDetail extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projectReducer.project,
+    user: state.user,
     error: state.projectsReducer.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle))
+    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
+    getUser: (username) => dispatch(userActions.fetchUser(username))
   }
 }
 
