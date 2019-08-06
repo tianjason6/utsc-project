@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectFullDetail.module.css';
 import * as projectActions from '../../store/actions/project';
+import * as userActions from '../../store/actions/user';
 import Modal from '../Modal/Modal';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
@@ -42,6 +43,12 @@ class ProjectFullDetail extends Component {
   }
 
   render() {
+    console.log("RENDER props user");
+    console.log(this.props.user.email);
+    let userInfo = "Loading...";
+    if(this.props.user != undefined){
+      userInfo=(<div>{this.props.user.email}</div>);
+    }
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
@@ -66,8 +73,10 @@ class ProjectFullDetail extends Component {
           <h3> {this.state.projectTitle} </h3>
           <div>Additional Information (description will temporarily fill this spot)</div>
           <div>{this.props.project.description}</div>
-          <ProjectOwnerDetail owner={this.props.project.owner} />
-
+          {/* <ProjectOwnerDetail owner={this.props.project.owner} /> */}
+          <button onClick={() => console.log(this.props.user)}>pen15</button>
+          {/* <div>{this.props.user.email}</div> */}
+          <div>{userInfo}</div>
           <button onClick={this.closeModal}>Exit</button>
         </Modal>
         <button onClick={this.showModal} >Join Project</button>
@@ -79,13 +88,14 @@ class ProjectFullDetail extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projectReducer.project,
+    user: state.userReducer.user,
     error: state.projectsReducer.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle))
+    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
   }
 }
 

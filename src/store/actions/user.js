@@ -10,6 +10,7 @@ export const fetchUser = ( username ) => {
         .then(res => {
             console.log("res data");
             console.log(res.data);
+            console.log(actionTypes.FETCH_USER);
             dispatch({
                 type: actionTypes.FETCH_USER,
                 user: res.data

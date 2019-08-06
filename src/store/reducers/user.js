@@ -7,8 +7,10 @@ const inititalState={
     error: false
 }
 
-const reducer = (state=inititalState, action) => {
+const reducer = (state = inititalState, action) => {
     console.log("USER REDUCEr");
+    console.log(state);
+    console.log(action);
     switch(action.type){
         case actionTypes.FETCH_USER:
             console.log("FETCH USER CASE");
