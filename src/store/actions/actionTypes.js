@@ -15,5 +15,8 @@ export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
 export const SIGN_IN_LOADING = 'SIGN_IN_LOADING';
 export const SIGN_IN_RESET = 'SIGN_IN_RESET';
 
+export const NEW_PROJECT = 'NEW_PROJECT';
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+

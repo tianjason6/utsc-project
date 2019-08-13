@@ -33,7 +33,7 @@ class ProjectAdd extends Component {
       description: this.state.description
     }
 
-    fetch('https://jsonplaceholder.typicode.com/posts', {
+    fetch('', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -98,7 +98,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle))
+    onInitProject: (title) => dispatch(projectActions.initProject(title))
   }
 }
 
