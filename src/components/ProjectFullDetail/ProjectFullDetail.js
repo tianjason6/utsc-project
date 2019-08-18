@@ -47,7 +47,16 @@ class ProjectFullDetail extends Component {
     console.log(this.props.user.email);
     let userInfo = "Loading...";
     if(this.props.user != undefined){
-      userInfo=(<div>{this.props.user.email}</div>);
+      userInfo=(
+        <div>
+          <h2> {this.state.projectTitle} </h2>
+          <div><b>Project Owner:</b> {this.props.project.owner}</div>
+          <div><b>Email:</b> {this.props.user.email}</div>
+          <br />
+          <div><b>Description:</b></div>
+          <div>{this.props.project.description}</div>
+        </div>
+      );
     }
     return (
       <div className={styles.Content}>
@@ -70,12 +79,6 @@ class ProjectFullDetail extends Component {
         <p className={styles.Description}>{this.props.project.description}</p>
 
         <Modal show={this.state.showModal} closeModal={this.closeModal} >
-          <h3> {this.state.projectTitle} </h3>
-          <div>Additional Information (description will temporarily fill this spot)</div>
-          <div>{this.props.project.description}</div>
-          {/* <ProjectOwnerDetail owner={this.props.project.owner} /> */}
-          <button onClick={() => console.log(this.props.user)}>pen15</button>
-          {/* <div>{this.props.user.email}</div> */}
           <div>{userInfo}</div>
           <button onClick={this.closeModal}>Exit</button>
         </Modal>

@@ -6,9 +6,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  console.log("project reducer thingz");
-  console.log(action);
-  console.log(state);
   switch (action.type) {
     case actionTypes.SET_PROJECT:
       return {

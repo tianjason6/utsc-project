@@ -19,11 +19,8 @@ export const initProject = (projectTitle) => {
 
     axios.get('Projects/' + projectTitle + '.json')
       .then(res => {
-        console.log(res.data);
         axios.get('Users/' + res.data.owner + '.json')
         .then(res => {
-            console.log("get within a get");
-            console.log(res.data);
             dispatch({
                 type: actionTypes.FETCH_USER,
                 user: res.data

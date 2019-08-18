@@ -8,6 +8,9 @@ const FullHeader = (props) => {
   const routeToContactUs = () => {
     history.push('ContactUs');
   }
+  const routeToViewProjects = () => {
+    history.push('ViewProjects');
+  }
 
   return (
     <div className={styles.Background}>
@@ -19,7 +22,7 @@ const FullHeader = (props) => {
         <p>I am looking to...</p>
         <div className={styles.ButtonGroup}>
           <button onClick={routeToContactUs}>Start a Project</button>
-          <button>Join a Project</button>
+          <button onClick={routeToViewProjects}>Join a Project</button>
         </div>
       </div>
 
