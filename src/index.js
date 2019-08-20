@@ -5,9 +5,10 @@ import history from './history';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { reducer as formReducer }from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 import projectsReducer from './store/reducers/projects';
 import projectReducer from './store/reducers/project';
+import projectAddReducer from './store/reducers/ProjectAdd';
 import featuredProjectsReducer from './store/reducers/featuredProjects';
 import signUpReducer from './store/reducers/signUp';
 import signInReducer from './store/reducers/signIn';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   projectsReducer: projectsReducer,
   projectReducer: projectReducer,
+  projectAddReducer: projectAddReducer,
   featuredProjectsReducer: featuredProjectsReducer,
   signUpReducer: signUpReducer,
   signInReducer: signInReducer,
@@ -33,9 +35,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const app = (
   <Provider store={store}>
-      <Router history={history}>
-          <App />
-      </Router>
+    <Router history={history}>
+      <App />
+    </Router>
   </Provider>
 );
 
