@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectAdd.module.css';
-import * as projectActions from '../../store/actions/project';
-import AddProject1Img from '../../assests/images/addProject.svg';
-import tempImg from '../../assests/images/dot.png';
+import * as projectActions from '../../store/actions/addProject';
 
 class ProjectAdd extends Component {
 
@@ -63,10 +61,10 @@ class ProjectAdd extends Component {
           </div>
           <span>
             <div className={styles.imgUpload}>
-              <input type="file" classname={styles.uploadItem} accept="image/*"></input>
-              <input type="file" classname={styles.uploadItem} accept="image/*"></input>
-              <input type="file" classname={styles.uploadItem} accept="image/*"></input>
-              <input type="file" classname={styles.uploadItem} accept="image/*"></input>
+              <input type="file" className={styles.uploadItem} accept="image/*"></input>
+              <input type="file" className={styles.uploadItem} accept="image/*"></input>
+              <input type="file" className={styles.uploadItem} accept="image/*"></input>
+              <input type="file" className={styles.uploadItem} accept="image/*"></input>
             </div>
             <h2>Upload up to 4 project images</h2>
           </span>
@@ -74,7 +72,7 @@ class ProjectAdd extends Component {
         <h1>Description</h1>
 
         <span>
-          <textarea id="message" className={styles.Description} maxlength="800"
+          <textarea id="message" className={styles.Description} maxLength="800"
             type="text" name="description" placeholder="Enter a description for your project and describe any open positions." onChange={this.onChange} value={this.state.description}></textarea>
           <p>Characters Remaining: {800 - this.state.characters}
           </p>
@@ -91,14 +89,13 @@ window.onbeforeunload = function () {
 
 const mapStateToProps = state => {
   return {
-    project: state.projectReducer.project,
-    error: state.projectsReducer.error
+    title: state.projectAddReducer.title,
+    description: state.projectAddReducer.description
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (title) => dispatch(projectActions.initProject(title))
   }
 }
 

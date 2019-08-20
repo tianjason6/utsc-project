@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import projectsReducer from './store/reducers/projects';
 import projectReducer from './store/reducers/project';
-import projectAddReducer from './store/reducers/ProjectAdd';
+import projectAddReducer from './store/reducers/projectAdd';
 import featuredProjectsReducer from './store/reducers/featuredProjects';
 import signUpReducer from './store/reducers/signUp';
 import signInReducer from './store/reducers/signIn';
