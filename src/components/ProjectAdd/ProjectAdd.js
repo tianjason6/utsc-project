@@ -19,8 +19,12 @@ class ProjectAdd extends Component {
   };
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    this.setState({ characters: e.target.value.length });
+    console.log(e.target.value);
+
+    this.setState({ [e.target.name]: e.target.value, characters: e.target.value.length }, () => {
+      this.props.projectAdd(this.state.title, this.state.description);
+
+    });
   }
 
   onSubmit(e) {
@@ -43,6 +47,7 @@ class ProjectAdd extends Component {
   }
 
   render() {
+    console.log('mapStateToProps', this.props.title, this.props.description);
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
@@ -96,6 +101,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    projectAdd: (title, description) => dispatch(projectActions.projectAdd(title, description))
   }
 }
 

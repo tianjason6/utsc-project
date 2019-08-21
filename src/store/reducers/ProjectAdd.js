@@ -12,10 +12,15 @@ const reducer = (state = initialState, action) => {
             return {
                 title: action.title,
                 description: action.description,
+
             }
         default:
             return state;
     }
+    console.log('projectAdd Reducer', action.title)
+    console.log('projectAdd Reducer', state)
+
+
 }
 
 export default reducer;
