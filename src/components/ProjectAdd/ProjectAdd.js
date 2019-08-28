@@ -7,12 +7,12 @@ class ProjectAdd extends Component {
 
   constructor(props) {
     super(props);
-    this.inputRef = React.createRef();
-    this.outputRef = React.createRef();
     this.state = {
       title: '',
       description: '',
-      characters: ''
+      characters: '',
+      mainImage: '',
+      images: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,16 +34,9 @@ class ProjectAdd extends Component {
       title: this.state.title,
       description: this.state.description
     }
+    this.props.onInitProjectAdd(this.state.title, this.state.description);
 
-    fetch('', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(project)
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+
   }
 
   render() {
@@ -101,7 +94,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    projectAdd: (title, description) => dispatch(projectActions.projectAdd(title, description))
+    projectAdd: (title, description) => dispatch(projectActions.projectAdd(title, description)),
+    onInitProjectAdd: (title, description) => dispatch(projectActions.initProjectAdd(title, description))
+
   }
 }
 

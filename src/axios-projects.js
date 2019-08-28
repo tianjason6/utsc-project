@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://utscprojects.firebaseio.com/'
+  baseURL: 'https://utsc-projects.firebaseio.com/'
 });
 
 export default instance;

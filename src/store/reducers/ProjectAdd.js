@@ -2,7 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     title: null,  //Adding just the title to begin with
-    description: null
+    description: null,
+    mainImage: null,
+    images: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +14,8 @@ const reducer = (state = initialState, action) => {
             return {
                 title: action.title,
                 description: action.description,
+                mainImage: action.mainImage,
+                images: action.images
 
             }
         default:
