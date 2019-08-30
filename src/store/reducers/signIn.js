@@ -3,7 +3,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   errorMessage: '',
   error: null, //null means untouched
-  loading: false
+  loading: false,
+  token: null,
+  userId: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,8 +15,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         errorMessage: '',
         error: false,
-        loading: false,
+        loading: true,
       }
+    case actionTypes.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        token: action.idToken,
+        userId: action.userId,
+        error: false
+
+      }
+
     case actionTypes.SIGN_IN_FAILED:
       return {
         ...state,

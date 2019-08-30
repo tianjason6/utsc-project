@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   flex: 4;
+  height: 250px;
   background-color: lightgrey;
   border-radius: 6px;
   padding-top: 20px;

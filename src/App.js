@@ -16,15 +16,21 @@ import ProjectFullDetail from './components/ProjectFullDetail/ProjectFullDetail'
 import ViewProjects from './components/ViewProjects/ViewProjects';
 import Console from './components/Console/Console';
 
+import  * as authActions from './store/actions/auth';
+
+
 library.add(faLaptopCode, faDollarSign, faFire, faHeart);
 
 class App extends Component {
+  componentDidMount(){
+    this.props.autoSignIn();
+  }
   render() {
-
     let routes = (
       <Switch>
-        <Route path="/test" component={Console} />
-
+        
+        <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
+        
         <Route path="/ViewProjects" component={ViewProjects} />
         <Route path="/ProjectFullDetail" component={ProjectFullDetail} />
         <Route path="/About" component={About} />
@@ -35,6 +41,8 @@ class App extends Component {
         <Redirect to="/RouteError" />
       </Switch>
     );
+
+    
     return (
       <div>
         <Layout>
@@ -53,7 +61,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // autoSignIn: () => dispatch(authActions.authCheckState)
+    autoSignIn: () => dispatch(authActions.checkAuthToken())
   }
 }
 
