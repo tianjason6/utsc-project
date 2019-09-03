@@ -34,14 +34,14 @@ export const initSignUp = (email, password) => {
 
   return (dispatch) => {
     dispatch(loading(true));
-    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
       email: email,
       password: password,
       returnSecureToken: true
     })
       .then((res) => {
         //send email confirmation
-        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
           requestType: 'VERIFY_EMAIL',
           idToken: res.data.idToken
         })

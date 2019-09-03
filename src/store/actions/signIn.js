@@ -44,7 +44,7 @@ export const loading = (loading) => {
 
 export const initSignIn = (email, password) => {
   return (dispatch) => {
-    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
       email: email,
       password: password,
       returnSecureToken: true
@@ -54,7 +54,7 @@ export const initSignIn = (email, password) => {
         let authData = res.data
         let authHeaders = res.headers
 
-        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
           idToken: res.data.idToken
         })
           .then((res) => {

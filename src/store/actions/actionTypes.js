@@ -20,3 +20,5 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export const FETCH_USER = 'FETCH_USER';
+
+export const SET_USER_MANAGED_PROJECTS = 'SET_USER_MANAGED_PROJECTS';

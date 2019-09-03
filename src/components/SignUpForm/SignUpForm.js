@@ -26,6 +26,19 @@ let SignUpForm = props => {
     let error = {};
     let isError = false;
 
+
+    //checking if the email domain is @mail.utoronto.ca
+    try { 
+      const emailDomain = values.email.split('@')[1];
+      if(emailDomain !== '@mail.utoronto.ca'){
+        error.email = 'Only \'@mail.utoronto.ca\' email domains are valid';
+        isError = true;
+      }
+    }catch{
+      error.email = 'invalid email';
+      isError = true;
+    }
+
     if (!('email' in values)) {
       error.email = 'Required';
       isError = true;

@@ -13,6 +13,7 @@ import signUpReducer from './store/reducers/signUp';
 import signInReducer from './store/reducers/signIn';
 import authReducer from './store/reducers/auth';
 import userReducer from './store/reducers/user';
+import userManagedProjectsReducer from './store/reducers/userManagedProjects';
 
 
 import './index.css';
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   signUpReducer: signUpReducer,
   signInReducer: signInReducer,
   authReducer: authReducer,
+  userManagedProjectsReducer: userManagedProjectsReducer,
   userReducer: userReducer
 });
 
