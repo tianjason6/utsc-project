@@ -14,17 +14,14 @@ class Console extends Component {
     return (
       <div className={styles.Content}>
         <ConsoleSideMenu></ConsoleSideMenu>
-        <div className={styles.ConsoleDisplay}>
-          {
-            <Switch>
-              <Route path="/test/MyProjects" component={MyProjects} />
-              <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
-              <Route path="/test/MyProjectFullDetail" component={ProjectAdd} />
-              <Route path="/test/EditMyProjectFullDetail" component={ProjectFullDetailEdit} />
-              <Redirect to="/test/MyProjects" />
-            </Switch>
-          }
-        </div>
+        <Switch>
+          <Route path="/test/MyProjects" component={MyProjects} />
+          <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
+          <Route path="/test/MyProjectFullDetail" component={ProjectAdd} />
+          <Route path="/test/EditMyProjectFullDetail" component={ProjectFullDetailEdit} />
+          <Redirect to="/test/MyProjects" />
+        </Switch>
+
       </div>
     )
   }
