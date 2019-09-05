@@ -3,8 +3,9 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import styles from './SignUpForm.module.css';
 import axios from '../../axios-projects';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className={styles.Field}>
+const renderField = ({ input, label, type, meta: { touched, error } }) => {
+  return(
+    <div className={label === 'Email' ? [styles.Field, styles.EmailField].join(' ') : styles.Field}>
     <label>{label}</label>
 
     {
@@ -16,7 +17,9 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
     {touched && error && <span>{error}</span>}
   </div>
-)
+  )
+  
+}
 
 let SignUpForm = props => {
 
@@ -26,11 +29,9 @@ let SignUpForm = props => {
     let error = {};
     let isError = false;
 
-
-    //checking if the email domain is @mail.utoronto.ca
-    try { 
-      const emailDomain = values.email.split('@')[1];
-      if(emailDomain !== '@mail.utoronto.ca'){
+    try {
+      const UofTRegex = /[A-Za-z0-9]+@mail\.utoronto\.ca/;
+      if(!UofTRegex.test(values.email)){
         error.email = 'Only \'@mail.utoronto.ca\' email domains are valid';
         isError = true;
       }
@@ -69,7 +70,7 @@ let SignUpForm = props => {
 
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.Form}>
-      <Field
+      <Field 
         name="email"
         type="email"
         component={renderField}
