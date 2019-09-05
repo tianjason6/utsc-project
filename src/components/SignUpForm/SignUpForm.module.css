@@ -1,5 +1,9 @@
-.EmailField{
+.EmailFieldWithError{
   margin-top: 100px;
+}
+
+.EmailField{
+  margin-top: 30px;
 }
 
 .Form {

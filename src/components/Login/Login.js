@@ -106,7 +106,7 @@ class Login extends Component {
         <div className={styles.darkOverlay} onClick={this.props.closeLoginModal}></div>
         <div className={styles.Content}>
           <h1>{header} {span} {errorMessage}</h1>
-            <div>{form}</div>
+          {form}
         </div>
       </div>
     )

@@ -3,9 +3,8 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import styles from './SignUpForm.module.css';
 import axios from '../../axios-projects';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => {
-  return(
-    <div className={label === 'Email' ? [styles.Field, styles.EmailField].join(' ') : styles.Field}>
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div className={label === 'Email' ? [styles.Field, styles.EmailField].join(' ') : styles.Field}>
     <label>{label}</label>
 
     {
@@ -17,9 +16,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
 
     {touched && error && <span>{error}</span>}
   </div>
-  )
-  
-}
+);
 
 let SignUpForm = props => {
 
