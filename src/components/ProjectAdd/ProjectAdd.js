@@ -11,11 +11,19 @@ class ProjectAdd extends Component {
       title: '',
       description: '',
       characters: '',
-      mainImage: '',
-      images: []
+      img1: null,
+      img2: null,
+      img3: null,
+      img4: null,
+      imgs: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.imagePreview1 = this.imagePreview1.bind(this);
+    this.imagePreview2 = this.imagePreview2.bind(this);
+    this.imagePreview3 = this.imagePreview3.bind(this);
+    this.imagePreview4 = this.imagePreview4.bind(this);
+
   };
 
   onChange(e) {
@@ -29,14 +37,37 @@ class ProjectAdd extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.state.imgs = this.state.imgs.concat(this.state.img1);
+    this.state.imgs = this.state.imgs.concat(this.state.img2);
+    this.state.imgs = this.state.imgs.concat(this.state.img3);
+    this.state.imgs = this.state.imgs.concat(this.state.img4);
+    console.log(this.state.imgs);
+    this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs);
+  }
 
-    const project = {
-      title: this.state.title,
-      description: this.state.description
-    }
-    this.props.onInitProjectAdd(this.state.title, this.state.description);
-
-
+  imagePreview1(event) {
+    console.log("received");
+    this.setState({
+      img1: URL.createObjectURL(event.target.files[0])
+    })
+  }
+  imagePreview2(event) {
+    console.log("received");
+    this.setState({
+      img2: URL.createObjectURL(event.target.files[0])
+    })
+  }
+  imagePreview3(event) {
+    console.log("received");
+    this.setState({
+      img3: URL.createObjectURL(event.target.files[0])
+    })
+  }
+  imagePreview4(event) {
+    console.log("received");
+    this.setState({
+      img4: URL.createObjectURL(event.target.files[0])
+    })
   }
 
   render() {
@@ -44,27 +75,28 @@ class ProjectAdd extends Component {
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
+
           <input type="text" name="title" placeholder="Project Name" onChange={this.onChange}
             value={this.state.title} maxLength="25"></input>
-          <img className={styles.imgEnlarge} src={this.state.mainImage}></img>
           <span>
-            <h2>Upload Main Project Image</h2>
-            <input type="file" name="image" accept="image/*"></input>
-          </span>
-          <div className={styles.imgSelect}>
-            <img className={styles.imgItem} src={this.state.sideImage1}></img>
-            <img className={styles.imgItem} src={this.state.sideImage2}></img>
-            <img className={styles.imgItem} src={this.state.sideImage3}></img>
-            <img className={styles.imgItem} src={this.state.sideImage3}></img>
-          </div>
-          <span>
-            <div className={styles.imgUpload}>
-              <input type="file" className={styles.uploadItem} accept="image/*"></input>
-              <input type="file" className={styles.uploadItem} accept="image/*"></input>
-              <input type="file" className={styles.uploadItem} accept="image/*"></input>
-              <input type="file" className={styles.uploadItem} accept="image/*"></input>
+            <div className={styles.imgSelect}>
+              <div className={styles.containerSmall}>
+                <img className={styles.imgItem} src={this.state.img1}></img>
+                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview1}></input>
+              </div>
+              <div className={styles.containerSmall}>
+                <img className={styles.imgItem} src={this.state.img2}></img>
+                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview2}></input>
+              </div>
+              <div className={styles.containerSmall}>
+                <img className={styles.imgItem} src={this.state.img3}></img>
+                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview3}></input>
+              </div>
+              <div className={styles.containerSmall}>
+                <img className={styles.imgItem} src={this.state.img4}></img>
+                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview4}></input>
+              </div>
             </div>
-            <h2>Upload up to 4 project images</h2>
           </span>
         </div>
         <h1>Description</h1>
@@ -76,7 +108,7 @@ class ProjectAdd extends Component {
           </p>
         </span>
         <button className={styles.ViewProject} onClick={this.onSubmit}>Add Project</button>
-      </div>
+      </div >
     )
   }
 }
@@ -88,14 +120,15 @@ window.onbeforeunload = function () {
 const mapStateToProps = state => {
   return {
     title: state.projectAddReducer.title,
-    description: state.projectAddReducer.description
+    description: state.projectAddReducer.description,
+    imgs: state.projectAddReducer.imgs
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    projectAdd: (title, description) => dispatch(projectActions.projectAdd(title, description)),
-    onInitProjectAdd: (title, description) => dispatch(projectActions.initProjectAdd(title, description))
+    projectAdd: (title, description, imgs) => dispatch(projectActions.projectAdd(title, description, imgs)),
+    onInitProjectAdd: (title, description, imgs) => dispatch(projectActions.initProjectAdd(title, description, imgs))
 
   }
 }
