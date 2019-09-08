@@ -15,6 +15,7 @@ import * as userManagedProjectsReducer from '../../store/reducers/userManagedPro
 class MyProjectsOverview extends Component {
 
   componentDidMount() {
+    console.log('jlee managed test: ',this.props.userManagedProjects)
     this.props.onInitUserManagedProjects(this.props.authEmail.split('@')[0]);
   }
 
@@ -47,7 +48,8 @@ class MyProjectsOverview extends Component {
 const mapStateToProps = state => {
   return {
     authEmail: state.authReducer.email,
-    featuredProjects: state.featuredProjectsReducer.projects,
+    //jlee remove if no errors
+    //featuredProjects: state.featuredProjectsReducer.projects,
     error: state.featuredProjectsReducer.error,
     userManagedProjects: state.userManagedProjectsReducer.projects
   };
@@ -55,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitFeaturedProjects: () => dispatch(featuredProjectsActions.initFeaturedProjects()),
+    //jlee remove if no bugs
+    //onInitFeaturedProjects: () => dispatch(featuredProjectsActions.initFeaturedProjects()),
     onInitUserManagedProjects: (username) => dispatch(userManagedProjectsActions.initUserManagedProjects(username)) 
   }
 }

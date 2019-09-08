@@ -6,7 +6,7 @@ const initialState = {
 };
 const reducer = (state=initialState, action) =>{
     switch(action.type) {
-        case actionTypes.SET_USER_MANAGED_PROJECTS:
+        case actionTypes.SET_USER_JOINED_PROJECTS:
             return{
                 ...state,
                 projects: action.projects,

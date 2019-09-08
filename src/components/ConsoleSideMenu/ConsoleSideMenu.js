@@ -10,6 +10,9 @@ class ConsoleSideMenu extends Component {
         <NavLink className={styles.Option} activeClassName={styles.OptionActive} to={'/test/MyProjects'}>
           My Projects
         </NavLink>
+        <NavLink className={styles.Option} activeClassName={styles.OptionActive} to={'/test/JoinedProjects'}>
+          Joined Projects
+        </NavLink>
         <NavLink className={styles.Option} activeClassName={styles.OptionActive} to={'/test/ConsoleLogout'}>
           Logout
         </NavLink>
