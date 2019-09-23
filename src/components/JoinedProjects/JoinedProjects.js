@@ -18,17 +18,30 @@ class JoinedProjects extends Component {
     componentDidMount(){
         this.props.fetchJoinedProjects(this.props.userEmail.split('@')[0]);
     }
+    
     render(){
-        console.log('jlee projects test:',this.props.userJoinedProjects)
-        const userJoinedProjects = this.props.userJoinedProjects.map( project => {
-            return(
-                <Project key={project.title}
-                title={project.title}
-                description={project.description}
-                img={project.imgs[0]}
-                projectInfo={project} />
-            );
-        });
+        const leaveProject = (removeProject) => {
+            this.props.leaveJoinedProjects(this.props.userEmail.split('@')[0], removeProject);
+        }
+        let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
+
+        if(this.props.userJoinedProjects.length != 0 ){
+            console.log('jlee bug?', this.props.userJoinedProjects)
+            userJoinedProjects = this.props.userJoinedProjects.map( project => {
+                return(
+                    <div>
+                        <Project key={project.title}
+                        title={project.title}
+                        description={project.description}
+                        img={project.imgs[0]}
+                        projectInfo={project}
+                        leaveProject={() => {leaveProject(project.title)}} />
+                    </div>
+                    
+                );
+            });
+        }
+        
         return(
             <div className={styles.Content}>
                 <div className={styles.Background}>
@@ -38,11 +51,8 @@ class JoinedProjects extends Component {
                             {userJoinedProjects}
                         </section>
                     </div>
-                    
                 </div>
-                
             </div>
-            
         );
     }
 }
@@ -58,7 +68,8 @@ const mapStateToProps = state =>{
 //running the function
 const mapDispatchToProps = dispatch => {
     return {
-        fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName))
+        fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
+        leaveJoinedProjects: (userName, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(userName, removeProject))
     }
 }
 

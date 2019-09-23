@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import styles from './Console.module.css';
 import { connect } from 'react-redux';
 import ConsoleSideMenu from '../ConsoleSideMenu/ConsoleSideMenu';
-import MyProjects from '../MyProjects/MyProjects';
+import ManagedProjects from '../ManagedProjects/ManagedProjects';
 import ConsoleLogout from '../ConsoleLogout/ConsoleLogout';
 import JoinedProjects from '../JoinedProjects/JoinedProjects';
 
@@ -16,11 +16,11 @@ class Console extends Component {
         <div className={styles.ConsoleDisplay}>
           {
             <Switch>
-              <Route path="/test/MyProjects" component={MyProjects} />
+              <Route path="/test/ManagedProjects" component={ManagedProjects} />
               <Route path="/test/JoinedProjects" component={JoinedProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
               <Route path="/test/EditMyProjectFullDetail" component={ConsoleLogout} />
-              <Redirect to="/test/MyProjects" />
+              <Redirect to="/test/ManagedProjects" />
             </Switch>
           }
         </div>
