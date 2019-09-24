@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ProjectAdd.module.css';
 import * as projectActions from '../../store/actions/addProject';
+import firebase from "firebase";
 
 class ProjectAdd extends Component {
 
@@ -11,11 +12,11 @@ class ProjectAdd extends Component {
       title: '',
       description: '',
       characters: '',
-      img1: null,
-      img2: null,
-      img3: null,
-      img4: null,
-      imgs: []
+      img1: null, img2: null, img3: null, img4: null,
+      imgs: [],
+      imgPath1: "", imgPath2: "", imgPath3: "", imgPath4: "",
+      imgPaths: [],
+      authUserEmail: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,6 +24,9 @@ class ProjectAdd extends Component {
     this.imagePreview2 = this.imagePreview2.bind(this);
     this.imagePreview3 = this.imagePreview3.bind(this);
     this.imagePreview4 = this.imagePreview4.bind(this);
+    this.config = this.config.bind(this);
+    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+
 
   };
 
@@ -37,44 +41,94 @@ class ProjectAdd extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.fileUploadHandler();
     this.state.imgs = this.state.imgs.concat(this.state.img1);
     this.state.imgs = this.state.imgs.concat(this.state.img2);
     this.state.imgs = this.state.imgs.concat(this.state.img3);
     this.state.imgs = this.state.imgs.concat(this.state.img4);
     console.log(this.state.imgs);
-    this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs);
+    console.log("authUserEmail:" + this.props.authUserEmail);
+
+    this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
   }
 
   imagePreview1(event) {
     console.log("received");
     this.setState({
-      img1: URL.createObjectURL(event.target.files[0])
-    })
+      img1: URL.createObjectURL(event.target.files[0]),
+      imgPath1: event.target.files[0]
+    });
+
   }
   imagePreview2(event) {
     console.log("received");
     this.setState({
-      img2: URL.createObjectURL(event.target.files[0])
-    })
+      img2: URL.createObjectURL(event.target.files[0]),
+      imgPath2: event.target.files[0]
+    });
   }
   imagePreview3(event) {
     console.log("received");
     this.setState({
-      img3: URL.createObjectURL(event.target.files[0])
-    })
+      img3: URL.createObjectURL(event.target.files[0]),
+      imgPath3: event.target.files[0]
+    });
   }
   imagePreview4(event) {
     console.log("received");
     this.setState({
-      img4: URL.createObjectURL(event.target.files[0])
-    })
+      img4: URL.createObjectURL(event.target.files[0]),
+      imgPath4: event.target.files[0]
+    });
+  }
+
+  config(event) {
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y",
+      authDomain: "utsc-projects.firebaseapp.com",
+      databaseURL: "https://utsc-projects.firebaseio.com",
+      projectId: "utsc-projects",
+      storageBucket: "utsc-projects.appspot.com",
+      messagingSenderId: "109791671007",
+      appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
+    };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    console.log("FIREBASE CONFIG");
+  }
+
+  fileUploadHandler = () => {
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath1);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath2);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath3);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath4);
+    // Create a root reference
+    var storageRef = firebase.storage().ref();
+
+    var ref, file;
+    for (var i = 1; i <= 4; i++) {
+      if (this.state.imgPaths[i - 1] != "") {
+        console.log(this.state.imgPaths[i - 1]);
+        // Create a reference to 'mountains.jpg'
+        file = this.state.imgPaths[i - 1];
+        ref = storageRef.child(this.state.title + '/img' + i + '.jpg');
+
+        ref.put(file).then(function (snapshot) {
+          console.log('Uploaded a blob or file!');
+        });
+      }
+    }
+
   }
 
   render() {
     console.log('mapStateToProps', this.props.title, this.props.description);
     return (
-      <div className={styles.Content}>
+      <div className={styles.Content} >
         <div className={styles.TitleImgs}>
+          {this.config()}
 
           <input type="text" name="title" placeholder="Project Name" onChange={this.onChange}
             value={this.state.title} maxLength="25"></input>
@@ -119,6 +173,7 @@ window.onbeforeunload = function () {
 
 const mapStateToProps = state => {
   return {
+    authUserEmail: state.authReducer.email,
     title: state.projectAddReducer.title,
     description: state.projectAddReducer.description,
     imgs: state.projectAddReducer.imgs
@@ -128,7 +183,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     projectAdd: (title, description, imgs) => dispatch(projectActions.projectAdd(title, description, imgs)),
-    onInitProjectAdd: (title, description, imgs) => dispatch(projectActions.initProjectAdd(title, description, imgs))
+    onInitProjectAdd: (title, description, imgs, authUserEmail) => dispatch(projectActions.initProjectAdd(title, description, imgs, authUserEmail))
 
   }
 }

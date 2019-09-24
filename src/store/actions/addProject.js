@@ -1,21 +1,19 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
-import store from '../../store/reducers/auth.js';
+import firebase from 'firebase';
 
-export const projectAdd = (title, description, imgs) => {
+export const projectAdd = (title, description, imgs, authUser) => {
     return (dispatch) => {
-        dispatch({ type: actionTypes.ADD_PROJECT, title, description, imgs })
+        dispatch({ type: actionTypes.ADD_PROJECT, title, description, imgs, authUser })
     }
 }
 
-export const initProjectAdd = (title, description, imgs) => {
+export const initProjectAdd = (title, description, imgs, authUser) => {
     return (dispatch) => {
-        console.log(title);
-
         axios.put('Projects/' + title + '.json', {
             title: title,
             description: description,
-            owner: store.getState().email,
+            owner: authUser,
             imgs: imgs
         });
     }
