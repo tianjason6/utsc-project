@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './ProjectAdd.module.css';
 import * as projectActions from '../../store/actions/addProject';
 import firebase from "firebase";
+import defaultImg from "../../assests/images/box.png";
 
 class ProjectAdd extends Component {
 
@@ -12,7 +13,7 @@ class ProjectAdd extends Component {
       title: '',
       description: '',
       characters: '',
-      img1: null, img2: null, img3: null, img4: null,
+      img1: defaultImg, img2: defaultImg, img3: defaultImg, img4: defaultImg,
       imgs: [],
       imgPath1: "", imgPath2: "", imgPath3: "", imgPath4: "",
       imgPaths: [],
@@ -42,10 +43,15 @@ class ProjectAdd extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.fileUploadHandler();
-    this.state.imgs = this.state.imgs.concat(this.state.img1);
-    this.state.imgs = this.state.imgs.concat(this.state.img2);
-    this.state.imgs = this.state.imgs.concat(this.state.img3);
-    this.state.imgs = this.state.imgs.concat(this.state.img4);
+    if (this.state.img1 != defaultImg)
+      this.state.imgs = this.state.imgs.concat(this.state.img1);
+    if (this.state.img2 != defaultImg)
+      this.state.imgs = this.state.imgs.concat(this.state.img2);
+    if (this.state.img3 != defaultImg)
+      this.state.imgs = this.state.imgs.concat(this.state.img3);
+    if (this.state.img4 != defaultImg)
+      this.state.imgs = this.state.imgs.concat(this.state.img4);
+
     console.log(this.state.imgs);
     console.log("authUserEmail:" + this.props.authUserEmail);
 
@@ -85,13 +91,8 @@ class ProjectAdd extends Component {
   config(event) {
 
     var firebaseConfig = {
-      apiKey: "AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y",
-      authDomain: "utsc-projects.firebaseapp.com",
-      databaseURL: "https://utsc-projects.firebaseio.com",
-      projectId: "utsc-projects",
-      storageBucket: "utsc-projects.appspot.com",
-      messagingSenderId: "109791671007",
-      appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
+
+
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
@@ -137,19 +138,27 @@ class ProjectAdd extends Component {
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img1}></img>
                 <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview1}></input>
+                <h3>Upload Image</h3>
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img2}></img>
                 <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview2}></input>
+                <h3>Upload Image</h3>
+
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img3}></img>
                 <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview3}></input>
+                <h3>Upload Image</h3>
+
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img4}></img>
                 <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview4}></input>
+                <h3>Upload Image</h3>
+
               </div>
+              <div className={styles.containerSmall}></div>
             </div>
           </span>
         </div>
@@ -158,8 +167,7 @@ class ProjectAdd extends Component {
         <span>
           <textarea id="message" className={styles.Description} maxLength="800"
             type="text" name="description" placeholder="Enter a description for your project and describe any open positions." onChange={this.onChange} value={this.state.description}></textarea>
-          <p>Characters Remaining: {800 - this.state.characters}
-          </p>
+          <p>Characters Remaining: {800 - this.state.characters}</p>
         </span>
         <button className={styles.ViewProject} onClick={this.onSubmit}>Add Project</button>
       </div >

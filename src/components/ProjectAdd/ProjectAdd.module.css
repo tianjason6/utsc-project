@@ -28,10 +28,10 @@
 }
 
 .containerSmall {
-  position: relative;
   width: 200px;
   height: 200px;
   margin-top: 40px;
+  padding: 10px;
 }
 
 input[type="text"], h1 {
@@ -43,6 +43,8 @@ input[type="file"] {
   width: 100%;
   text-align: center;
   font-size: 18px;
+  opacity: 0;
+  cursor: pointer;
 }
 
 
@@ -50,7 +52,7 @@ input[type="file"] {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 1200px;
+  width: 70%;
   height: 300px;
   font-size: 26px;
   font-family: sans-serif;
@@ -205,6 +207,13 @@ span {
 }
 
 p {
+  font-size: 20px;
+}
+
+h3 {
+  width: 150px;
+  padding-left: 135px;
+  padding-top: 85px;
   font-size: 20px;
 }
 
