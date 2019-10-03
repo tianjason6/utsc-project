@@ -7,6 +7,11 @@ export const setUserJoinedProjects = (projects) =>{
         projects: projects
     }
 }
+export const userLogout = () => {
+    return (dispatch) => {
+        dispatch(setUserJoinedProjects([]));
+    }
+}
 
 export const leaveJoinedProjects = (username, removeProject) => {
     return (dispatch) => {
@@ -27,10 +32,6 @@ export const leaveJoinedProjects = (username, removeProject) => {
                 });
             });
     }
-
-    // return {
-    //     type: actionTypes.DELETE_USER_JOINED_PROJECTS
-    // }
 }
 
 export const initJoinedProjects = (username) => {

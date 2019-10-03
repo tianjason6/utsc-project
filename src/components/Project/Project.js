@@ -32,7 +32,6 @@ class Project extends Component {
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
           <button className={styles.ViewProject} onClick={this.routeProjectFullDetail}>View Project</button>
-          {this.props.leaveProject ? <button className={styles.ViewProject} onClick={this.props.leaveProject}>Leave Project</button> : null}
         </div>
       </>;
 

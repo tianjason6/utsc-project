@@ -2,6 +2,9 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
 import history from '../../history';
 
+import * as joinedProjectsAction from './joinedProjects';
+import * as userManagedProjectsAction from './userManagedProjects';
+
 export const login = (email, idToken, idTokenExpiryDate, isAdmin) => {
   return {
     type: actionTypes.LOGIN,
@@ -13,14 +16,44 @@ export const login = (email, idToken, idTokenExpiryDate, isAdmin) => {
 }
 
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('expireDate');
-  history.push('/');
+  //jlee trying things out
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expireDate');
+    
 
-  return {
-    type: actionTypes.LOGOUT,
+    //jlee remove userJoinedProjects and userManagedProjects (if it exists? dont think it does)
+    console.log('jlee auth logout')
+    dispatch(joinedProjectsAction.userLogout());
+    userManagedProjectsAction.userLogout();
+
+    dispatch({
+      type: actionTypes.LOGOUT,
+      email: null,
+      signedIn: false,
+      idToken: null,
+      idTokenExpiryDate: null,
+      isAdmin: false
+    });
+    history.push('/');
+    
   }
+  
+
+  // ***************
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
+  // localStorage.removeItem('expireDate');
+  // history.push('/');
+  // return {
+  //   type: actionTypes.LOGOUT,
+  //   email: null,
+  //   signedIn: false,
+  //   idToken: null,
+  //   idTokenExpiryDate: null,
+  //   isAdmin: false
+  // }
 }
 
 // export const authCheckState = () => {

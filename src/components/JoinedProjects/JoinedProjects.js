@@ -4,13 +4,8 @@ import styles from './JoinedProjects.module.css';
 
 import { connect } from 'react-redux';
 
-//reducers and actions
-import userJoinedProjectsReducer from '../../store/reducers/joinedProjects';
-import authReducer from '../../store/reducers/auth';
-
 import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
 
-import ProjectsOverview from '../ProjectsOverview/ProjectsOverview';
 import Project from '../Project/Project';
 
 
@@ -26,7 +21,6 @@ class JoinedProjects extends Component {
         let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 
         if(this.props.userJoinedProjects.length != 0 ){
-            console.log('jlee bug?', this.props.userJoinedProjects)
             userJoinedProjects = this.props.userJoinedProjects.map( project => {
                 return(
                     <div>
@@ -34,8 +28,7 @@ class JoinedProjects extends Component {
                         title={project.title}
                         description={project.description}
                         img={project.imgs[0]}
-                        projectInfo={project}
-                        leaveProject={() => {leaveProject(project.title)}} />
+                        projectInfo={project} />
                     </div>
                     
                 );

@@ -12,9 +12,15 @@
     text-align: center;
     
     z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     top: 3%;
     left: 3%;;

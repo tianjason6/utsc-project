@@ -19,7 +19,6 @@ export const initFeaturedProjects = () => {
     axios.get('FeaturedProjects.json')
       .then((res) => {
         let featuredProjectTitles = res.data;
-
         let projectRequests = featuredProjectTitles.map((projectTitle) => {
           return axios.get('Projects/' + projectTitle + '.json')
         });
@@ -37,9 +36,9 @@ export const initFeaturedProjects = () => {
             dispatch(setFeaturedProjects(featuredProjects));
           })
       })
-      .catch(() => {
-        console.log('error')
-        dispatch(initFeaturedProjects());
+      .catch((err) => {
+        console.error('error: ', err)
+        // dispatch(initFeaturedProjects());
       });
   }
 }

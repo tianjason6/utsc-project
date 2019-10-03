@@ -7,6 +7,8 @@ import Modal from '../Modal/Modal';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
 
+import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
+
 class ProjectFullDetail extends Component {
 
   constructor(props) {
@@ -17,12 +19,17 @@ class ProjectFullDetail extends Component {
       mainImgURL: '',
       projectTitle: this.params.get('projectTitle').replace('%20', ' '),
       showModal: false,
-      projectOwner: ''
+      projectOwner: '',
     }
   };
 
   componentDidMount() {
     this.props.onInitProject(this.state.projectTitle);
+
+    if(this.props.auth.signedIn) {
+      //jlee put the username into state after just so it looks prettier
+      this.props.fetchJoinedProjects(this.props.auth.email.split('@')[0]);
+    }
   }
 
   componentDidUpdate() {
@@ -42,22 +49,80 @@ class ProjectFullDetail extends Component {
     this.setState({showModal: false});
   }
 
+  leaveProject = () => {
+    console.log('jlee leaveProject ')
+    this.props.leaveJoinedProjects(this.props.auth.email.split('@')[0], this.props.project.title);
+  }
+
   render() {
-    console.log("RENDER props user");
-    console.log(this.props.user.email);
-    let userInfo = "Loading...";
-    if(this.props.user != undefined){
-      userInfo=(
+    console.log("RENDER props projectOwner");
+    console.log(this.props.projectOwner.email);
+    let projectOwnerInfo = "Loading...";
+    if(this.props.projectOwner != undefined){
+      projectOwnerInfo=(
         <div>
           <h2> {this.state.projectTitle} </h2>
           <div><b>Project Owner:</b> {this.props.project.owner}</div>
-          <div><b>Email:</b> {this.props.user.email}</div>
+          <div><b>Email:</b> {this.props.projectOwner.email}</div>
           <br />
           <div><b>Description:</b></div>
           <div>{this.props.project.description}</div>
         </div>
       );
     }
+
+    let modalButton = (
+      <button className={styles.ContentButton} onClick={this.showModal} >Loading.....</button>
+    );
+    let modalContent = (
+      <div>
+        <div>Loading.....</div>
+        <button className={styles.ContentButton} onClick={this.closeModal}>Exit</button>
+      </div>
+    );
+    
+    //jlee should be a better way
+    // do u know da wei?
+    let foundProject = undefined;
+    // if(this.props.auth.signedIn){
+    //   console.log('jlee logged in user joined projects: ', this.props.userJoinedProjects);
+    //   foundProject = this.props.userJoinedProjects.find(project => {
+    //     console.log('jlee project :', project.title);
+    //     return project.title === this.props.project.title;
+    //   });
+    // }
+
+    console.log('jlee logged in user joined projects: ', this.props.userJoinedProjects);
+      foundProject = this.props.userJoinedProjects.find(project => {
+        console.log('jlee project :', project.title);
+        return project.title === this.props.project.title;
+      });
+    
+
+    if(foundProject != undefined) {
+      modalContent = (
+        <div>
+          <h3>Are you sure you want to leave project?</h3>
+          <div>There will be no going back, unless the project owner accepts you again</div>
+          <button className={[styles.ContentButton, styles.YesButton].join(' ')} onClick={this.leaveProject}>Yes</button>
+          <button className={[styles.ContentButton, styles.NoButton].join(' ')} onClick={this.closeModal}>NO</button>
+        </div>
+      );
+      modalButton = (
+        <button className={styles.ContentButton} onClick={this.showModal}>Leave Project</button>
+      );
+    } else {
+      modalButton = (
+        <button className={styles.ContentButton} onClick={this.showModal} >Join Project</button>
+      );
+      modalContent = (
+        <div>
+          <div>{projectOwnerInfo}</div>
+          <button className={styles.ContentButton}onClick={this.closeModal}>Exit</button>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
@@ -78,11 +143,15 @@ class ProjectFullDetail extends Component {
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
 
-        <Modal show={this.state.showModal} closeModal={this.closeModal} >
-          <div>{userInfo}</div>
+        {/* <Modal show={this.state.showModal} closeModal={this.closeModal} >
+          <div>{projectOwnerInfo}</div>
           <button onClick={this.closeModal}>Exit</button>
+        </Modal> */}
+        <Modal show={this.state.showModal} closeModal={this.closeModal} >
+          {modalContent}
         </Modal>
-        <button onClick={this.showModal} >Join Project</button>
+        {modalButton}
+        {/* <button onClick={this.showModal} >Join Project</button> */}
       </div>
     )
   }
@@ -91,14 +160,21 @@ class ProjectFullDetail extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projectReducer.project,
-    user: state.userReducer.user,
-    error: state.projectsReducer.error
+    projectOwner: state.userReducer.user,
+    error: state.projectsReducer.error,
+    //jlee
+    userJoinedProjects: state.userJoinedProjectsReducer.projects,
+    auth: state.authReducer
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
+
+    //jlee
+    fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
+    leaveJoinedProjects: (userName, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(userName, removeProject))
   }
 }
 
