@@ -10,7 +10,9 @@ export const setUserManagedProjects = (projects) =>{
 }
 
 export const userLogout = () => {
-    setUserManagedProjects([]);
+    return (dispatch) => {
+        dispatch(setUserManagedProjects([]));
+    }
 }
 
 export const initUserManagedProjects =(username) =>{

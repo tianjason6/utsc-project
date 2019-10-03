@@ -4,6 +4,7 @@ import history from '../../history';
 
 import * as joinedProjectsAction from './joinedProjects';
 import * as userManagedProjectsAction from './userManagedProjects';
+//import { lookupService } from 'dns';
 
 export const login = (email, idToken, idTokenExpiryDate, isAdmin) => {
   return {
@@ -26,7 +27,7 @@ export const logout = () => {
     //jlee remove userJoinedProjects and userManagedProjects (if it exists? dont think it does)
     console.log('jlee auth logout')
     dispatch(joinedProjectsAction.userLogout());
-    userManagedProjectsAction.userLogout();
+    dispatch(userManagedProjectsAction.userLogout());
 
     dispatch({
       type: actionTypes.LOGOUT,
@@ -37,7 +38,7 @@ export const logout = () => {
       isAdmin: false
     });
     history.push('/');
-    
+    console.log()
   }
   
 
