@@ -4,6 +4,7 @@ import styles from './ProjectAdd.module.css';
 import * as projectActions from '../../store/actions/addProject';
 import firebase from "firebase";
 import defaultImg from "../../assests/images/box.png";
+import history from '../../history';
 
 class ProjectAdd extends Component {
 
@@ -44,18 +45,19 @@ class ProjectAdd extends Component {
     e.preventDefault();
     this.fileUploadHandler();
     if (this.state.img1 != defaultImg)
-      this.state.imgs = this.state.imgs.concat(this.state.img1);
+      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg1.jpg?alt=media");
     if (this.state.img2 != defaultImg)
-      this.state.imgs = this.state.imgs.concat(this.state.img2);
+      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg2.jpg?alt=media");
     if (this.state.img3 != defaultImg)
-      this.state.imgs = this.state.imgs.concat(this.state.img3);
+      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg3.jpg?alt=media");
     if (this.state.img4 != defaultImg)
-      this.state.imgs = this.state.imgs.concat(this.state.img4);
+      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg4.jpg?alt=media");
 
     console.log(this.state.imgs);
     console.log("authUserEmail:" + this.props.authUserEmail);
 
     this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
+    history.push('/test/myProjects');
   }
 
   imagePreview1(event) {
@@ -91,8 +93,13 @@ class ProjectAdd extends Component {
   config(event) {
 
     var firebaseConfig = {
-
-
+      apiKey: "AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y",
+      authDomain: "utsc-projects.firebaseapp.com",
+      databaseURL: "https://utsc-projects.firebaseio.com",
+      projectId: "utsc-projects",
+      storageBucket: "utsc-projects.appspot.com",
+      messagingSenderId: "109791671007",
+      appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
