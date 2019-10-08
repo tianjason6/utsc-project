@@ -18,7 +18,9 @@ class ProjectAdd extends Component {
       imgs: [],
       imgPath1: "", imgPath2: "", imgPath3: "", imgPath4: "",
       imgPaths: [],
-      authUserEmail: ''
+      authUserEmail: '',
+      imgUrl: "https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/",
+      maxFileSize: 10000000
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -45,13 +47,13 @@ class ProjectAdd extends Component {
     e.preventDefault();
     this.fileUploadHandler();
     if (this.state.img1 != defaultImg)
-      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg1.jpg?alt=media");
+      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg1.jpg?alt=media");
     if (this.state.img2 != defaultImg)
-      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg2.jpg?alt=media");
+      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg2.jpg?alt=media");
     if (this.state.img3 != defaultImg)
-      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg3.jpg?alt=media");
+      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg3.jpg?alt=media");
     if (this.state.img4 != defaultImg)
-      this.state.imgs = this.state.imgs.concat("https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/" + this.state.title + "%2Fimg4.jpg?alt=media");
+      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg4.jpg?alt=media");
 
     console.log(this.state.imgs);
     console.log("authUserEmail:" + this.props.authUserEmail);
@@ -62,32 +64,48 @@ class ProjectAdd extends Component {
 
   imagePreview1(event) {
     console.log("received");
-    this.setState({
-      img1: URL.createObjectURL(event.target.files[0]),
-      imgPath1: event.target.files[0]
-    });
+    if (event.target.files[0].size > this.state.maxFileSize) {
+      alert("File is too big!");
+    } else {
+      this.setState({
+        img1: URL.createObjectURL(event.target.files[0]),
+        imgPath1: event.target.files[0]
+      });
+    }
 
   }
   imagePreview2(event) {
     console.log("received");
-    this.setState({
-      img2: URL.createObjectURL(event.target.files[0]),
-      imgPath2: event.target.files[0]
-    });
+    if (event.target.files[0].size > this.state.maxFileSize) {
+      alert("File is too big!");
+    } else {
+      this.setState({
+        img2: URL.createObjectURL(event.target.files[0]),
+        imgPath2: event.target.files[0]
+      });
+    }
   }
   imagePreview3(event) {
     console.log("received");
-    this.setState({
-      img3: URL.createObjectURL(event.target.files[0]),
-      imgPath3: event.target.files[0]
-    });
+    if (event.target.files[0].size > this.state.maxFileSize) {
+      alert("File is too big!");
+    } else {
+      this.setState({
+        img3: URL.createObjectURL(event.target.files[0]),
+        imgPath3: event.target.files[0]
+      });
+    }
   }
   imagePreview4(event) {
     console.log("received");
-    this.setState({
-      img4: URL.createObjectURL(event.target.files[0]),
-      imgPath4: event.target.files[0]
-    });
+    if (event.target.files[0].size > this.state.maxFileSize) {
+      alert("File is too big!");
+    } else {
+      this.setState({
+        img4: URL.createObjectURL(event.target.files[0]),
+        imgPath4: event.target.files[0]
+      });
+    }
   }
 
   config(event) {
