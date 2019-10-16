@@ -20,18 +20,13 @@ class ProjectAdd extends Component {
       imgPaths: [],
       authUserEmail: '',
       imgUrl: "https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/",
-      maxFileSize: 10000000
+      maxFileSize: 10000000 // 10 Megabyte File Limit, it is measured in bytes
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.imagePreview1 = this.imagePreview1.bind(this);
-    this.imagePreview2 = this.imagePreview2.bind(this);
-    this.imagePreview3 = this.imagePreview3.bind(this);
-    this.imagePreview4 = this.imagePreview4.bind(this);
+    this.imagePreview = this.imagePreview.bind(this);
     this.config = this.config.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
-
-
   };
 
   onChange(e) {
@@ -46,64 +41,41 @@ class ProjectAdd extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.fileUploadHandler();
-    if (this.state.img1 != defaultImg)
+    var hasImage = false;
+    if (this.state.img1 != defaultImg) {
       this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg1.jpg?alt=media");
-    if (this.state.img2 != defaultImg)
+      hasImage = true;
+    }
+    if (this.state.img2 != defaultImg) {
       this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg2.jpg?alt=media");
-    if (this.state.img3 != defaultImg)
+      hasImage = true;
+
+    }
+    if (this.state.img3 != defaultImg) {
       this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg3.jpg?alt=media");
-    if (this.state.img4 != defaultImg)
+      hasImage = true;
+
+    }
+    if (this.state.img4 != defaultImg) {
       this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg4.jpg?alt=media");
+      hasImage = true;
 
+    }
     console.log(this.state.imgs);
-    console.log("authUserEmail:" + this.props.authUserEmail);
-
-    this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
-    history.push('/test/myProjects');
-  }
-
-  imagePreview1(event) {
-    console.log("received");
-    if (event.target.files[0].size > this.state.maxFileSize) {
-      alert("File is too big!");
-    } else {
-      this.setState({
-        img1: URL.createObjectURL(event.target.files[0]),
-        imgPath1: event.target.files[0]
-      });
+    if (hasImage) {
+      this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
+      history.push('/test/myProjects');
     }
+    alert("Please upload a project image");
+  }
 
-  }
-  imagePreview2(event) {
-    console.log("received");
+  imagePreview(event) {
     if (event.target.files[0].size > this.state.maxFileSize) {
       alert("File is too big!");
     } else {
       this.setState({
-        img2: URL.createObjectURL(event.target.files[0]),
-        imgPath2: event.target.files[0]
-      });
-    }
-  }
-  imagePreview3(event) {
-    console.log("received");
-    if (event.target.files[0].size > this.state.maxFileSize) {
-      alert("File is too big!");
-    } else {
-      this.setState({
-        img3: URL.createObjectURL(event.target.files[0]),
-        imgPath3: event.target.files[0]
-      });
-    }
-  }
-  imagePreview4(event) {
-    console.log("received");
-    if (event.target.files[0].size > this.state.maxFileSize) {
-      alert("File is too big!");
-    } else {
-      this.setState({
-        img4: URL.createObjectURL(event.target.files[0]),
-        imgPath4: event.target.files[0]
+        ["img" + event.target.id]: URL.createObjectURL(event.target.files[0]),
+        ["imgPath" + event.target.id]: event.target.files[0]
       });
     }
   }
@@ -151,6 +123,11 @@ class ProjectAdd extends Component {
 
   render() {
     console.log('mapStateToProps', this.props.title, this.props.description);
+    if (this.props.authUserEmail == null) {
+      alert("Please login to create a project");
+      history.push('/test/myProjects');
+
+    }
     return (
       <div className={styles.Content} >
         <div className={styles.TitleImgs}>
@@ -162,24 +139,24 @@ class ProjectAdd extends Component {
             <div className={styles.imgSelect}>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img1}></img>
-                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview1}></input>
+                <input type="file" className={styles.imgItem} accept="image/*" id="1" onChange={this.imagePreview}></input>
                 <h3>Upload Image</h3>
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img2}></img>
-                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview2}></input>
+                <input type="file" className={styles.imgItem} accept="image/*" id="2" onChange={this.imagePreview2}></input>
                 <h3>Upload Image</h3>
 
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img3}></img>
-                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview3}></input>
+                <input type="file" className={styles.imgItem} accept="image/*" id="3" onChange={this.imagePreview3}></input>
                 <h3>Upload Image</h3>
 
               </div>
               <div className={styles.containerSmall}>
                 <img className={styles.imgItem} src={this.state.img4}></img>
-                <input type="file" className={styles.imgItem} accept="image/*" onChange={this.imagePreview4}></input>
+                <input type="file" className={styles.imgItem} accept="image/*" id="4" onChange={this.imagePreview4}></input>
                 <h3>Upload Image</h3>
 
               </div>
@@ -209,13 +186,14 @@ const mapStateToProps = state => {
     authUserEmail: state.authReducer.email,
     title: state.projectAddReducer.title,
     description: state.projectAddReducer.description,
-    imgs: state.projectAddReducer.imgs
+    imgs: state.projectAddReducer.imgs,
   };
+
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    projectAdd: (title, description, imgs) => dispatch(projectActions.projectAdd(title, description, imgs)),
+    projectAdd: (title, description, imgs, authUserEmail) => dispatch(projectActions.projectAdd(title, description, imgs, authUserEmail)),
     onInitProjectAdd: (title, description, imgs, authUserEmail) => dispatch(projectActions.initProjectAdd(title, description, imgs, authUserEmail))
 
   }
