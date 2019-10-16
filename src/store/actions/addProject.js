@@ -37,17 +37,14 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
             axios.get('Users/' + username + '.json')
                 .then(res => {
                     userData = res.data;
-                    if (userData != null) {
+                    if (userData != null) { // If user exists, update with current values
                         projectsManaged = userData.projectsManaged;
                         projectsJoined = userData.projectsJoined;
                         projectAdmin = userData.isAdmin;
                         projectsManaged.push(title);
-                        console.log("userData not null");
                         putUser(username, authUser, projectAdmin, projectsJoined, projectsManaged);
-                        console.log("POST USER");
-                    } else {
+                    } else {    // If user does not exist, create a new set of values
                         putUser(username, authUser, projectAdmin, [], [title]);
-                        console.log("PUT USER");
                     }
                 });
 

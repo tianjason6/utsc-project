@@ -42,24 +42,11 @@ class ProjectAdd extends Component {
     e.preventDefault();
     this.fileUploadHandler();
     var hasImage = false;
-    if (this.state.img1 != defaultImg) {
-      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg1.jpg?alt=media");
-      hasImage = true;
-    }
-    if (this.state.img2 != defaultImg) {
-      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg2.jpg?alt=media");
-      hasImage = true;
-
-    }
-    if (this.state.img3 != defaultImg) {
-      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg3.jpg?alt=media");
-      hasImage = true;
-
-    }
-    if (this.state.img4 != defaultImg) {
-      this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg4.jpg?alt=media");
-      hasImage = true;
-
+    for (var i = 1; i <= 4; i++) {
+      if (this.state["img" + i] != defaultImg) {
+        this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media");
+        hasImage = true;
+      }
     }
     console.log(this.state.imgs);
     if (hasImage) {
