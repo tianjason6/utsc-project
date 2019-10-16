@@ -26,9 +26,8 @@ class ProjectFullDetail extends Component {
   componentDidMount() {
     this.props.onInitProject(this.state.projectTitle);
 
-    if(this.props.auth.signedIn) {
-      //jlee put the username into state after just so it looks prettier
-      this.props.fetchJoinedProjects(this.props.auth.email.split('@')[0]);
+    if(this.props.loggedInUser) {
+      this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
   }
 
@@ -50,8 +49,7 @@ class ProjectFullDetail extends Component {
   }
 
   leaveProject = () => {
-    console.log('jlee leaveProject ')
-    this.props.leaveJoinedProjects(this.props.auth.email.split('@')[0], this.props.project.title);
+    this.props.leaveJoinedProjects(this.props.loggedInUser.username, this.props.loggedInUser.projectsJoined, this.props.project.title);
   }
 
   render() {
@@ -81,22 +79,11 @@ class ProjectFullDetail extends Component {
       </div>
     );
     
-    //jlee should be a better way
-    // do u know da wei?
     let foundProject = undefined;
-    // if(this.props.auth.signedIn){
-    //   console.log('jlee logged in user joined projects: ', this.props.userJoinedProjects);
-    //   foundProject = this.props.userJoinedProjects.find(project => {
-    //     console.log('jlee project :', project.title);
-    //     return project.title === this.props.project.title;
-    //   });
-    // }
-
-    console.log('jlee logged in user joined projects: ', this.props.userJoinedProjects);
-      foundProject = this.props.userJoinedProjects.find(project => {
-        console.log('jlee project :', project.title);
-        return project.title === this.props.project.title;
-      });
+    
+    foundProject = this.props.userJoinedProjects.find(project => {
+      return project.title === this.props.project.title;
+    });
     
 
     if(foundProject != undefined) {
@@ -142,16 +129,10 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-
-        {/* <Modal show={this.state.showModal} closeModal={this.closeModal} >
-          <div>{projectOwnerInfo}</div>
-          <button onClick={this.closeModal}>Exit</button>
-        </Modal> */}
         <Modal show={this.state.showModal} closeModal={this.closeModal} >
           {modalContent}
         </Modal>
         {modalButton}
-        {/* <button onClick={this.showModal} >Join Project</button> */}
       </div>
     )
   }
@@ -162,9 +143,8 @@ const mapStateToProps = state => {
     project: state.projectReducer.project,
     projectOwner: state.userReducer.user,
     error: state.projectsReducer.error,
-    //jlee
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
-    auth: state.authReducer
+    loggedInUser: state.loggedInUserReducer.loggedInUser
   };
 };
 
@@ -172,9 +152,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
 
-    //jlee
     fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
-    leaveJoinedProjects: (userName, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(userName, removeProject))
+    leaveJoinedProjects: (username, joinedProjects, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(username, joinedProjects, removeProject))
   }
 }
 

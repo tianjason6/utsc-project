@@ -1,0 +1,39 @@
+
+.timeline {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.timelineItem{
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    background-color: white;
+}
+.timelineDetails{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    min-height: 30px;
+    width: 100%;
+    overflow: auto;
+    flex-direction: row;
+}
+
+
+.timelineContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    flex-direction: column;
+}

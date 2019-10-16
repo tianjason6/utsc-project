@@ -4,30 +4,27 @@ import history from '../../history';
 
 import * as joinedProjectsAction from './joinedProjects';
 import * as userManagedProjectsAction from './userManagedProjects';
+import * as loggedInUserAction from './loggedInUser';
 //import { lookupService } from 'dns';
 
-export const login = (email, idToken, idTokenExpiryDate, isAdmin) => {
+export const login = (email, idToken, idTokenExpiryDate) => {
   return {
     type: actionTypes.LOGIN,
     email: email,
     idToken: idToken,
     idTokenExpiryDate: idTokenExpiryDate,
-    isAdmin: isAdmin
   }
 }
 
 export const logout = () => {
-  //jlee trying things out
   return (dispatch) => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('expireDate');
-    
 
-    //jlee remove userJoinedProjects and userManagedProjects (if it exists? dont think it does)
-    console.log('jlee auth logout')
     dispatch(joinedProjectsAction.userLogout());
     dispatch(userManagedProjectsAction.userLogout());
+    dispatch(loggedInUserAction.userLogout());
 
     dispatch({
       type: actionTypes.LOGOUT,
@@ -90,8 +87,9 @@ export const checkAuthToken = () => {
       } else {
         const userEmail = localStorage.getItem('email');
         
-        dispatch(login(userEmail, token, expireDate, false));        
+        dispatch(login(userEmail, token, expireDate));        
         dispatch(checkTokenTimeout( (expireDate.getTime() - (new Date().getTime()))/1000 ));
+        dispatch(loggedInUserAction.fetchLoggedInUser(userEmail.split('@')[0]));
       }
     }
 

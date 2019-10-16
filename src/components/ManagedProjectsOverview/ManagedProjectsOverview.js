@@ -19,23 +19,28 @@ class ManagedProjectsOverview extends Component {
   }
 
   render() {
-    console.log('user managed projects: ');
-    console.log(this.props.userManagedProjects);
-    const managedProjects = this.props.userManagedProjects.map(project => {
-      return (
-        <Project key={project.title}
-        title={project.title}
-        description={project.description}
-        img={project.imgs[0]}
-        projectInfo={project} />
-      )});
+    console.log('user managed projects: ', this.props.userManagedProjects);
+    let managedProjects;
+    if (this.props.userManagedProjects.length != 0) {
+      managedProjects = this.props.userManagedProjects.map(project => {
+        return (
+          <Project key={project.title}
+          title={project.title}
+          description={project.description}
+          img={project.imgs[0]}
+          projectInfo={project} />
+        )});
+    }
+    
     return (
       <div className={styles.Background} >
         <div className={styles.OngoingProjects}>
           <h1>Managed Projects</h1>
+          {managedProjects === undefined ? <h1>You aren't managing any projects right now!</h1> : 
           <section className={styles.Wrap}>
             {managedProjects}
-          </section>
+          </section>}
+          
         </div>
       </div>
 

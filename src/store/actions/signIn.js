@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
-import * as authActions from './auth';
 import axios from '../../axios-projects';
+
+import * as authActions from './auth';
+import * as loggedInUserAction from './loggedInUser';
 
 export const signIn = (authData) => {
   console.log(authData);
@@ -76,7 +78,8 @@ export const initSignIn = (email, password) => {
             dispatch(authActions.checkTokenTimeout (authData.expiresIn));
             // need to add admin dispatch
             console.log('dispatching authactions', authData)
-            dispatch(authActions.login(authData.email, authData.idToken, authHeaders.expires, false))
+            dispatch(authActions.login(authData.email, authData.idToken, authHeaders.expires, authData.isAdmin))
+            dispatch(loggedInUserAction.fetchLoggedInUser(authData.email.split('@')[0]));
           })
           .catch((error) => {
             console.log('get user data error')

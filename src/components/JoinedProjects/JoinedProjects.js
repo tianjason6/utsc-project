@@ -11,13 +11,13 @@ import Project from '../Project/Project';
 
 class JoinedProjects extends Component {
     componentDidMount(){
-        this.props.fetchJoinedProjects(this.props.userEmail.split('@')[0]);
+        // this.props.fetchJoinedProjects(this.props.userEmail.split('@')[0]);
+        if (this.props.loggedInUser) {
+            this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
+        }
     }
     
     render(){
-        const leaveProject = (removeProject) => {
-            this.props.leaveJoinedProjects(this.props.userEmail.split('@')[0], removeProject);
-        }
         let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 
         if(this.props.userJoinedProjects.length != 0 ){
@@ -34,6 +34,7 @@ class JoinedProjects extends Component {
                 );
             });
         }
+        
         
         return(
             <div className={styles.Content}>
@@ -55,16 +56,15 @@ class JoinedProjects extends Component {
 const mapStateToProps = state =>{
     return{
         userJoinedProjects: state.userJoinedProjectsReducer.projects,
-        userEmail: state.authReducer.email
+        userEmail: state.authReducer.email,
+        loggedInUser: state.loggedInUserReducer.loggedInUser
     };
 }
 //running the function
 const mapDispatchToProps = dispatch => {
     return {
-        fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
-        leaveJoinedProjects: (userName, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(userName, removeProject))
+        fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName))
     }
 }
 
-//jlee whats the null and pure crap?
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(JoinedProjects);

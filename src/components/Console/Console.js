@@ -6,6 +6,9 @@ import ConsoleSideMenu from '../ConsoleSideMenu/ConsoleSideMenu';
 import ManagedProjects from '../ManagedProjects/ManagedProjects';
 import ConsoleLogout from '../ConsoleLogout/ConsoleLogout';
 import JoinedProjects from '../JoinedProjects/JoinedProjects';
+import Timeline from '../Timeline/Timeline';
+
+import RouteError from '../RouteError/RouteError';
 
 class Console extends Component {
   render() {
@@ -20,7 +23,9 @@ class Console extends Component {
               <Route path="/test/JoinedProjects" component={JoinedProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
               <Route path="/test/EditMyProjectFullDetail" component={ConsoleLogout} />
-              <Redirect to="/test/ManagedProjects" />
+              <Route path='/test/Timeline' component={Timeline}/>
+              
+              <Redirect to="/test/Timeline" />
             </Switch>
           }
         </div>
@@ -31,6 +36,7 @@ class Console extends Component {
 
 const mapStateToProps = state => {
   return {
+    loggedInUser: state.loggedInUserReducer.loggedInUser
   };
 };
 
