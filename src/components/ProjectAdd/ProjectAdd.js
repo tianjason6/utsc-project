@@ -52,8 +52,9 @@ class ProjectAdd extends Component {
     if (hasImage) {
       this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
       history.push('/test/myProjects');
+    } else {
+      alert("Please upload a project image");
     }
-    alert("Please upload a project image");
   }
 
   imagePreview(event) {

@@ -29,28 +29,29 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
         axios.get('Projects/' + title + '.json')
             .then(res => {
                 projectData = res.data;
+                if (projectData == null) {    // If project does not exist, put request
+                    putProject(title, description, username, imgs);
+                    // Fetching the user values
+                    axios.get('Users/' + username + '.json')
+                        .then(res => {
+                            userData = res.data;
+                            if (userData != null) { // If user exists, update with current values
+                                projectsManaged = userData.projectsManaged;
+                                projectsJoined = userData.projectsJoined;
+                                projectAdmin = userData.isAdmin;
+                                projectsManaged.push(title);
+                                putUser(username, authUser, projectAdmin, projectsJoined, projectsManaged);
+                            } else {    // If user does not exist, create a new set of values
+                                putUser(username, authUser, projectAdmin, [], [title]);
+                            }
+                        });
+
+                } else {    // If project already exists, send error message
+                    alert("A project with this name already exists");
+                }
             });
 
-        if (projectData == null) {    // If project does not exist, put request
-            putProject(title, description, username, imgs);
-            // Fetching the user values
-            axios.get('Users/' + username + '.json')
-                .then(res => {
-                    userData = res.data;
-                    if (userData != null) { // If user exists, update with current values
-                        projectsManaged = userData.projectsManaged;
-                        projectsJoined = userData.projectsJoined;
-                        projectAdmin = userData.isAdmin;
-                        projectsManaged.push(title);
-                        putUser(username, authUser, projectAdmin, projectsJoined, projectsManaged);
-                    } else {    // If user does not exist, create a new set of values
-                        putUser(username, authUser, projectAdmin, [], [title]);
-                    }
-                });
 
-        } else {    // If project already exists, send error message
-            alert("A project with this name already exists");
-        }
     }
 
     function putProject(title, description, username, imgs) {
