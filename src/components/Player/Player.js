@@ -49,8 +49,8 @@ class Player extends Component {
           defaultValue={color}
           disabled={this.checkColor}
         >
-          {/* <option value="#FF0000" disabled={this.props.disabledColors[0]}> */}
-          <option value="#FF0000" disabled={returnTrue()}>
+          <option value="#FF0000" disabled={this.props.disabledColors[0]}>
+            {/* <option value="#FF0000" disabled={returnTrue()}> */}
             Red
           </option>
           <option value="#FF7F00" disabled={this.props.disabledColors[1]}>
