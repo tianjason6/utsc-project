@@ -1,0 +1,41 @@
+.player h2, .evenPlayer h2, .oddPlayer h2, .player1 h2, .player2 h2, .player3 h2, .player4 h2 {
+  border-radius: 5px;
+  width: 120px;
+  padding: 5px;
+  margin: 0px;
+}
+
+.player select, .evenPlayer select, .oddPlayer select, .player1 select, .player2 select, .player3 select, .player4 select {
+  width: 130px;
+}
+
+.evenPlayer {
+  margin-right: right;
+  right: 0px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.oddPlayer {
+  margin-left: 0px;
+  display: inline;
+}
+
+.player1 {
+  display: inline;
+}
+
+.player2 {
+  position: relative;
+  bottom: 88px;
+  left: 820px;
+  display: inline;
+}
+
+.player4 {
+  position: absolute;
+  top: 328px;
+  left: 1296px;
+}
+/*# sourceMappingURL=player.module.css.map */

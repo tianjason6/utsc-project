@@ -1,0 +1,59 @@
+$player-width: 120px;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.player {
+  h2 {
+    @include border-radius(5px);
+    width: $player-width;
+    padding: 5px;
+    margin: 0px;
+  }
+  select {
+    width: $player-width + 10px;
+  }
+}
+
+.evenPlayer {
+  @extend .player;
+  // margin-right: 100px;
+  // below makes text shift to right
+  margin-right: right;
+  right: 0px;
+  justify-content: space-between;
+}
+
+.oddPlayer {
+  @extend .player;
+  margin-left: 0px;
+  display: inline;
+  // display: table-cell;
+  // text-align: left;
+}
+
+// only works full screen
+.player1 {
+  @extend .player;
+  display: inline;
+}
+.player2 {
+  @extend .player;
+  position: relative;
+  bottom: 88px;
+  left: 820px;
+  display: inline;
+}
+.player3 {
+  @extend .player;
+}
+.player4 {
+  @extend .player;
+  position: absolute;
+  top: 328px;
+  left: 1296px;
+}
