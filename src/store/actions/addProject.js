@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
-import firebase from 'firebase';
 
 export const projectAdd = (title, description, imgs, authUser) => {
     return (dispatch) => {
@@ -46,8 +45,6 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
                             }
                         });
 
-                } else {    // If project already exists, send error message
-                    alert("A project with this name already exists");
                 }
             });
 

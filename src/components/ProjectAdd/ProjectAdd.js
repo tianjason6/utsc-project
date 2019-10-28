@@ -5,6 +5,7 @@ import * as projectActions from '../../store/actions/addProject';
 import firebase from "firebase";
 import defaultImg from "../../assests/images/box.png";
 import history from '../../history';
+import axios from '../../axios-projects';
 
 class ProjectAdd extends Component {
 
@@ -40,21 +41,33 @@ class ProjectAdd extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.fileUploadHandler();
-    var hasImage = false;
-    for (var i = 1; i <= 4; i++) {
-      if (this.state["img" + i] != defaultImg) {
-        this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media");
-        hasImage = true;
-      }
-    }
-    console.log(this.state.imgs);
-    if (hasImage) {
-      this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
-      history.push('/test/myProjects');
-    } else {
-      alert("Please upload a project image");
-    }
+
+    var projectData = null;
+    // Fetching the project names
+    axios.get('Projects/' + this.state.title + '.json')
+      .then(res => {
+        projectData = res.data;
+        if (projectData != null) {    // If project does not exist, put request
+          alert("A project with this name already exists");
+        } else {
+          this.fileUploadHandler();
+          var hasImage = false;
+          for (var i = 1; i <= 4; i++) {
+            if (this.state["img" + i] != defaultImg) {
+              this.state.imgs = this.state.imgs.concat(this.state.imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media");
+              hasImage = true;
+            }
+          }
+          console.log(this.state.imgs);
+          if (hasImage) {
+            this.props.onInitProjectAdd(this.state.title, this.state.description, this.state.imgs, this.props.authUserEmail);
+            history.push('/test/myProjects');
+          } else {
+            alert("Please upload a project image");
+          }
+        }
+      });
+
   }
 
   imagePreview(event) {
