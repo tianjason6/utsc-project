@@ -6,38 +6,96 @@ import * as timelineAction from '../../store/actions/timeline';
 
 import TimelineItem from './TimelineItem/TimelineItem';
 
+import Modal from '../Modal/Modal';
+
 import { NavLink } from 'react-router-dom';
 import AddToTimelineForm from './AddTimelineForm/AddTimelineForm';
 
+
 class Timeline extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            file: null,
+            showModal: false,
+            currentPage: 1,
+        }
+    }
+    
     componentDidMount() {
         this.props.fetchTimeline();
     }
+
+    toggleModal = () => {
+        this.setState({showModal: !this.state.showModal});
+    }
+
+    changePage = (page) => {
+        this.setState({currentPage: page});
+    }
+
     render(){
         let superUser;
+        
         if(this.props.loggedInUser){
             if(this.props.loggedInUser.isAdmin){
-                // superUser = <NavLink className={styles.addTimeline} to={'/test/AddTimeLine'}>
-                //                 + Add To Timeline
-                //             </NavLink>
-                superUser = <AddToTimelineForm className={styles.container} />
+                superUser = (
+                    <>
+                        <div className={styles.addTimelineBtn} onClick={() => this.toggleModal()}>Post To Timeline + </div>
+                        <Modal show={this.state.showModal} closeModal={this.toggleModal} style={styles.modalStyle}>
+                            <AddToTimelineForm 
+                            className={styles.container}
+                            />
+                        </Modal>
+                    </>
+                    
+                )
             }
         }
+        let timeline = (<h1>Loading... </h1>); 
+        let totalPages = (<div className={styles.paginationItem} onClick={() => this.changePage(1)} >{1}</div>);
 
-        let timeline = this.props.timeline.map(element => (
-            <TimelineItem 
-                title={element.title}
-                date={element.date}
-                username={element.username}
-                content={element.content}
-            />
-        ));
+        if (this.props.timeline) {
+            timeline = []
+            totalPages = [];
+            let element;
+            
+            for (let i = ((this.state.currentPage - 1) * 10); (i < ((this.state.currentPage - 1) * 10)+10)&&(i< this.props.timeline.length); i++ ) {
+                element = this.props.timeline[i];
+                timeline.push(<TimelineItem 
+                    title={element.title}
+                    date={element.date}
+                    time={element.time}
+                    username={element.username}
+                    content={element.content}
+                    attachment={element.attachment}
+                    id={element.id}
+                />)
+            }
+
+            for(let i = 1; i <= (Math.floor((this.props.timeline.length - 1)/10) +1); i++){
+                if( i === this.state.currentPage){
+                    totalPages.push(<div className={[styles.paginationItem, styles.activePaginationItem].join(' ')} onClick={() => this.changePage(i)} >{i}</div>);
+                } else {
+                    totalPages.push(<div className={styles.paginationItem} onClick={() => this.changePage(i)} >{i}</div>);
+                }
+                
+            }
+
+        } else {
+            timeline = (<h1>No Timeline Posts Yet! </h1>); 
+        }
+
         return(
             <div className={styles.Background}>
                 <div className={styles.container}>
                     <h1>Timeline</h1>
                     {superUser}
+                    <button className={styles.addTimelineBtn} onClick={this.props.fetchTimeline}> Check for Updates</button>
                     {timeline}
+                    <h3>Pages</h3>
+                    <div className={styles.pagination}>{totalPages}</div>
+                    
                 </div>
             </div>
         );

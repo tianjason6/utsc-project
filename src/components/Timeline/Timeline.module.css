@@ -20,8 +20,49 @@
     border: solid 1px;
     margin: 5px;
     padding: 10px;
-    background-color: orange;
+    background-color: rgb(247, 103, 36);
     border-radius: 10px;
     font-weight: bold;
     color: black;
+}
+
+.addTimelineBtn:hover{
+    background-color: rgb(160, 60, 15);
+    cursor: pointer;
+}
+
+.addTimelineBtn {
+    padding: 10px 15px 10px 15px;
+    /* border: solid 1px black; */
+    background-color: rgb(247, 103, 36);
+    border-radius: 10px;
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    color: white;
+    border: none;
+}
+
+.modalStyle{
+    height: 100%;
+    width: 100%;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+}
+.paginationItem{
+    padding: 5px 10px 5px 10px;
+
+    margin-bottom: 10px;
+    background-color: rgb(247, 103, 36);
+    color: white
+}
+.activePaginationItem {
+    background-color: rgb(160, 60, 15);
+}
+
+.paginationItem:hover{
+    cursor: pointer;
+    background-color: rgb(160, 60, 15);
 }

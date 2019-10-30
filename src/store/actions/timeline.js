@@ -16,3 +16,27 @@ export const fetchTimeline = () => {
         });
     }
 }
+
+export const addToTimeline = (date, time, username, content, id, file=null) => {
+    
+    return dispatch => {
+        axios.get('https://utsc-projects.firebaseio.com/Timeline.json')
+            .then(res => {
+                content.date = date;
+                content.time = time;
+                content.username = username;
+                content.id = id;
+                content.attachment = (file!=null)
+                if(res.data){
+                    const timelineArray = res.data;
+                    timelineArray.unshift(content);
+                    console.log(timelineArray);
+                    axios.put('Timeline.json', timelineArray);
+                } else {
+                    axios.put('Timeline.json', [content]);
+                }
+            });
+    }
+    
+    
+}
