@@ -1,0 +1,20 @@
+.line {
+  border: 2px solid black;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.user {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.user h1 {
+  font-size: 35px;
+}
+
+.user p {
+  font-size: 21px;
+}
+/*# sourceMappingURL=ProjectOwnerDetail.module.css.map */

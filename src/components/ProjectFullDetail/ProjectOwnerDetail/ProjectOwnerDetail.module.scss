@@ -1,0 +1,20 @@
+$margin-rate: 10%;
+.line {
+  border: 2px solid black;
+  width: 80%;
+  margin-right: $margin-rate;
+  margin-left: $margin-rate;
+}
+
+.user {
+  //   margin-top: $margin-rate;
+  //   margin-top: 10vh;npms
+  margin-right: $margin-rate;
+  margin-left: $margin-rate;
+  h1 {
+    font-size: 35px;
+  }
+  p {
+    font-size: 21px;
+  }
+}
