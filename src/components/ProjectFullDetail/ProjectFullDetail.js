@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styles from "./ProjectFullDetail.module.css";
 import * as projectActions from "../../store/actions/project";
 import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
-import * as userActions from "../../store/actions/user";
 
 class ProjectFullDetail extends Component {
   constructor(props) {
@@ -31,7 +30,6 @@ class ProjectFullDetail extends Component {
   };
 
   render() {
-    console.log("project full detail: ", this.props);
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>

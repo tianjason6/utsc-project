@@ -14,14 +14,11 @@ class ProjectOwnerDetail extends Component {
 
   // get user from database
   componentDidMount() {
-    console.log("project owner detail did mount ", this.props.owner);
     this.setState({ owner: this.props.owner });
     this.props.getUser(this.state.owner);
   }
 
   render() {
-    console.log("in project owner detail ", this.props);
-    console.log("state of owner details ", this.state);
     // gets all users for some reason
     const owner = this.props.user[this.props.owner];
     let e = "";
@@ -34,7 +31,6 @@ class ProjectOwnerDetail extends Component {
         e !== "projectsManaged" &&
         e !== "username"
       ) {
-        console.log("element in owner ", owner[e]);
         userData.push(
           <p>
             <strong>{e}: </strong>
@@ -43,7 +39,6 @@ class ProjectOwnerDetail extends Component {
         );
       }
     }
-    console.log("data of owner ", userData);
     return (
       <div>
         <div className={styles.line}></div>
