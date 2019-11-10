@@ -11,7 +11,6 @@ import Project from '../Project/Project';
 
 class JoinedProjects extends Component {
     componentDidMount(){
-        // this.props.fetchJoinedProjects(this.props.userEmail.split('@')[0]);
         if (this.props.loggedInUser) {
             this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
         }

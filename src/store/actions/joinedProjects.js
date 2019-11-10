@@ -17,13 +17,9 @@ export const userLogout = () => {
 
 export const leaveJoinedProjects = (username, joinedProjects, removeProject) => {
     return (dispatch) => {
-        console.log('leaveJoinedProjects action username: ',username);
-        console.log('leaveJoinedProjects action removeproject: ',removeProject);
-        console.log('leaveJoinedProjects action joined projects: ', joinedProjects)
         const removedJoinedProjectArray = joinedProjects.filter( project =>{
             return project != removeProject
         });
-        console.log(removedJoinedProjectArray)
         axios.put(('Users/' + username  + '/projectsJoined.json'), removedJoinedProjectArray)
         .then(res => {
             dispatch(setUserJoinedProjects(removedJoinedProjectArray));
@@ -45,7 +41,6 @@ export const initJoinedProjects = (projectsJoinedTitles) => {
                 .then(res =>{
                     //we only want the data, so map only the data to a new array
                     const projectsJoined = res.map(project => project.data ); 
-                    console.log('projects joined: ', projectsJoined);
                     //set the user managed projects in the reducer!
                     dispatch(setUserJoinedProjects(projectsJoined));
                 });

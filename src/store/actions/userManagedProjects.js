@@ -30,7 +30,6 @@ export const initUserManagedProjects =(username) =>{
                     .then(res =>{
                         //we only want the data, so map only the data to a new array
                         const projectsManaged = res.map(project => project.data ); 
-                        console.log('projects managed: ', projectsManaged)
                         //set the user managed projects in the reducer!
                         dispatch(setUserManagedProjects(projectsManaged))
                     });

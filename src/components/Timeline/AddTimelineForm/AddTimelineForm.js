@@ -59,7 +59,6 @@ class AddTimelineForm extends Component {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig)
         }
-        console.log("FIREBASE CONFIG");
     }
     fileUploadHandler = (id) => {
         const storageRef = firebase.storage().ref();
@@ -70,8 +69,7 @@ class AddTimelineForm extends Component {
         const blobURL = URL.createObjectURL(this.state.fileBlob);
         
         timelineRef.put(this.state.fileBlob).then(snapshot => {
-            console.log('uploaded a blob or file!')
-            console.log('snapshot', snapshot);
+
         })
     }
 
@@ -109,8 +107,6 @@ class AddTimelineForm extends Component {
     };
 
     render(){
-        // destructuring
-        // const handleSubmit = this.props.handleSubmit
         const { handleSubmit } = this.props
         return(
             <form className={styles.background} onSubmit={handleSubmit(this.submitForm)} >
