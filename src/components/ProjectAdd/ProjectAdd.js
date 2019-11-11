@@ -6,7 +6,7 @@ import firebase from "firebase";
 import defaultImg from "../../assests/images/box.png";
 import history from "../../history";
 import axios from "../../axios-projects";
-import firebaseInitialize from "../../firebase.js";
+import { firebaseConfig, maxFileSize, imgUrl } from "../../firebaseConst.js";
 
 class ProjectAdd extends Component {
   constructor(props) {
@@ -58,12 +58,8 @@ class ProjectAdd extends Component {
         let hasImage = false;
         for (let i = 1; i <= 4; i++) {
           if (this.state["img" + i] !== defaultImg) {
-            this.setState.imgs = this.state.imgs.concat(
-              this.state.imgUrl +
-                this.state.title +
-                "%2Fimg" +
-                i +
-                ".jpg?alt=media"
+            this.state.imgs = this.state.imgs.concat(
+              imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media"
             );
             hasImage = true;
           }
@@ -84,7 +80,7 @@ class ProjectAdd extends Component {
   }
 
   imagePreview(event) {
-    if (event.target.files[0].size > firebaseInitialize.maxFileSize) {
+    if (event.target.files[0].size > maxFileSize) {
       alert("File is too big!");
     } else {
       this.setState({
@@ -96,22 +92,21 @@ class ProjectAdd extends Component {
 
   config(event) {
     if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseInitialize.firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
     }
   }
 
   fileUploadHandler = () => {
-    this.setState.imgPaths = this.state.imgPaths.concat(this.state.imgPath1);
-    this.setState.imgPaths = this.state.imgPaths.concat(this.state.imgPath2);
-    this.setState.imgPaths = this.state.imgPaths.concat(this.state.imgPath3);
-    this.setState.imgPaths = this.state.imgPaths.concat(this.state.imgPath4);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath1);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath2);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath3);
+    this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath4);
     // Create a root reference
     let storageRef = firebase.storage().ref();
 
     let ref, file;
     for (let i = 1; i <= 4; i++) {
       if (this.state.imgPaths[i - 1] !== "") {
-        // Create a reference to 'mountains.jpg'
         file = this.state.imgPaths[i - 1];
         ref = storageRef.child(this.state.title + "/img" + i + ".jpg");
         ref.put(file);

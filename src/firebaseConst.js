@@ -1,4 +1,4 @@
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y",
   authDomain: "utsc-projects.firebaseapp.com",
   databaseURL: "https://utsc-projects.firebaseio.com",
@@ -7,6 +7,6 @@ const firebaseConfig = {
   messagingSenderId: "109791671007",
   appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
 };
-const imgUrl =
+export const imgUrl =
   "https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/";
-const maxFileSize = 10000000; // 10 Megabyte File Limit, it is measured in bytes
+export const maxFileSize = 10000000; // 10 Megabyte File Limit, it is measured in bytes
