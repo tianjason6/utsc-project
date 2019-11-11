@@ -21,6 +21,7 @@ class Drawer extends Component {
       this.props.logout();
     };
     const loggedIn = [
+      <div className={styles.title}>User Menu</div>,
       <div className={styles.separator} />,
       <NavLink onClick={this.props.closeDrawer} to={"/Console"}>
         Console
@@ -63,6 +64,7 @@ class Drawer extends Component {
             </NavLink>
             {this.props.auth.signedIn === false ? (
               <a onClick={loginOnClick}>
+                {/* not sure if separator is needed here*/}
                 <div className={styles.separator} />
                 <div className={styles.NavItem}>Login</div>
               </a>
