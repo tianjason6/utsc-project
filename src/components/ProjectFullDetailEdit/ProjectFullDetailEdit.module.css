@@ -11,43 +11,6 @@
   padding-bottom: 20px;
 }
 
-/* .Content .imgEnlarge {
-  background-image: url('../../assests/images/night-sky.jpg');
-  width: 800px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid black;
-}
-
-@media(max-width: 900px) {
-  .Content .imgEnlarge {
-    width: 600px;
-    height: 375px;
-  }
-}
-
-@media(max-width: 700px) {
-  .Content .imgEnlarge {
-    width: 450px;
-    height: 280px;
-  }
-}
-
-@media(max-width: 500px) {
-  .Content .imgEnlarge {
-    width: 340px;
-    height: 255px;
-  }
-}
-
-@media(max-width: 300px) {
-  .Content .imgEnlarge {
-    width: 200px;
-    height: 150px;
-  }
-} */
-
 .Content .imgEnlarge {
   background-image: url('../../assests/images/night-sky.jpg');
   width: 600px;
