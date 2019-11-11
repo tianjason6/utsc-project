@@ -1,5 +1,5 @@
 .Background {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -16,6 +16,7 @@
   left: 0;
   top: 0;
   z-index: 120;
+  overflow-y: scroll;
   transition: transform 0.3s ease-out;
 }
 
@@ -27,7 +28,7 @@
 }
 
 .ItemsGroup a:hover {
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
 
@@ -45,4 +46,11 @@
 
 .Close {
   transform: translateX(-100%);
+}
+
+.separator {
+  margin-top: 20px;
+  margin-bottom: -20px;
+  margin-left: -20px;
+  border: 2px solid white;
 }
