@@ -43,21 +43,7 @@
   }
 }
 
-.Content a {
-  text-decoration: none;
-}
-
-.Content .Option {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  height: 50px;
-  width: 80%;
-  font-size: 23px;
-  border-radius: 5px;
-  color: black;
-}
+/* for option items */
 
 .Content .Option:hover {
   border-bottom: 4px solid rgb(247, 103, 36);
@@ -68,4 +54,32 @@
 .Content .OptionActive {
   border-bottom: 4px solid rgb(247, 103, 36);
   color: rgb(247, 103, 36);
+}
+
+@media (max-width: 1200px) {
+  .Content a {
+    display: none;
+  }
+
+  .Content .Option {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Content a {
+    text-decoration: none;
+  }
+
+  .Content .Option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 50px;
+    width: 80%;
+    font-size: 23px;
+    border-radius: 5px;
+    color: black;
+  }
 }

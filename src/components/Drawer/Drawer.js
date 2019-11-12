@@ -64,8 +64,6 @@ class Drawer extends Component {
             </NavLink>
             {this.props.auth.signedIn === false ? (
               <a onClick={loginOnClick}>
-                {/* not sure if separator is needed here*/}
-                <div className={styles.separator} />
                 <div className={styles.NavItem}>Login</div>
               </a>
             ) : (
