@@ -24,21 +24,12 @@ export const initFeaturedProjects = () => {
         });
         Promise.all(projectRequests)
           .then((res) => {
-            console.log('all responses')
-            console.log(res)
-
             let featuredProjects = [];
             res.forEach((item) => {
               featuredProjects.push(item.data);
             })
-            console.log('featuredProjects')
-            console.log(featuredProjects)
             dispatch(setFeaturedProjects(featuredProjects));
           })
       })
-      .catch((err) => {
-        console.error('error: ', err)
-        // dispatch(initFeaturedProjects());
-      });
   }
 }

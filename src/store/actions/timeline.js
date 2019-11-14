@@ -30,7 +30,6 @@ export const addToTimeline = (date, time, username, content, id, file=null) => {
                 if(res.data){
                     const timelineArray = res.data;
                     timelineArray.unshift(content);
-                    console.log(timelineArray);
                     axios.put('Timeline.json', timelineArray);
                 } else {
                     axios.put('Timeline.json', [content]);

@@ -19,7 +19,7 @@ class ProjectFullDetail extends Component {
       mainImgURL: '',
       projectTitle: this.params.get('projectTitle').replace('%20', ' '),
       showModal: false,
-      projectOwner: '',
+      projectOwner: ''
     }
   };
 
@@ -53,8 +53,6 @@ class ProjectFullDetail extends Component {
   }
 
   render() {
-    console.log("RENDER props projectOwner");
-    console.log(this.props.projectOwner.email);
     let projectOwnerInfo = "Loading...";
     if(this.props.projectOwner != undefined){
       projectOwnerInfo=(

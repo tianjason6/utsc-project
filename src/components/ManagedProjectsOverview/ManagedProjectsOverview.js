@@ -19,7 +19,6 @@ class ManagedProjectsOverview extends Component {
   }
 
   render() {
-    console.log('user managed projects: ', this.props.userManagedProjects);
     let managedProjects;
     if (this.props.userManagedProjects.length != 0) {
       managedProjects = this.props.userManagedProjects.map(project => {

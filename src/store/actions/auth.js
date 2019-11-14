@@ -5,7 +5,6 @@ import history from '../../history';
 import * as joinedProjectsAction from './joinedProjects';
 import * as userManagedProjectsAction from './userManagedProjects';
 import * as loggedInUserAction from './loggedInUser';
-//import { lookupService } from 'dns';
 
 export const login = (email, idToken, idTokenExpiryDate) => {
   return {
@@ -35,37 +34,8 @@ export const logout = () => {
       isAdmin: false
     });
     history.push('/');
-    console.log()
   }
-  
-
-  // ***************
-  // localStorage.removeItem('token');
-  // localStorage.removeItem('userId');
-  // localStorage.removeItem('expireDate');
-  // history.push('/');
-  // return {
-  //   type: actionTypes.LOGOUT,
-  //   email: null,
-  //   signedIn: false,
-  //   idToken: null,
-  //   idTokenExpiryDate: null,
-  //   isAdmin: false
-  // }
 }
-
-// export const authCheckState = () => {
-//   console.log('inside sign in action')
-//   return (dispatch) => {
-
-//     //if token did not expire, login
-
-//     // else logout
-//     dispatch({
-//       type: actionTypes.LOGOUT,
-//     })
-//   }
-// }
 
 export const checkTokenTimeout = (expiresIn) =>{
   return dispatch => {
