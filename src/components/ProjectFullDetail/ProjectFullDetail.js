@@ -90,9 +90,7 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-        <ProjectOwnerDetail
-          owner={this.props.project.owner}
-        ></ProjectOwnerDetail>
+        <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
           <div>{userInfo}</div>
           <button onClick={this.closeModal}>Exit</button>
