@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./ProjectFullDetail.module.css";
 import * as projectActions from "../../store/actions/project";
+import Modal from "../Modal/Modal";
+
 import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
 
 class ProjectFullDetail extends Component {
@@ -11,7 +13,9 @@ class ProjectFullDetail extends Component {
 
     this.state = {
       mainImgURL: "",
-      projectTitle: this.params.get("projectTitle").replace("%20", " ")
+      projectTitle: this.params.get("projectTitle").replace("%20", " "),
+      showModal: false,
+      projectOwner: ""
     };
   }
 
@@ -29,7 +33,35 @@ class ProjectFullDetail extends Component {
     this.setState({ mainImgURL: imgURL });
   };
 
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
+    console.log("RENDER props user");
+    console.log(this.props.user.email);
+    let userInfo = "Loading...";
+    if (this.props.user != undefined) {
+      userInfo = (
+        <div>
+          <h2> {this.state.projectTitle} </h2>
+          <div>
+            <b>Project Owner:</b> {this.props.project.owner}
+          </div>
+          <div>
+            <b>Email:</b> {this.props.user.email}
+          </div>
+          <br />
+          <div>
+            <b>Description:</b>
+          </div>
+          <div>{this.props.project.description}</div>
+        </div>
+      );
+    }
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
@@ -58,8 +90,14 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-        <ProjectOwnerDetail owner={this.props.project.owner} />
-        <button>Join Project</button>
+        <ProjectOwnerDetail
+          owner={this.props.project.owner}
+        ></ProjectOwnerDetail>
+        <Modal show={this.state.showModal} closeModal={this.closeModal}>
+          <div>{userInfo}</div>
+          <button onClick={this.closeModal}>Exit</button>
+        </Modal>
+        <button onClick={this.showModal}>Join Project</button>
       </div>
     );
   }
@@ -68,6 +106,7 @@ class ProjectFullDetail extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projectReducer.project,
+    user: state.userReducer.user,
     error: state.projectsReducer.error
   };
 };
@@ -79,7 +118,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectFullDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectFullDetail);

@@ -19,6 +19,13 @@ export const initProject = (projectTitle) => {
 
     axios.get('Projects/' + projectTitle + '.json')
       .then(res => {
+        axios.get('Users/' + res.data.owner + '.json')
+        .then(res => {
+            dispatch({
+                type: actionTypes.FETCH_USER,
+                user: res.data
+            });
+          });
         dispatch(setProject(res.data));
       })
       .catch(error => {

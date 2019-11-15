@@ -12,45 +12,8 @@
   padding-bottom: 20px;
 }
 
-/* .Content .imgEnlarge {
-  background-image: url('../../assests/images/night-sky.jpg');
-  width: 800px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid black;
-}
-
-@media(max-width: 900px) {
-  .Content .imgEnlarge {
-    width: 600px;
-    height: 375px;
-  }
-}
-
-@media(max-width: 700px) {
-  .Content .imgEnlarge {
-    width: 450px;
-    height: 280px;
-  }
-}
-
-@media(max-width: 500px) {
-  .Content .imgEnlarge {
-    width: 340px;
-    height: 255px;
-  }
-}
-
-@media(max-width: 300px) {
-  .Content .imgEnlarge {
-    width: 200px;
-    height: 150px;
-  }
-} */
-
 .Content .imgEnlarge {
-  background-image: url('../../assests/images/night-sky.jpg');
+  background-image: url("../../assests/images/night-sky.jpg");
   width: 600px;
   height: 600px;
   margin-left: auto;
@@ -58,28 +21,28 @@
   border: 2px solid black;
 }
 
-@media(max-width: 900px) {
+@media (max-width: 900px) {
   .Content .imgEnlarge {
     width: 500px;
     height: 500px;
   }
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
   .Content .imgEnlarge {
     width: 450px;
     height: 450px;
   }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
   .Content .imgEnlarge {
     width: 340px;
     height: 340px;
   }
 }
 
-@media(max-width: 300px) {
+@media (max-width: 300px) {
   .Content .imgEnlarge {
     width: 200px;
     height: 200px;
@@ -95,7 +58,7 @@
 }
 
 .Content .imgSelect .imgItem {
-  background-image: url('../../assests/images/night-sky.jpg');
+  background-image: url("../../assests/images/night-sky.jpg");
   border: 2px solid black;
   margin-top: 20px;
   margin-left: 10px;
@@ -104,10 +67,10 @@
   height: 200px;
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
   .Content .imgSelect .imgItem {
     width: 50px;
-    height: 50px; 
+    height: 50px;
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
@@ -132,28 +95,28 @@
   font-size: 26px;
 }
 
-@media(max-width: 1250px) {
+@media (max-width: 1250px) {
   .Content p {
     width: 800px;
     font-size: 24px;
   }
 }
 
-@media(max-width: 1000px) {
+@media (max-width: 1000px) {
   .Content p {
     width: 680px;
     font-size: 24px;
   }
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
   .Content p {
     width: 500px;
     font-size: 18px;
   }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
   .Content p {
     width: 300px;
     font-size: 14px;
@@ -164,7 +127,7 @@
   }
 }
 
-@media(max-width: 300px) {
+@media (max-width: 300px) {
   .Content p {
     width: 200px;
     font-size: 14px;
