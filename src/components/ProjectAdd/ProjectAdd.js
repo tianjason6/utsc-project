@@ -7,6 +7,7 @@ import defaultImg from "../../assests/images/box.png";
 import history from "../../history";
 import axios from "../../axios-projects";
 import { firebaseConfig, maxFileSize, imgUrl } from "../../firebaseConst.js";
+import ProjectAddForm from "../ProjectAddForm/ProjectAddForm";
 
 class ProjectAdd extends Component {
   constructor(props) {
@@ -120,102 +121,108 @@ class ProjectAdd extends Component {
       history.push("/test/myProjects");
     }
     return (
-      <div className={styles.Content}>
-        <div className={styles.TitleImgs}>
-          {this.config()}
+      <div>
+        {this.config()}
+        <ProjectAddForm onInitProjectAdd={this.props.initProjectAdd} />
 
-          <input
-            type="text"
-            name="title"
-            placeholder="Project Name"
-            onChange={this.onChange}
-            value={this.state.title}
-            maxLength="25"
-          ></input>
-          <span>
-            <div className={styles.imgSelect}>
-              <div className={styles.containerSmall}>
-                <img
-                  className={styles.imgItem}
-                  src={this.state.img1}
-                  alt=""
-                ></img>
-                <input
-                  type="file"
-                  className={styles.imgItem}
-                  accept="image/*"
-                  id="1"
-                  onChange={this.imagePreview}
-                ></input>
-                <h3>Upload Image</h3>
-              </div>
-              <div className={styles.containerSmall}>
-                <img
-                  className={styles.imgItem}
-                  src={this.state.img2}
-                  alt=""
-                ></img>
-                <input
-                  type="file"
-                  className={styles.imgItem}
-                  accept="image/*"
-                  id="2"
-                  onChange={this.imagePreview2}
-                ></input>
-                <h3>Upload Image</h3>
-              </div>
-              <div className={styles.containerSmall}>
-                <img
-                  className={styles.imgItem}
-                  src={this.state.img3}
-                  alt=""
-                ></img>
-                <input
-                  type="file"
-                  className={styles.imgItem}
-                  accept="image/*"
-                  id="3"
-                  onChange={this.imagePreview3}
-                ></input>
-                <h3>Upload Image</h3>
-              </div>
-              <div className={styles.containerSmall}>
-                <img
-                  className={styles.imgItem}
-                  src={this.state.img4}
-                  alt=""
-                ></img>
-                <input
-                  type="file"
-                  className={styles.imgItem}
-                  accept="image/*"
-                  id="4"
-                  onChange={this.imagePreview4}
-                ></input>
-                <h3>Upload Image</h3>
-              </div>
-              <div className={styles.containerSmall}></div>
+        <div className={styles.Content}>
+          <form>
+            <div className={styles.TitleImgs}>
+              {this.config()}
+              <input
+                type="text"
+                name="title"
+                placeholder="Project Name"
+                onChange={this.onChange}
+                value={this.state.title}
+                maxLength="25"
+              ></input>
+              <span>
+                <div className={styles.imgSelect}>
+                  <div className={styles.containerSmall}>
+                    <img
+                      className={styles.imgItem}
+                      src={this.state.img1}
+                      alt=""
+                    ></img>
+                    <input
+                      type="file"
+                      className={styles.imgItem}
+                      accept="image/*"
+                      id="1"
+                      onChange={this.imagePreview}
+                    ></input>
+                    <h3>Upload Image</h3>
+                  </div>
+                  <div className={styles.containerSmall}>
+                    <img
+                      className={styles.imgItem}
+                      src={this.state.img2}
+                      alt=""
+                    ></img>
+                    <input
+                      type="file"
+                      className={styles.imgItem}
+                      accept="image/*"
+                      id="2"
+                      onChange={this.imagePreview2}
+                    ></input>
+                    <h3>Upload Image</h3>
+                  </div>
+                  <div className={styles.containerSmall}>
+                    <img
+                      className={styles.imgItem}
+                      src={this.state.img3}
+                      alt=""
+                    ></img>
+                    <input
+                      type="file"
+                      className={styles.imgItem}
+                      accept="image/*"
+                      id="3"
+                      onChange={this.imagePreview3}
+                    ></input>
+                    <h3>Upload Image</h3>
+                  </div>
+                  <div className={styles.containerSmall}>
+                    <img
+                      className={styles.imgItem}
+                      src={this.state.img4}
+                      alt=""
+                    ></img>
+                    <input
+                      type="file"
+                      className={styles.imgItem}
+                      accept="image/*"
+                      id="4"
+                      onChange={this.imagePreview4}
+                    ></input>
+                    <h3>Upload Image</h3>
+                  </div>
+                  <div className={styles.containerSmall}></div>
+                </div>
+              </span>
             </div>
-          </span>
-        </div>
-        <h1>Description</h1>
+            <h1>Description</h1>
 
-        <span>
-          <textarea
-            id="message"
-            className={styles.Description}
-            maxLength="800"
-            type="text"
-            name="description"
-            placeholder="Enter a description for your project and describe any open positions."
-            onChange={this.onChange}
-            value={this.state.description}
-          ></textarea>
-          <p>Characters Remaining: {800 - this.state.characters}</p>
-        </span>
-        <button className={styles.ViewProject} onClick={this.onSubmit}>
-          Add Project
-        </button>
+            <span>
+              <textarea
+                id="message"
+                className={styles.Description}
+                maxLength="800"
+                type="text"
+                name="description"
+                placeholder="Enter a description for your project and describe any open positions."
+                onChange={this.onChange}
+                value={this.state.description}
+              ></textarea>
+              <p>Characters Remaining: {800 - this.state.characters}</p>
+            </span>
+            <button className={styles.ViewProject} onClick={this.onSubmit}>
+              Add Project
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -247,7 +254,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectAdd);
