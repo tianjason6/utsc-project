@@ -2,6 +2,37 @@ import React from "react";
 import { Field, reduxForm, SubmissionError } from "redux-form";
 import styles from "./ProjectAddForm.module.css";
 
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    {label === "Project Name" ? (
+      <div className={styles.TitleImgs}>
+        <input {...input} placeholder={label} type={type} maxLength="25" />
+      </div>
+    ) : (
+      <textarea
+        className={styles.Description}
+        {...input}
+        placeholder={label}
+        type={type}
+      />
+    )}
+    {touched && error && <span>{error}</span>}
+  </div>
+);
+
+const renderImageField = ({ id, meta: { touched, error } }) => (
+  <div>
+    {
+      <div className={styles.containerSmall}>
+        <img className={styles.imgItem} alt=""></img>
+        <input type="file" className={styles.imgItem} accept="image/*"></input>
+        <h3>Upload Image</h3>
+      </div>
+    }
+    {touched && error && <span>{error}</span>}
+  </div>
+);
+
 let ProjectAddForm = props => {
   const { handleSubmit } = props;
 
@@ -27,46 +58,10 @@ let ProjectAddForm = props => {
       props.onInitAddProject(
         values.title,
         values.description,
-        values.imgs,
         values.authUserEmail
       );
     }
   };
-
-  const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div>
-      {label === "Project Name" ? (
-        <div className={styles.TitleImgs}>
-          <input {...input} placeholder={label} type={type} maxLength="25" />
-        </div>
-      ) : (
-        <textarea
-          className={styles.Description}
-          {...input}
-          placeholder={label}
-          type={type}
-        />
-      )}
-      {touched && error && <span>{error}</span>}
-    </div>
-  );
-
-  const renderImageField = ({ id, meta: { touched, error } }) => (
-    <div>
-      {
-        <div className={styles.containerSmall}>
-          <img className={styles.imgItem} alt=""></img>
-          <input
-            type="file"
-            className={styles.imgItem}
-            accept="image/*"
-          ></input>
-          <h3>Upload Image</h3>
-        </div>
-      }
-      {touched && error && <span>{error}</span>}
-    </div>
-  );
 
   return (
     <form onSubmit={handleSubmit(submit)}>

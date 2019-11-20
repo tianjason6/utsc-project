@@ -28,20 +28,10 @@ class ProjectAdd extends Component {
       imgPaths: [],
       authUserEmail: ""
     };
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.imagePreview = this.imagePreview.bind(this);
     this.config = this.config.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
-  }
-
-  onChange(e) {
-    this.setState(
-      { [e.target.name]: e.target.value, characters: e.target.value.length },
-      () => {
-        this.props.projectAdd(this.state.title, this.state.description);
-      }
-    );
   }
 
   onSubmit(e) {
@@ -124,105 +114,6 @@ class ProjectAdd extends Component {
       <div>
         {this.config()}
         <ProjectAddForm onInitProjectAdd={this.props.initProjectAdd} />
-
-        <div className={styles.Content}>
-          <form>
-            <div className={styles.TitleImgs}>
-              {this.config()}
-              <input
-                type="text"
-                name="title"
-                placeholder="Project Name"
-                onChange={this.onChange}
-                value={this.state.title}
-                maxLength="25"
-              ></input>
-              <span>
-                <div className={styles.imgSelect}>
-                  <div className={styles.containerSmall}>
-                    <img
-                      className={styles.imgItem}
-                      src={this.state.img1}
-                      alt=""
-                    ></img>
-                    <input
-                      type="file"
-                      className={styles.imgItem}
-                      accept="image/*"
-                      id="1"
-                      onChange={this.imagePreview}
-                    ></input>
-                    <h3>Upload Image</h3>
-                  </div>
-                  <div className={styles.containerSmall}>
-                    <img
-                      className={styles.imgItem}
-                      src={this.state.img2}
-                      alt=""
-                    ></img>
-                    <input
-                      type="file"
-                      className={styles.imgItem}
-                      accept="image/*"
-                      id="2"
-                      onChange={this.imagePreview2}
-                    ></input>
-                    <h3>Upload Image</h3>
-                  </div>
-                  <div className={styles.containerSmall}>
-                    <img
-                      className={styles.imgItem}
-                      src={this.state.img3}
-                      alt=""
-                    ></img>
-                    <input
-                      type="file"
-                      className={styles.imgItem}
-                      accept="image/*"
-                      id="3"
-                      onChange={this.imagePreview3}
-                    ></input>
-                    <h3>Upload Image</h3>
-                  </div>
-                  <div className={styles.containerSmall}>
-                    <img
-                      className={styles.imgItem}
-                      src={this.state.img4}
-                      alt=""
-                    ></img>
-                    <input
-                      type="file"
-                      className={styles.imgItem}
-                      accept="image/*"
-                      id="4"
-                      onChange={this.imagePreview4}
-                    ></input>
-                    <h3>Upload Image</h3>
-                  </div>
-                  <div className={styles.containerSmall}></div>
-                </div>
-              </span>
-            </div>
-            <h1>Description</h1>
-
-            <span>
-              <textarea
-                id="message"
-                className={styles.Description}
-                maxLength="800"
-                type="text"
-                name="description"
-                placeholder="Enter a description for your project and describe any open positions."
-                onChange={this.onChange}
-                value={this.state.description}
-              ></textarea>
-              <p>Characters Remaining: {800 - this.state.characters}</p>
-            </span>
-            <button className={styles.ViewProject} onClick={this.onSubmit}>
-              Add Project
-            </button>
-          </form>
-        </div>
       </div>
     );
   }
