@@ -1,10 +1,27 @@
 import React from 'react';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { reset, Field, reduxForm, SubmissionError } from 'redux-form';
+import { submit } from '../../store/actions/submit';
+import { connect } from 'react-redux';
 import styles from './ContactUsForm.module.css';
 
 // const  { DOM: { textarea } } = React;
 
-let ContactUsForm = props => {
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div className={styles.Field}>
+    <label>{label}</label>
+
+    {
+      label === 'Message' ?
+      <textarea className={styles.Message} {...input} placeholder={label} type={type} />
+      :
+      <input className={styles.Regular} {...input} placeholder={label} type={type} />
+    }
+
+    {touched && error && <span>{error}</span>}
+  </div>
+)
+
+let ContactUsForm = (props, dispatch) => {
   const { handleSubmit } = props;
 
   const submit = (values) => {
@@ -44,25 +61,10 @@ let ContactUsForm = props => {
     if(isError) {
       throw new SubmissionError(error);
     } else {
-      console.log('Valid Submission');
-      console.log(values);
+      props.submitEmail(values);
+      props.destroy();
     }
   }
-
-  const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div className={styles.Field}>
-      <label>{label}</label>
-
-      {
-        label === 'Message' ?
-        <textarea className={styles.Message} {...input} placeholder={label} type={type} />
-        :
-        <input className={styles.Regular} {...input} placeholder={label} type={type} />
-      }
-
-      {touched && error && <span>{error}</span>}
-    </div>
-  )
 
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.Form}>
@@ -111,9 +113,18 @@ let ContactUsForm = props => {
 }
 
 ContactUsForm = reduxForm({
-  // a unique name for the form
   form: 'ContactUsForm'
 })(ContactUsForm)
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitEmail: (res) => {dispatch(submit(res))}
+  };
+}
 
-export default ContactUsForm;
+const mapStateToProps = state => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactUsForm);
