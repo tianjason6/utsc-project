@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLaptopCode, faDollarSign, faFire, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Layout from './components/Layout/Layout';
-import LongInfo from './components/LongInfo/LongInfo';
+// import LongInfo from './components/LongInfo/LongInfo';
 
 import LandingPage from './components/LandingPage/LandingPage';
 import About from './components/About/About';

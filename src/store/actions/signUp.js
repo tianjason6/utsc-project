@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
 
+import { URL_SIGN_UP, URL_VERIFY_EMAIL} from '../../GlobalVar';
+
 export const signUp = () => {
   return {
     type: actionTypes.SIGN_UP,
@@ -34,14 +36,14 @@ export const initSignUp = (email, password) => {
 
   return (dispatch) => {
     dispatch(loading(true));
-    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+    axios.post(URL_SIGN_UP, {
       email: email,
       password: password,
       returnSecureToken: true
     })
       .then((res) => {
         //send email confirmation
-        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+        axios.post(URL_VERIFY_EMAIL, {
           requestType: 'VERIFY_EMAIL',
           idToken: res.data.idToken
         })

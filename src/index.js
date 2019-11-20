@@ -13,6 +13,10 @@ import signUpReducer from './store/reducers/signUp';
 import signInReducer from './store/reducers/signIn';
 import authReducer from './store/reducers/auth';
 import userReducer from './store/reducers/user';
+import userManagedProjectsReducer from './store/reducers/userManagedProjects';
+import userJoinedProjectsReducer from './store/reducers/joinedProjects';
+import timelineReducer from './store/reducers/timeline';
+import loggedInUserReducer from './store/reducers/loggedInUser';
 
 
 import './index.css';
@@ -21,13 +25,17 @@ import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
   //reducers go here
+  authReducer: authReducer,
+  featuredProjectsReducer: featuredProjectsReducer,
   form: formReducer,
+  loggedInUserReducer: loggedInUserReducer,
   projectsReducer: projectsReducer,
   projectReducer: projectReducer,
-  featuredProjectsReducer: featuredProjectsReducer,
   signUpReducer: signUpReducer,
   signInReducer: signInReducer,
-  authReducer: authReducer,
+  timelineReducer: timelineReducer,
+  userJoinedProjectsReducer: userJoinedProjectsReducer,
+  userManagedProjectsReducer: userManagedProjectsReducer,
   userReducer: userReducer
 });
 
