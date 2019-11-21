@@ -5,6 +5,33 @@ import { NavLink } from "react-router-dom";
 
 class ConsoleSideMenu extends Component {
   render() {
+    const isSuperUser = this.props.auth.isAdmin;
+    const superUserLink = (
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/JoinedProjects"}
+      >
+        All Projects
+      </NavLink>
+    );
+    const nonSuperUserLink = [
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/ManagedProjects"}
+      >
+        Managed Projects
+      </NavLink>,
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/JoinedProjects"}
+      >
+        Joined Projects
+      </NavLink>
+    ];
+    console.log(this.props, "in console side menu");
     return (
       <div className={styles.Content}>
         <NavLink
@@ -14,20 +41,7 @@ class ConsoleSideMenu extends Component {
         >
           Timeline
         </NavLink>
-        <NavLink
-          className={styles.Option}
-          activeClassName={styles.OptionActive}
-          to={"/test/ManagedProjects"}
-        >
-          Managed Projects
-        </NavLink>
-        <NavLink
-          className={styles.Option}
-          activeClassName={styles.OptionActive}
-          to={"/test/JoinedProjects"}
-        >
-          Joined Projects
-        </NavLink>
+        {isSuperUser === false ? nonSuperUserLink : superUserLink}
         <NavLink
           className={styles.Option}
           activeClassName={styles.OptionActive}
@@ -41,12 +55,11 @@ class ConsoleSideMenu extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    auth: state.authReducer
+  };
 };
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { pure: false }
-)(ConsoleSideMenu);
+export default connect(mapStateToProps, null, null, { pure: false })(
+  ConsoleSideMenu
+);
