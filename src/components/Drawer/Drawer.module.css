@@ -54,11 +54,18 @@
   border: 2px solid white;
 }
 
-.title {
+.mainTitle {
   color: white;
-  font-style: oblique;
   font-weight: bold;
   font-size: 36px;
-  margin-top: 3vw;
+  margin-top: 1.5vw;
+  margin-bottom: -25px;
+}
+
+.title {
+  color: white;
+  font-weight: bold;
+  font-size: 36px;
+  margin-top: 5vw;
   margin-bottom: -25px;
 }

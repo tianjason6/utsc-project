@@ -49,7 +49,7 @@ class Drawer extends Component {
         ) : null}
         <div className={attachedClasses.join(" ")}>
           <div className={styles.ItemsGroup}>
-            <div className={styles.title}>Main Menu</div>
+            <div className={styles.mainTitle}>Main Menu</div>
             <div className={styles.separator} />
             <NavLink
               onClick={this.props.closeDrawer}
