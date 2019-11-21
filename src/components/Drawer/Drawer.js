@@ -49,6 +49,8 @@ class Drawer extends Component {
         ) : null}
         <div className={attachedClasses.join(" ")}>
           <div className={styles.ItemsGroup}>
+            <div className={styles.title}>Main Menu</div>
+            <div className={styles.separator} />
             <NavLink
               onClick={this.props.closeDrawer}
               to={"/ViewProjects"}
@@ -76,30 +78,6 @@ class Drawer extends Component {
   }
 }
 
-// const Drawer = (props) => {
-//   let attachedClasses = [styles.Drawer, styles.Close];
-//   if (props.isOpen) {
-//       attachedClasses = [styles.Drawer, styles.Open];
-//   }
-
-//   const loginOnClick = () => {
-//     props.closeDrawer();
-//     props.toggleLoginModal();
-//   }
-//   return (
-//     <>
-//       {props.isOpen ? <div className={styles.Background} onClick={props.closeDrawer}></div> : null}
-//       <div className={attachedClasses.join(' ')}>
-//         <div className={styles.ItemsGroup}>
-//           <NavLink onClick={props.closeDrawer} to={'/ViewProjects'} exact>View Projects</NavLink>
-//           <NavLink onClick={props.closeDrawer} to={'/About'}>About</NavLink>
-//           <NavLink onClick={props.closeDrawer} to={'/ContactUs'}>Contact Us</NavLink>
-//           <a onClick={loginOnClick}>Login</a>
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
 const mapStateToProps = state => {
   return {
     auth: state.authReducer
@@ -112,9 +90,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { pure: false }
-)(Drawer);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  pure: false
+})(Drawer);
