@@ -120,7 +120,7 @@ class ProjectAdd extends Component {
       history.push("/test/myProjects");
     }
     return (
-      <div className={styles.Content}>
+      <div className={styles.ProjectAddContent}>
         <div className={styles.TitleImgs}>
           {this.config()}
 
@@ -247,7 +247,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectAdd);
