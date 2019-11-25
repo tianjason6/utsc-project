@@ -61,7 +61,7 @@ class ProjectFullDetail extends Component {
       );
     }
     return (
-      <div className={styles.Content}>
+      <div className={styles.ProjectFullDetail}>
         <div className={styles.TitleImgs}>
           <h1>{this.props.project.title}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
