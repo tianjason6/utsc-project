@@ -41,8 +41,6 @@ class ProjectFullDetail extends Component {
   };
 
   render() {
-    console.log("RENDER props user");
-    console.log(this.props.user.email);
     let userInfo = "Loading...";
     if (this.props.user != undefined) {
       userInfo = (
@@ -90,6 +88,7 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
+        {console.log(this.state.projectOwner, "owner in project full detail")}
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
           <div>{userInfo}</div>
