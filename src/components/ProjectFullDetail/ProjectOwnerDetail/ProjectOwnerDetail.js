@@ -8,7 +8,7 @@ class ProjectOwnerDetail extends Component {
   }
 
   render() {
-    // gets all users for some reason
+    // all user information in props
     const owner = this.props.user;
     let e = "";
     let userData = [];
