@@ -30,7 +30,7 @@ class ProjectFullDetailEdit extends Component {
 
   render() {
     return (
-      <div className={styles.Content}>
+      <div className={styles.ProjectFullDetailEdit}>
         <div className={styles.TitleImgs}>
           <h1>{this.state.projectTitle}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
