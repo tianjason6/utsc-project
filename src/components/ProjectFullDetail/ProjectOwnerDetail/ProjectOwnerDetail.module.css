@@ -5,16 +5,16 @@
   margin-left: 10%;
 }
 
-.user {
+.projectOwnerDetail {
   margin-right: 10%;
   margin-left: 10%;
 }
 
-.user h1 {
+.projectOwnerDetail h1 {
   font-size: 35px;
 }
 
-.user p {
+.projectOwnerDetail p {
   font-size: 21px;
 }
 /*# sourceMappingURL=ProjectOwnerDetail.module.css.map */

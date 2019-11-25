@@ -34,7 +34,7 @@ class ProjectOwnerDetail extends Component {
     return (
       <div>
         <div className={styles.line}></div>
-        <div className={styles.user}>
+        <div className={styles.projectOwnerDetail}>
           <h1>Owner Details</h1>
           <p>
             <strong>Owner:</strong> {this.props.owner}
