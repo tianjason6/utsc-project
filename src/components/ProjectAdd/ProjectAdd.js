@@ -32,7 +32,12 @@ class ProjectAdd extends Component {
     this.imagePreview = this.imagePreview.bind(this);
     this.config = this.config.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
   }
+
+  uploadImage = event => {
+    console.log("This is uploading an image");
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -113,7 +118,7 @@ class ProjectAdd extends Component {
     return (
       <div>
         {this.config()}
-        <ProjectAddForm onInitProjectAdd={this.props.initProjectAdd} />
+        <ProjectAddForm onInitProjectAdd={this.props.onInitProjectAdd} />
       </div>
     );
   }
