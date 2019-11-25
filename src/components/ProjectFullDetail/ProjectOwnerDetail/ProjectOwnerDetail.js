@@ -51,6 +51,5 @@ const mapStateToProps = state => {
     user: state.userReducer.user
   };
 };
-const mapDispatchToProps = dispatch => {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectOwnerDetail);
+export default connect(mapStateToProps)(ProjectOwnerDetail);
