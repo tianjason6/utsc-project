@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log("projectAdd Reducer", action);
   switch (action.type) {
     case actionTypes.ADD_PROJECT:
       return {

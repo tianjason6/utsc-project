@@ -10,10 +10,9 @@ class ProjectOwnerDetail extends Component {
   render() {
     // all user information in props
     const owner = this.props.user;
-    let e = "";
     let userData = [];
     // populate userdata
-    for (e in owner) {
+    for (let e in owner) {
       if (
         e !== "isAdmin" &&
         e !== "projectsJoined" &&
