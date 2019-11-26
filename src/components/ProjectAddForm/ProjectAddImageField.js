@@ -6,24 +6,35 @@ class ProjectAddImageField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: ""
+      img: "",
+      imgPath: ""
     };
     this.onChange = this.onChange.bind(this);
-    this.imagePreview = this.imagePreview.bind(this);
   }
 
-  onChange(e) {
-    this.imagePreview(e);
-  }
-
-  imagePreview(event) {
-    if (event.target.files[0].size > maxFileSize) {
+  onChange(event) {
+    const file = event.target.files[0];
+    const id = event.target.id;
+    if (file.size > maxFileSize) {
       alert("File is too big!");
     } else {
       this.setState({
-        img: URL.createObjectURL(event.target.files[0])
+        img: URL.createObjectURL(file),
+        imgPath: file
       });
-      this.props.input.uploadImage(this.state.img);
+      console.log("imgPath:" + file);
+
+      const reader = new FileReader();
+
+      // if it triggers the load event, run the callback function
+      reader.addEventListener("load", () => {
+        //this will load an image onto the screen so temporarily we will comment it out and see if we can put in firebase
+      });
+      // // this triggers a load event so it runs the acllback function
+      reader.readAsDataURL(file);
+
+      // this uses the parent class onchange method
+      this.props.input.onChange(file, id);
     }
   }
 
@@ -31,8 +42,7 @@ class ProjectAddImageField extends React.Component {
     const {
       input: { value }
     } = this.props;
-    //these are all of our props. add more if we included more :))))))
-    const { id } = this.props;
+    const { input, id } = this.props;
     return (
       <div className={styles.containerSmall}>
         <img className={styles.imgItem} src={this.state.img} alt=""></img>

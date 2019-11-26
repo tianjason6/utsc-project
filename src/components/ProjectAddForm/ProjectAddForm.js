@@ -4,15 +4,26 @@ import styles from "./ProjectAddForm.module.css";
 import RenderImageField from "./ProjectAddImageField";
 import * as projectActions from "../../store/actions/addProject";
 import { connect } from "react-redux";
+import { imgUrl } from "../../firebaseConst.js";
 
 class ProjectAddForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       authUserEmail: "",
-      imgs: ["", "", "", ""]
+      imgs: [],
+      img1: "",
+      img2: "",
+      img3: "",
+      img4: ""
     };
+    this.updateFile = this.updateFile.bind(this);
   }
+
+  updateFile = (file, id) => {
+    this.setState["img" + id] = file;
+    console.log("VALUE" + file);
+  };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     <div>
@@ -33,14 +44,30 @@ class ProjectAddForm extends Component {
   );
 
   ProjectAddForm = values => {
-    console.log("Valid Submission");
     console.log(values);
-    this.props.onInitProjectAdd(
-      values.title,
-      values.description,
-      this.state.imgs,
-      this.props.authUserEmail
-    );
+    let hasImage = false;
+    for (let i = 1; i <= 4; i++) {
+      console.log("img" + i + ":" + this.state["img" + i]);
+      console.log("BLAH:" + this.state["img" + i]);
+      if (this.state["img" + i] !== "") {
+        this.state.imgs = this.state.imgs.concat(
+          imgUrl + values.title + "%2Fimg" + i + ".jpg?alt=media"
+        );
+        hasImage = true;
+      }
+    }
+    if (!hasImage) {
+      console.log("no image");
+      this.state.imgs = [""];
+    } else {
+      console.log("IMGS" + this.state.imgs);
+      this.props.onInitProjectAdd(
+        values.title,
+        values.description,
+        this.state.imgs,
+        this.props.authUserEmail
+      );
+    }
   };
 
   render() {
@@ -58,10 +85,27 @@ class ProjectAddForm extends Component {
           <div className={styles.TitleImgs}>
             <span>
               <div className={styles.imgSelect}>
-                <Field component={RenderImageField} id="1" />
-                <Field component={RenderImageField} id="2" />
-                <Field component={RenderImageField} id="3" />
-                <Field component={RenderImageField} id="4" />
+                <Field
+                  name="imgs"
+                  component={RenderImageField}
+                  onChange={this.updateFile}
+                  id="1"
+                />
+                <Field
+                  component={RenderImageField}
+                  onChange={this.updateFile}
+                  id="2"
+                />
+                <Field
+                  component={RenderImageField}
+                  onChange={this.updateFile}
+                  id="3"
+                />
+                <Field
+                  component={RenderImageField}
+                  onChange={this.updateFile}
+                  id="4"
+                />
                 <div className={styles.containerSmall}></div>
               </div>
             </span>
