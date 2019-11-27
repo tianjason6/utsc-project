@@ -4,9 +4,7 @@ import styles from "./ProjectAddForm.module.css";
 import RenderImageField from "./ProjectAddImageField";
 import * as projectActions from "../../store/actions/addProject";
 import { connect } from "react-redux";
-import axios from "../../axios-projects";
-import firebase from "firebase";
-import { firebaseConfig, maxFileSize, imgUrl } from "../../firebaseConst.js";
+import { imgUrl } from "../../firebaseConst.js";
 
 class ProjectAddForm extends Component {
   constructor(props) {
@@ -19,39 +17,12 @@ class ProjectAddForm extends Component {
       img3: "",
       img4: ""
     };
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    this.config = this.config.bind(this);
+    this.updateFile = this.updateFile.bind(this);
   }
 
-  fileUploadHandler(title) {
-    // Create a root reference
-    let storageRef = firebase.storage().ref();
-    let ref, file;
-    let index = 1;
-    this.state.imgs.map(item => {
-      if (item !== "") {
-        file = this.state["img" + index];
-        ref = storageRef.child(title + "/img" + index + ".jpg");
-        ref.put(file);
-      }
-      index++;
-    });
-  }
-
-  updateFile1 = (file, id) => {
-    this.setState({ img1: file });
-  };
-
-  updateFile2 = (file, id) => {
-    this.setState({ img2: file });
-  };
-
-  updateFile3 = (file, id) => {
-    this.setState({ img3: file });
-  };
-
-  updateFile4 = (file, id) => {
-    this.setState({ img4: file });
+  updateFile = (file, id) => {
+    this.setState["img" + id] = file;
+    console.log("VALUE" + file);
   };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -68,57 +39,41 @@ class ProjectAddForm extends Component {
           type={type}
         />
       )}
+      {touched && error && <span>{error}</span>}
     </div>
   );
 
-  config(event) {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-  }
-
   ProjectAddForm = values => {
-    let projectData = null;
-    // Fetching the project names
-    axios.get("Projects/" + values.title + ".json").then(res => {
-      projectData = res.data;
-      if (projectData != null) {
-        // If project does not exist, put request
-        alert("A project with this name already exists");
-      } else {
-        let hasImage = false;
-        for (let i = 1; i <= 4; i++) {
-          if (this.state["img" + i] !== "") {
-            this.state.imgs = this.state.imgs.concat(
-              imgUrl + values.title + "%2Fimg" + i + ".jpg?alt=media"
-            );
-            hasImage = true;
-          }
-        }
-
-        if (!hasImage) {
-          this.state.imgs = [""];
-          alert("A project image is required!");
-        } else {
-          this.fileUploadHandler(values.title);
-
-          this.props.onInitProjectAdd(
-            values.title,
-            values.description,
-            this.state.imgs,
-            this.props.authUserEmail
-          );
-        }
+    console.log(values);
+    let hasImage = false;
+    for (let i = 1; i <= 4; i++) {
+      console.log("img" + i + ":" + this.state["img" + i]);
+      console.log("BLAH:" + this.state["img" + i]);
+      if (this.state["img" + i] !== "") {
+        this.state.imgs = this.state.imgs.concat(
+          imgUrl + values.title + "%2Fimg" + i + ".jpg?alt=media"
+        );
+        hasImage = true;
       }
-    });
+    }
+    if (!hasImage) {
+      console.log("no image");
+      this.state.imgs = [""];
+    } else {
+      console.log("IMGS" + this.state.imgs);
+      this.props.onInitProjectAdd(
+        values.title,
+        values.description,
+        this.state.imgs,
+        this.props.authUserEmail
+      );
+    }
   };
 
   render() {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit(this.ProjectAddForm)}>
-        {this.config()}
-
         <div className={styles.Content}>
           <Field
             name="title"
@@ -133,22 +88,22 @@ class ProjectAddForm extends Component {
                 <Field
                   name="imgs"
                   component={RenderImageField}
-                  onChange={this.updateFile1}
+                  onChange={this.updateFile}
                   id="1"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile2}
+                  onChange={this.updateFile}
                   id="2"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile3}
+                  onChange={this.updateFile}
                   id="3"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile4}
+                  onChange={this.updateFile}
                   id="4"
                 />
                 <div className={styles.containerSmall}></div>
