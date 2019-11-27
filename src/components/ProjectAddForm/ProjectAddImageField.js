@@ -6,8 +6,7 @@ class ProjectAddImageField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: "",
-      imgPath: ""
+      img: ""
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -15,26 +14,21 @@ class ProjectAddImageField extends React.Component {
   onChange(event) {
     const file = event.target.files[0];
     const id = event.target.id;
-    if (file.size > maxFileSize) {
-      alert("File is too big!");
-    } else {
-      this.setState({
-        img: URL.createObjectURL(file),
-        imgPath: file
-      });
-      console.log("imgPath:" + file);
-
-      const reader = new FileReader();
-
-      // if it triggers the load event, run the callback function
-      reader.addEventListener("load", () => {
-        //this will load an image onto the screen so temporarily we will comment it out and see if we can put in firebase
-      });
-      // // this triggers a load event so it runs the acllback function
-      reader.readAsDataURL(file);
-
-      // this uses the parent class onchange method
-      this.props.input.onChange(file, id);
+    if (file != null) {
+      if (file.size > maxFileSize) {
+        alert("File is too big!");
+      } else {
+        this.setState({ img: URL.createObjectURL(file) });
+        const reader = new FileReader();
+        // if it triggers the load event, run the callback function
+        reader.addEventListener("load", () => {
+          //this will load an image onto the screen so temporarily we will comment it out and see if we can put in firebase
+        });
+        // // this triggers a load event so it runs the acllback function
+        reader.readAsDataURL(file);
+        // this uses the parent class onchange method
+        this.props.input.onChange(file, id);
+      }
     }
   }
 
