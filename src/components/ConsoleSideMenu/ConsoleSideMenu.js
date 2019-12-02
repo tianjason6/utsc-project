@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 
 class ConsoleSideMenu extends Component {
   render() {
-    // const isSuperUser = this.props.loggedInUser.isAdmin;
     let isSuperUser = undefined;
     if (this.props.currUser.loggedInUser !== null) {
       isSuperUser = this.props.currUser.loggedInUser.isAdmin;
@@ -14,7 +13,7 @@ class ConsoleSideMenu extends Component {
       <NavLink
         className={styles.Option}
         activeClassName={styles.OptionActive}
-        to={"/test/JoinedProjects"}
+        to={"/test/AllProjects"}
       >
         All Projects
       </NavLink>

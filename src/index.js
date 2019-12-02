@@ -5,7 +5,7 @@ import history from './history';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { reducer as formReducer }from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 import projectsReducer from './store/reducers/projects';
 import projectReducer from './store/reducers/project';
 import featuredProjectsReducer from './store/reducers/featuredProjects';
@@ -17,7 +17,7 @@ import userManagedProjectsReducer from './store/reducers/userManagedProjects';
 import userJoinedProjectsReducer from './store/reducers/joinedProjects';
 import timelineReducer from './store/reducers/timeline';
 import loggedInUserReducer from './store/reducers/loggedInUser';
-
+import allProjectReducer from './store/reducers/allProjects';
 
 import './index.css';
 import App from './App';
@@ -36,16 +36,17 @@ const rootReducer = combineReducers({
   timelineReducer: timelineReducer,
   userJoinedProjectsReducer: userJoinedProjectsReducer,
   userManagedProjectsReducer: userManagedProjectsReducer,
-  userReducer: userReducer
+  userReducer: userReducer,
+  allProjectReducer: allProjectReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const app = (
   <Provider store={store}>
-      <Router history={history}>
-          <App />
-      </Router>
+    <Router history={history}>
+      <App />
+    </Router>
   </Provider>
 );
 
