@@ -31,7 +31,6 @@ class ConsoleSideMenu extends Component {
         Joined Projects
       </NavLink>
     ];
-    console.log(this.props, "in console side menu");
     return (
       <div className={styles.Content}>
         <NavLink
