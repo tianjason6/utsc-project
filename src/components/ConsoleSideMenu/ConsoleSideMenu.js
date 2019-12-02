@@ -5,7 +5,11 @@ import { NavLink } from "react-router-dom";
 
 class ConsoleSideMenu extends Component {
   render() {
-    const isSuperUser = this.props.auth.isAdmin;
+    // const isSuperUser = this.props.loggedInUser.isAdmin;
+    let isSuperUser = undefined;
+    if (this.props.currUser.loggedInUser !== null) {
+      isSuperUser = this.props.currUser.loggedInUser.isAdmin;
+    }
     const superUserLink = (
       <NavLink
         className={styles.Option}
@@ -55,7 +59,8 @@ class ConsoleSideMenu extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.authReducer
+    auth: state.authReducer,
+    currUser: state.loggedInUserReducer
   };
 };
 
