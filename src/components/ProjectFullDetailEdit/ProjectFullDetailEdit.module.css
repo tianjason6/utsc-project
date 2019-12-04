@@ -1,17 +1,17 @@
-.ProjectFullDetailEdit {
+.Content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.ProjectFullDetailEdit .TitleImgs {
+.Content .TitleImgs {
   display: flex;
   flex-direction: column;
   background-color: lightgrey;
   padding-bottom: 20px;
 }
 
-.ProjectFullDetailEdit .imgEnlarge {
+.Content .imgEnlarge {
   background-image: url("../../assests/images/night-sky.jpg");
   width: 600px;
   height: 600px;
@@ -21,34 +21,34 @@
 }
 
 @media (max-width: 900px) {
-  .ProjectFullDetailEdit .imgEnlarge {
+  .Content .imgEnlarge {
     width: 500px;
     height: 500px;
   }
 }
 
 @media (max-width: 700px) {
-  .ProjectFullDetailEdit .imgEnlarge {
+  .Content .imgEnlarge {
     width: 450px;
     height: 450px;
   }
 }
 
 @media (max-width: 500px) {
-  .ProjectFullDetailEdit .imgEnlarge {
+  .Content .imgEnlarge {
     width: 340px;
     height: 340px;
   }
 }
 
 @media (max-width: 300px) {
-  .ProjectFullDetailEdit .imgEnlarge {
+  .Content .imgEnlarge {
     width: 200px;
     height: 200px;
   }
 }
 
-.ProjectFullDetailEdit .imgSelect {
+.Content .imgSelect {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -56,7 +56,7 @@
   margin-bottom: 20px;
 }
 
-.ProjectFullDetailEdit .imgSelect .imgItem {
+.Content .imgSelect .imgItem {
   background-image: url("../../assests/images/night-sky.jpg");
   border: 2px solid black;
   margin-top: 20px;
@@ -67,7 +67,7 @@
 }
 
 @media (max-width: 500px) {
-  .ProjectFullDetailEdit .imgSelect .imgItem {
+  .Content .imgSelect .imgItem {
     width: 50px;
     height: 50px;
     margin-top: 5px;
@@ -76,17 +76,17 @@
   }
 }
 
-.ProjectFullDetailEdit .imgSelect .imgItem:hover {
+.Content .imgSelect .imgItem:hover {
   border: 2px solid rgb(247, 103, 36);
 }
 
-.ProjectFullDetailEdit h1 {
+.Content .heading {
   font-size: 50px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.ProjectFullDetailEdit p {
+.Content .paragraph {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -95,49 +95,49 @@
 }
 
 @media (max-width: 1250px) {
-  .ProjectFullDetailEdit p {
+  .Content .paragraph {
     width: 800px;
     font-size: 24px;
   }
 }
 
 @media (max-width: 1000px) {
-  .ProjectFullDetailEdit p {
+  .Content .paragraph {
     width: 680px;
     font-size: 24px;
   }
 }
 
 @media (max-width: 700px) {
-  .ProjectFullDetailEdit p {
+  .Content .paragraph {
     width: 500px;
     font-size: 18px;
   }
 }
 
 @media (max-width: 500px) {
-  .ProjectFullDetailEdit p {
+  .Content .paragraph {
     width: 300px;
     font-size: 14px;
   }
 
-  .ProjectFullDetailEdit h1 {
+  .Content .heading {
     font-size: 40px;
   }
 }
 
 @media (max-width: 300px) {
-  .ProjectFullDetailEdit p {
+  .Content .paragraph {
     width: 200px;
     font-size: 14px;
   }
 
-  .ProjectFullDetailEdit h1 {
+  .Content .heading {
     font-size: 35px;
   }
 }
 
-.ProjectFullDetailEdit button {
+.Content button {
   width: 70%;
   height: 60px;
   background-color: rgb(247, 103, 36);
@@ -153,7 +153,7 @@
   margin-right: auto;
 }
 
-.ProjectFullDetailEdit button:hover {
+.Content button:hover {
   background-color: rgb(163, 62, 15);
   cursor: pointer;
 }
