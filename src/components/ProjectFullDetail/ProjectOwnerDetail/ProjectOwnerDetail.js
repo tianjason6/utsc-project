@@ -22,7 +22,7 @@ class ProjectOwnerDetail extends Component {
         // to not have email and owner show up if they are the same
         if (e === "email" && owner[e] !== this.props.owner) {
           userData.push(
-            <p key={e + "ProjectOwnerDetail"}>
+            <p key={e + "ProjectOwnerDetail"} className={styles.description}>
               <strong>{e}: </strong>
               {owner[e]}
             </p>
@@ -34,8 +34,8 @@ class ProjectOwnerDetail extends Component {
       <div>
         <div className={styles.line}></div>
         <div className={styles.projectOwnerDetail}>
-          <h1>Owner Details</h1>
-          <p>
+          <h1 className={styles.heading}>Owner Details</h1>
+          <p className={styles.description}>
             <strong>Owner:</strong> {this.props.owner}
           </p>
           {userData}

@@ -9,10 +9,10 @@ $margin-rate: 10%;
 .projectOwnerDetail {
   margin-right: $margin-rate;
   margin-left: $margin-rate;
-  h1 {
+  .heading {
     font-size: 35px;
   }
-  p {
+  .description {
     font-size: 21px;
   }
 }

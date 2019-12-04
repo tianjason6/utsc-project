@@ -10,11 +10,11 @@
   margin-left: 10%;
 }
 
-.projectOwnerDetail h1 {
+.projectOwnerDetail .heading {
   font-size: 35px;
 }
 
-.projectOwnerDetail p {
+.projectOwnerDetail .description {
   font-size: 21px;
 }
 /*# sourceMappingURL=ProjectOwnerDetail.module.css.map */
