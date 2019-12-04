@@ -15,16 +15,8 @@ class ProjectAdd extends Component {
       title: "",
       description: "",
       characters: "",
-      // img1: defaultImg,
-      // img2: defaultImg,
-      // img3: defaultImg,
-      // img4: defaultImg,
       currImg: [defaultImg, defaultImg, defaultImg, defaultImg],
       imgs: [],
-      // imgPath1: "",
-      // imgPath2: "",
-      // imgPath3: "",
-      // imgPath4: "",
       currImgPath: ["", "", "", ""],
       imgPaths: [],
       authUserEmail: ""
@@ -65,9 +57,6 @@ class ProjectAdd extends Component {
                 imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media"
               )
             });
-            // this.state.imgs = this.state.imgs.concat(
-            //   imgUrl + this.state.title + "%2Fimg" + i + ".jpg?alt=media"
-            // );
             hasImage = true;
           }
         }
@@ -109,10 +98,6 @@ class ProjectAdd extends Component {
         imgPaths: this.state.imgPaths.concat(this.state.currImgPath[i])
       });
     }
-    // this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath1);
-    // this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath2);
-    // this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath3);
-    // this.state.imgPaths = this.state.imgPaths.concat(this.state.imgPath4);
     // Create a root reference
     let storageRef = firebase.storage().ref();
 
@@ -233,7 +218,7 @@ class ProjectAdd extends Component {
   }
 }
 
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
   return true;
 };
 
