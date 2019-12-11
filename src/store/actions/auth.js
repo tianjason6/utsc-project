@@ -7,11 +7,22 @@ import * as userManagedProjectsAction from './userManagedProjects';
 import * as loggedInUserAction from './loggedInUser';
 
 export const login = (email, idToken, idTokenExpiryDate) => {
-  return {
-    type: actionTypes.LOGIN,
-    email: email,
-    idToken: idToken,
-    idTokenExpiryDate: idTokenExpiryDate,
+  let userType;
+  const username = email.split('@')[0];
+  let user = axios.get('Users/' + username + '.json').then(res => {
+    return res.data;
+  });
+  return (dispatch) => {
+    Promise.resolve(user).then((res) => {
+      userType = res.isAdmin;
+      dispatch({
+        type: actionTypes.LOGIN,
+        email: email,
+        idToken: idToken,
+        idTokenExpiryDate: idTokenExpiryDate,
+        isAdmin: userType
+      });
+    });
   }
 }
 
@@ -37,7 +48,7 @@ export const logout = () => {
   }
 }
 
-export const checkTokenTimeout = (expiresIn) =>{
+export const checkTokenTimeout = (expiresIn) => {
   return dispatch => {
     setTimeout(() => {
       dispatch(logout());
@@ -50,15 +61,15 @@ export const checkAuthToken = () => {
     const token = localStorage.getItem('token');
     if (!token) {
       dispatch(logout());
-    } else  {
+    } else {
       const expireDate = new Date(localStorage.getItem('expireDate'));
       if (expireDate < new Date()) {
         dispatch(logout());
       } else {
         const userEmail = localStorage.getItem('email');
-        
-        dispatch(login(userEmail, token, expireDate));        
-        dispatch(checkTokenTimeout( (expireDate.getTime() - (new Date().getTime()))/1000 ));
+
+        dispatch(login(userEmail, token, expireDate));
+        dispatch(checkTokenTimeout((expireDate.getTime() - (new Date().getTime())) / 1000));
         dispatch(loggedInUserAction.fetchLoggedInUser(userEmail.split('@')[0]));
       }
     }
