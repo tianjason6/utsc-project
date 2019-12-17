@@ -15,21 +15,36 @@ export const fetchAllProjectsFailed = () => {
 };
 
 export const initAllProjects = () => {
+  // this will break if database list is not keys are not continuous 
   return (dispatch) => {
-    axios.get('AllProjects.json')
+    let allProjects = [];
+    axios.get('ActiveProjects.json')
+      // maybe use a helper function so this is not redundant???
       .then((res) => {
         let ProjectTitles = res.data;
-        let projectRequests = ProjectTitles.map((projectTitle) => {
+        let archiveProjectRequests = ProjectTitles.map((projectTitle) => {
           return axios.get('Projects/' + projectTitle + '.json')
         });
-        Promise.all(projectRequests)
+        Promise.all(archiveProjectRequests)
           .then((res) => {
-            let allProjects = [];
             res.forEach((item) => {
               allProjects.push(item.data);
             })
-            dispatch(setAllProjects(allProjects));
           })
-      })
+
+      }).then(axios.get('ArchivedProjects.json')
+        .then((res) => {
+          let ProjectTitles = res.data;
+          let projectRequests = ProjectTitles.map((projectTitle) => {
+            return axios.get('Projects/' + projectTitle + '.json')
+          });
+          Promise.all(projectRequests)
+            .then((res) => {
+              res.forEach((item) => {
+                allProjects.push(item.data);
+              })
+              dispatch(setAllProjects(allProjects));
+            })
+        }))
   }
 };
