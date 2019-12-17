@@ -15,17 +15,21 @@ export const fetchAllProjectsFailed = () => {
 };
 
 export const initAllProjects = () => {
-  return dispatch => {
-    axios
-      .get("Projects.json")
-      .then(res => {
-        let allProject = res.data;
-        axios.get("ArchivedProjects.json").then(res => {
-          dispatch(setAllProjects(allProject + res.data));
+  return (dispatch) => {
+    axios.get('AllProjects.json')
+      .then((res) => {
+        let ProjectTitles = res.data;
+        let projectRequests = ProjectTitles.map((projectTitle) => {
+          return axios.get('Projects/' + projectTitle + '.json')
         });
+        Promise.all(projectRequests)
+          .then((res) => {
+            let allProjects = [];
+            res.forEach((item) => {
+              allProjects.push(item.data);
+            })
+            dispatch(setAllProjects(allProjects));
+          })
       })
-      .catch(error => {
-        dispatch(fetchAllProjectsFailed());
-      });
-  };
+  }
 };

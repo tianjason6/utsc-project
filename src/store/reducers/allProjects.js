@@ -7,7 +7,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.SET_PROJECTS:
+        case actionTypes.SET_ALL_PROJECTS:
             return {
                 ...state,
                 projects: action.projects,

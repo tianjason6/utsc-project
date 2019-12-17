@@ -4,8 +4,12 @@ import Project from '../Project/Project';
 import * as allProjectsActions from '../../store/actions/allProjects';
 
 class AllProjects extends Component {
-  state = {};
+  componentDidMount() {
+    this.props.onInitAllProjects();
+  }
+
   render() {
+    console.log("all projects component: ", this.props);
     return (
       <div>
         <div>
