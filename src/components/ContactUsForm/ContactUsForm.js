@@ -1,13 +1,40 @@
 import React from 'react';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, SubmissionError, reset } from 'redux-form';
+import { submit, successConfirmation } from '../../store/actions/submit';
+import { connect } from 'react-redux';
 import styles from './ContactUsForm.module.css';
 
 // const  { DOM: { textarea } } = React;
 
-let ContactUsForm = props => {
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div className={styles.Field}>
+    <label>{label}</label>
+
+    {
+      label === 'Message' ?
+      <textarea className={styles.Message} {...input} placeholder={label} type={type} />
+      :
+      <input className={styles.Regular} {...input} placeholder={label} type={type} />
+    }
+
+    {touched && error && <span>{error}</span>}
+  </div>
+)
+
+
+let ContactUsForm = (props) => {
+  console.log("form status", props);
+  if(props.formStatus.success){
+    alert(props.formStatus.message)
+    props.successConfirmation();
+  }
   const { handleSubmit } = props;
 
   const submit = (values) => {
+    if(props.formStatus.timeout){
+      alert("Please allow up to 10 seconds before your second submission :)");
+      return;
+    }
     let error = {};
     let isError = false;
 
@@ -40,29 +67,15 @@ let ContactUsForm = props => {
       error.message = 'Required';
       isError = true;
     }
-
     if(isError) {
       throw new SubmissionError(error);
     } else {
-      console.log('Valid Submission');
-      console.log(values);
+      props.submitEmail(values);
+      if(!props.formStatus.error){
+        props.resetform();
+      }
     }
   }
-
-  const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div className={styles.Field}>
-      <label>{label}</label>
-
-      {
-        label === 'Message' ?
-        <textarea className={styles.Message} {...input} placeholder={label} type={type} />
-        :
-        <input className={styles.Regular} {...input} placeholder={label} type={type} />
-      }
-
-      {touched && error && <span>{error}</span>}
-    </div>
-  )
 
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.Form}>
@@ -103,7 +116,7 @@ let ContactUsForm = props => {
         label="Message"
       />
       {props.error && <strong>{props.error}</strong>}
-      <button className={styles.SubmitButton} type="submit" disabled={props.submitting}>
+      <button className={styles.SubmitButton} type="submit">
         Submit
       </button>
     </form>
@@ -111,9 +124,21 @@ let ContactUsForm = props => {
 }
 
 ContactUsForm = reduxForm({
-  // a unique name for the form
   form: 'ContactUsForm'
 })(ContactUsForm)
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitEmail: (res) => {dispatch(submit(res))},
+    resetform: () => {dispatch(reset('ContactUsForm'))},
+    successConfirmation: () => {dispatch(successConfirmation())}
+  };
+}
 
-export default ContactUsForm;
+const mapStateToProps = state => {
+  return {
+    formStatus: state.submitReducer
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactUsForm);
