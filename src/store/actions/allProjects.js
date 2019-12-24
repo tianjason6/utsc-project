@@ -14,37 +14,29 @@ export const fetchAllProjectsFailed = () => {
   };
 };
 
+// helper function
+let setProjects = (projectType, projects, allProjectList, dispatch) => {
+  let pTitles = Object.keys(projects);
+  let currProjects = pTitles.map(projectTitle => {
+    return axios.get(projectType + projectTitle + ".json");
+  })
+  Promise.all(currProjects).then(res => {
+    res.forEach(project => {
+      allProjectList.push(project.data);
+    })
+    dispatch(setAllProjects(allProjectList));
+  })
+}
+
 export const initAllProjects = () => {
-  // this will break if database list is not keys are not continuous 
   return (dispatch) => {
     let allProjects = [];
-    axios.get('ActiveProjects.json')
-      // maybe use a helper function so this is not redundant???
-      .then((res) => {
-        let ProjectTitles = res.data;
-        let archiveProjectRequests = ProjectTitles.map((projectTitle) => {
-          return axios.get('Projects/' + projectTitle + '.json')
-        });
-        Promise.all(archiveProjectRequests)
-          .then((res) => {
-            res.forEach((item) => {
-              allProjects.push(item.data);
-            })
-          })
-
-      }).then(axios.get('ArchivedProjects.json')
-        .then((res) => {
-          let ProjectTitles = res.data;
-          let projectRequests = ProjectTitles.map((projectTitle) => {
-            return axios.get('Projects/' + projectTitle + '.json')
-          });
-          Promise.all(projectRequests)
-            .then((res) => {
-              res.forEach((item) => {
-                allProjects.push(item.data);
-              })
-              dispatch(setAllProjects(allProjects));
-            })
-        }))
-  }
+    axios.get("Projects.json").then(res => {
+      setProjects("Projects/", res.data, allProjects, dispatch);
+    }).then(
+      axios.get("ArchivedProjects.json").then(res => {
+        setProjects("ArchivedProjects/", res.data, allProjects, dispatch);
+      })
+    );
+  };
 };
