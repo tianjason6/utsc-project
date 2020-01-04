@@ -6,6 +6,7 @@ import * as userActions from '../../store/actions/user';
 import Modal from '../Modal/Modal';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
+import ArchiveStatus from '../ArchiveStatus/ArchiveStatus';
 
 import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
 
@@ -26,14 +27,14 @@ class ProjectFullDetail extends Component {
   componentDidMount() {
     this.props.onInitProject(this.state.projectTitle);
 
-    if(this.props.loggedInUser) {
+    if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
   }
 
   componentDidUpdate() {
-    if(this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
-      this.setState({mainImgURL: this.props.project.imgs[0]});
+    if (this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
+      this.setState({ mainImgURL: this.props.project.imgs[0] });
     }
   }
 
@@ -42,10 +43,10 @@ class ProjectFullDetail extends Component {
   }
 
   showModal = () => {
-    this.setState({ showModal: true});
+    this.setState({ showModal: true });
   }
-  closeModal = ()  => {
-    this.setState({showModal: false});
+  closeModal = () => {
+    this.setState({ showModal: false });
   }
 
   leaveProject = () => {
@@ -54,8 +55,8 @@ class ProjectFullDetail extends Component {
 
   render() {
     let projectOwnerInfo = "Loading...";
-    if(this.props.projectOwner != undefined){
-      projectOwnerInfo=(
+    if (this.props.projectOwner != undefined) {
+      projectOwnerInfo = (
         <div>
           <h2> {this.state.projectTitle} </h2>
           <div><b>Project Owner:</b> {this.props.project.owner}</div>
@@ -76,15 +77,15 @@ class ProjectFullDetail extends Component {
         <button className={styles.ContentButton} onClick={this.closeModal}>Exit</button>
       </div>
     );
-    
+
     let foundProject = undefined;
-    
+
     foundProject = this.props.userJoinedProjects.find(project => {
       return project.title === this.props.project.title;
     });
-    
 
-    if(foundProject != undefined) {
+
+    if (foundProject != undefined) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
@@ -103,7 +104,7 @@ class ProjectFullDetail extends Component {
       modalContent = (
         <div>
           <div>{projectOwnerInfo}</div>
-          <button className={styles.ContentButton}onClick={this.closeModal}>Exit</button>
+          <button className={styles.ContentButton} onClick={this.closeModal}>Exit</button>
         </div>
       );
     }
@@ -116,11 +117,11 @@ class ProjectFullDetail extends Component {
           <img className={styles.imgEnlarge} src={this.state.mainImgURL} alt="Main Img"></img>
           <div className={styles.imgSelect}>
             {
-              this.props.project.imgs ? 
-              this.props.project.imgs.map((imgURL, i) => {
-                return  <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
-              })
-              : null
+              this.props.project.imgs ?
+                this.props.project.imgs.map((imgURL, i) => {
+                  return <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
+                })
+                : null
             }
 
           </div>
@@ -131,6 +132,7 @@ class ProjectFullDetail extends Component {
           {modalContent}
         </Modal>
         {modalButton}
+        <ArchiveStatus projectTitle={this.props.project.title} />
       </div>
     )
   }

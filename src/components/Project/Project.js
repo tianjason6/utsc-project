@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import history from '../../history';
+import ArchiveStatus from '../ArchiveStatus/ArchiveStatus';
 
 import styles from './Project.module.css';
 
@@ -32,6 +33,7 @@ class Project extends Component {
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
           <button className={styles.ViewProject} onClick={this.routeProjectFullDetail}>View Project</button>
+          <ArchiveStatus projectTitle={this.props.title} />
         </div>
       </>;
 
