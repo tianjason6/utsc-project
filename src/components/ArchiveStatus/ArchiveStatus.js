@@ -12,19 +12,35 @@ class ArchiveButton extends Component {
     }
 
     render() {
-        console.log("Archive status button", this.state.projectTitle);
         return (
-            <button className={styles.ContentButton} onClick={() => {
-                axios.get("Projects/" + this.state.projectTitle + ".json").then(res => {
-                    const archiving = res.data;
-                    Promise.resolve(archiving).then(projectData => {
-                        console.log("project data: ", projectData)
-                        axios.put("ArchivedProjects/" + this.state.projectTitle + ".json", projectData).then(res => {
-                            console.log("response to putting in archive: ", res)
+            <div>
+                <button className={styles.ContentButton} onClick={() => {
+                    axios.get("Projects/" + this.state.projectTitle + ".json").then(res => {
+                        const archiving = res.data;
+                        Promise.resolve(archiving).then(projectData => {
+                            axios.put("ArchivedProjects/" + this.state.projectTitle + ".json", projectData).then(res => {
+                                console.log("response to putting in archives: ", res)
+                                axios.delete("Projects/" + this.state.projectTitle + ".json").then(res => {
+                                    console.log("response to deleting in projects: ", res);
+                                })
+                            })
                         })
                     })
-                })
-            }}> Archive </button>
+                }}> Archive </button>
+                <button className={styles.ContentButton} onClick={() => {
+                    axios.get("ArchivedProjects/" + this.state.projectTitle + ".json").then(res => {
+                        const archiving = res.data;
+                        Promise.resolve(archiving).then(projectData => {
+                            axios.put("Projects/" + this.state.projectTitle + ".json", projectData).then(res => {
+                                console.log("response to putting in projects: ", res)
+                                axios.delete("ArchivedProjects/" + this.state.projectTitle + ".json").then(res => {
+                                    console.log("response to deleting in archives: ", res);
+                                })
+                            })
+                        })
+                    })
+                }}> Activate </button>
+            </div>
         )
     }
 }
