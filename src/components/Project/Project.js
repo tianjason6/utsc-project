@@ -22,8 +22,13 @@ class Project extends Component {
   }
 
   render() {
-
     let editProject = [styles.Box];
+    let archiveButton = undefined;
+    if (this.props.loggedInUser) {
+      if (this.props.loggedInUser.isAdmin === true) {
+        archiveButton = (<ArchiveStatus projectTitle={this.props.title} />)
+      }
+    }
     let projectDisplay =
       <>
         <div>
@@ -33,7 +38,7 @@ class Project extends Component {
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
           <button className={styles.ViewProject} onClick={this.routeProjectFullDetail}>View Project</button>
-          <ArchiveStatus projectTitle={this.props.title} />
+          {archiveButton}
         </div>
       </>;
 
@@ -53,6 +58,7 @@ class Project extends Component {
 
 const mapStateToProps = state => {
   return {
+    loggedInUser: state.loggedInUserReducer.loggedInUser
   };
 };
 

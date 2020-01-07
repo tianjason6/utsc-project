@@ -109,6 +109,13 @@ class ProjectFullDetail extends Component {
       );
     }
 
+    let archiveButton = undefined;
+    if (this.props.loggedInUser) {
+      if (this.props.loggedInUser.isAdmin === true) {
+        archiveButton = (<ArchiveStatus projectTitle={this.props.title} />)
+      }
+    }
+
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
@@ -132,7 +139,7 @@ class ProjectFullDetail extends Component {
           {modalContent}
         </Modal>
         {modalButton}
-        <ArchiveStatus projectTitle={this.props.project.title} />
+        {archiveButton}
       </div>
     )
   }
