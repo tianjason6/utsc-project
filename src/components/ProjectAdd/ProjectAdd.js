@@ -18,7 +18,7 @@ class ProjectAdd extends Component {
   }
 }
 
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
   return true;
 };
 

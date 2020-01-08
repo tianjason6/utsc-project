@@ -32,8 +32,8 @@ class ProjectFullDetailEdit extends Component {
     return (
       <div className={styles.Content}>
         <div className={styles.TitleImgs}>
-          <h1>{this.state.projectTitle}</h1>
-          {this.props.error ? <p>Error loading project</p> : null}
+          <h1 className={styles.heading}>{this.state.projectTitle}</h1>
+          {this.props.error ? <p className={styles.paragraph}>Error loading project</p> : null}
           <img
             className={styles.imgEnlarge}
             src={this.state.mainImgURL}
@@ -42,20 +42,20 @@ class ProjectFullDetailEdit extends Component {
           <div className={styles.imgSelect}>
             {this.props.imgs
               ? this.props.project.imgs.map((imgURL, i) => {
-                  return (
-                    <img
-                      key={i}
-                      className={styles.imgItem}
-                      src={imgURL}
-                      alt={imgURL}
-                      onMouseEnter={() => this.selectPicture(imgURL)}
-                    ></img>
-                  );
-                })
+                return (
+                  <img
+                    key={i}
+                    className={styles.imgItem}
+                    src={imgURL}
+                    alt={imgURL}
+                    onMouseEnter={() => this.selectPicture(imgURL)}
+                  ></img>
+                );
+              })
               : null}
           </div>
         </div>
-        <h1>Description</h1>
+        <h1 className={styles.heading}>Description</h1>
         <p className={styles.Description}>{this.props.description}</p>
 
         <button>Join Project</button>
