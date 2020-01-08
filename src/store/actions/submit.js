@@ -1,19 +1,20 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
 
+import { CONTACT_US_CLOUDFUNCTION } from './../../GlobalVar';
+
 export const submit = (submission) => {
     return (dispatch) => {
         dispatch({
             type: actionTypes.SUBMISSION_LOADING
         })
-        axios.post("https://us-central1-utsc-projects.cloudfunctions.net/sendmail", submission)
+        axios.post(CONTACT_US_CLOUDFUNCTION, submission)
         .then(res => {
             dispatch({
                 type: actionTypes.SUBMISSION_SUCCESS
             })
         })
         .catch(error => {
-            console.log(error.data);
             dispatch({
                 type: actionTypes.SUBMISSION_ERROR
             })

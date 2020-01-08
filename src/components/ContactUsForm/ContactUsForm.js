@@ -4,8 +4,6 @@ import { submit, successConfirmation } from '../../store/actions/submit';
 import { connect } from 'react-redux';
 import styles from './ContactUsForm.module.css';
 
-// const  { DOM: { textarea } } = React;
-
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div className={styles.Field}>
     <label>{label}</label>
@@ -23,7 +21,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 
 let ContactUsForm = (props) => {
-  console.log("form status", props);
   if(props.formStatus.success){
     alert(props.formStatus.message)
     props.successConfirmation();
@@ -115,7 +112,7 @@ let ContactUsForm = (props) => {
         component={renderField}
         label="Message"
       />
-      {props.error && <strong>{props.error}</strong>}
+      {props.error && <p className={styles.Strong}>{props.error}</p>}
       <button className={styles.SubmitButton} type="submit">
         Submit
       </button>
