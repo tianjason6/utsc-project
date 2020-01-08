@@ -38,8 +38,20 @@ class ProjectAddForm extends Component {
     });
   }
 
-  updateFile = values => {
-    this.setState["img" + values.id] = values.file;
+  updateFile1 = (file, id) => {
+    this.setState({ img1: file });
+  };
+
+  updateFile2 = (file, id) => {
+    this.setState({ img2: file });
+  };
+
+  updateFile3 = (file, id) => {
+    this.setState({ img3: file });
+  };
+
+  updateFile4 = (file, id) => {
+    this.setState({ img4: file });
   };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -85,6 +97,7 @@ class ProjectAddForm extends Component {
         }
 
         if (!hasImage) {
+          this.state.imgs = [""];
           alert("A project image is required!");
         } else {
           this.fileUploadHandler(values.title);
@@ -120,22 +133,22 @@ class ProjectAddForm extends Component {
                 <Field
                   name="imgs"
                   component={RenderImageField}
-                  onChange={this.updateFile}
+                  onChange={this.updateFile1}
                   id="1"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile}
+                  onChange={this.updateFile2}
                   id="2"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile}
+                  onChange={this.updateFile3}
                   id="3"
                 />
                 <Field
                   component={RenderImageField}
-                  onChange={this.updateFile}
+                  onChange={this.updateFile4}
                   id="4"
                 />
                 <div className={styles.containerSmall}></div>
