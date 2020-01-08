@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
-import * as authActions from './auth';
 import axios from '../../axios-projects';
+
+import * as authActions from './auth';
+import * as loggedInUserAction from './loggedInUser';
 
 export const signIn = (authData) => {
   console.log(authData);
@@ -44,7 +46,7 @@ export const loading = (loading) => {
 
 export const initSignIn = (email, password) => {
   return (dispatch) => {
-    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
       email: email,
       password: password,
       returnSecureToken: true
@@ -54,7 +56,7 @@ export const initSignIn = (email, password) => {
         let authData = res.data
         let authHeaders = res.headers
 
-        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyDIuViSw1eLVB8zKgTdPHVmwm9O1xDFLFQ', {
+        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyDICnZMnrvISneUWxo-WfyjCbRj5CMuC2Y', {
           idToken: res.data.idToken
         })
           .then((res) => {
@@ -76,7 +78,8 @@ export const initSignIn = (email, password) => {
             dispatch(authActions.checkTokenTimeout (authData.expiresIn));
             // need to add admin dispatch
             console.log('dispatching authactions', authData)
-            dispatch(authActions.login(authData.email, authData.idToken, authHeaders.expires, false))
+            dispatch(authActions.login(authData.email, authData.idToken, authHeaders.expires, authData.isAdmin))
+            dispatch(loggedInUserAction.fetchLoggedInUser(authData.email.split('@')[0]));
           })
           .catch((error) => {
             console.log('get user data error')

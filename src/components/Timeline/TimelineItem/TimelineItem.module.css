@@ -1,0 +1,53 @@
+
+.timeline {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.timelineItem{
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: column;
+    background-color: white;
+}
+.timelineDetails{
+    padding: 0 10px 0 10px;
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(247, 103, 36);
+    min-height: 30px;
+    width: 100%;
+    overflow: auto;
+    flex-direction: row;
+}
+
+
+.timelineBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    flex-direction: column;
+}
+.timelineTitle{
+    text-align: center;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+.timelineContent{
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.timelineImg{
+    max-width: 30vw;
+    height: auto;
+}

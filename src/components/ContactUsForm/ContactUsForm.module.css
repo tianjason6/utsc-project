@@ -4,7 +4,7 @@
   justify-content: center;
   flex: 4;
   /* width: 700px; */
-  height: 670px;
+  height: 870px;
   background-color: lightgrey;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -71,4 +71,8 @@
   cursor: pointer;
   margin-right: auto;
   margin-left: auto;
+}
+
+.Strong {
+  font-weight: bold;
 }

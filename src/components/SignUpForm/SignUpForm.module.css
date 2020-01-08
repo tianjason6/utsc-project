@@ -1,3 +1,11 @@
+.EmailFieldWithError{
+  margin-top: 100px;
+}
+
+.EmailField{
+  margin-top: 30px;
+}
+
 .Form {
   display: flex;
   flex-direction: column;
@@ -10,6 +18,7 @@
   padding-bottom: 10px;
   margin-left: 20px;
   margin-right: 20px;
+  overflow: scroll;
 }
 
 .Field {
@@ -19,6 +28,8 @@
   margin-right: auto;
   padding-bottom: 10px;
 }
+
+
 
 .Field label {
   font-size: 24px;

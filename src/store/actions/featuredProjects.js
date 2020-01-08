@@ -19,27 +19,17 @@ export const initFeaturedProjects = () => {
     axios.get('FeaturedProjects.json')
       .then((res) => {
         let featuredProjectTitles = res.data;
-
         let projectRequests = featuredProjectTitles.map((projectTitle) => {
           return axios.get('Projects/' + projectTitle + '.json')
         });
         Promise.all(projectRequests)
           .then((res) => {
-            console.log('all responses')
-            console.log(res)
-
             let featuredProjects = [];
             res.forEach((item) => {
               featuredProjects.push(item.data);
             })
-            console.log('featuredProjects')
-            console.log(featuredProjects)
             dispatch(setFeaturedProjects(featuredProjects));
           })
       })
-      .catch(() => {
-        console.log('error')
-        dispatch(initFeaturedProjects());
-      });
   }
 }

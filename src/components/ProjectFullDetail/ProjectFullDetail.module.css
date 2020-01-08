@@ -1,4 +1,4 @@
-.ProjectFullDetail {
+.Content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,7 +138,7 @@
   }
 }
 
-.ProjectFullDetail button {
+.ContentButton {
   width: 70%;
   height: 60px;
   background-color: rgb(247, 103, 36);
@@ -154,7 +154,20 @@
   margin-right: auto;
 }
 
-.ProjectFullDetail button:hover {
+.ContentButton:hover {
   background-color: rgb(163, 62, 15);
   cursor: pointer;
+}
+
+.YesButton {
+  background-color: greenyellow;
+}
+.YesButton:hover {
+  background-color: rgb(141, 209, 39);
+}
+.NoButton {
+  background-color: rgb(230, 32, 32);
+}
+.NoButton:hover {
+  background-color: rgb(175, 0, 0);
 }

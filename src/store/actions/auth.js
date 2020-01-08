@@ -2,39 +2,40 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
 import history from '../../history';
 
-export const login = (email, idToken, idTokenExpiryDate, isAdmin) => {
+import * as joinedProjectsAction from './joinedProjects';
+import * as userManagedProjectsAction from './userManagedProjects';
+import * as loggedInUserAction from './loggedInUser';
+
+export const login = (email, idToken, idTokenExpiryDate) => {
   return {
     type: actionTypes.LOGIN,
     email: email,
     idToken: idToken,
     idTokenExpiryDate: idTokenExpiryDate,
-    isAdmin: isAdmin
   }
 }
 
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('expireDate');
-  history.push('/');
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expireDate');
 
-  return {
-    type: actionTypes.LOGOUT,
+    dispatch(joinedProjectsAction.userLogout());
+    dispatch(userManagedProjectsAction.userLogout());
+    dispatch(loggedInUserAction.userLogout());
+
+    dispatch({
+      type: actionTypes.LOGOUT,
+      email: null,
+      signedIn: false,
+      idToken: null,
+      idTokenExpiryDate: null,
+      isAdmin: false
+    });
+    history.push('/');
   }
 }
-
-// export const authCheckState = () => {
-//   console.log('inside sign in action')
-//   return (dispatch) => {
-
-//     //if token did not expire, login
-
-//     // else logout
-//     dispatch({
-//       type: actionTypes.LOGOUT,
-//     })
-//   }
-// }
 
 export const checkTokenTimeout = (expiresIn) =>{
   return dispatch => {
@@ -56,8 +57,9 @@ export const checkAuthToken = () => {
       } else {
         const userEmail = localStorage.getItem('email');
         
-        dispatch(login(userEmail, token, expireDate, false));        
+        dispatch(login(userEmail, token, expireDate));        
         dispatch(checkTokenTimeout( (expireDate.getTime() - (new Date().getTime()))/1000 ));
+        dispatch(loggedInUserAction.fetchLoggedInUser(userEmail.split('@')[0]));
       }
     }
 

@@ -4,7 +4,7 @@ import styles from './SignUpForm.module.css';
 import axios from '../../axios-projects';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className={styles.Field}>
+  <div className={label === 'Email' ? [styles.Field, styles.EmailField].join(' ') : styles.Field}>
     <label>{label}</label>
 
     {
@@ -16,7 +16,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
     {touched && error && <span>{error}</span>}
   </div>
-)
+);
 
 let SignUpForm = props => {
 
@@ -25,6 +25,17 @@ let SignUpForm = props => {
   const submit = (values) => {
     let error = {};
     let isError = false;
+
+    try {
+      const UofTRegex = /[A-Za-z0-9]+@mail\.utoronto\.ca/;
+      if(!UofTRegex.test(values.email)){
+        error.email = 'Only \'@mail.utoronto.ca\' email domains are valid';
+        isError = true;
+      }
+    }catch{
+      error.email = 'invalid email';
+      isError = true;
+    }
 
     if (!('email' in values)) {
       error.email = 'Required';
@@ -56,7 +67,7 @@ let SignUpForm = props => {
 
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.Form}>
-      <Field
+      <Field 
         name="email"
         type="email"
         component={renderField}

@@ -1,0 +1,25 @@
+.background {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: red;
+}
+
+.formItem{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: red
+}
+
+.formLabel {
+    
+}
+
+.error {
+    background-color: red;
+}
+
+.active{
+    background-color: orange;
+}

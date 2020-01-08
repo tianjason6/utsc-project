@@ -14,22 +14,30 @@ import signUpReducer from "./store/reducers/signUp";
 import signInReducer from "./store/reducers/signIn";
 import authReducer from "./store/reducers/auth";
 import userReducer from "./store/reducers/user";
-
+import userManagedProjectsReducer from "./store/reducers/userManagedProjects";
+import userJoinedProjectsReducer from "./store/reducers/joinedProjects";
+import timelineReducer from "./store/reducers/timeline";
+import loggedInUserReducer from "./store/reducers/loggedInUser";
+import submitReducer from "./store/reducers/submit";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 const rootReducer = combineReducers({
   //reducers go here
+  authReducer: authReducer,
+  featuredProjectsReducer: featuredProjectsReducer,
   form: formReducer,
+  loggedInUserReducer: loggedInUserReducer,
   projectsReducer: projectsReducer,
   projectReducer: projectReducer,
-  projectAddReducer: projectAddReducer,
-  featuredProjectsReducer: featuredProjectsReducer,
   signUpReducer: signUpReducer,
   signInReducer: signInReducer,
-  authReducer: authReducer,
-  userReducer: userReducer
+  timelineReducer: timelineReducer,
+  userJoinedProjectsReducer: userJoinedProjectsReducer,
+  userManagedProjectsReducer: userManagedProjectsReducer,
+  userReducer: userReducer,
+  submitReducer: submitReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
