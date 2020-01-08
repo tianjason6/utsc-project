@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./ManagedProjectsOverview.module.css";
 import Project from "../Project/Project";
-
 import * as userManagedProjectsActions from "../../store/actions/userManagedProjects";
+import RouteError from "../RouteError/RouteError";
+import history from "../../history";
 
 class ManagedProjectsOverview extends Component {
   componentDidMount() {
@@ -18,13 +19,16 @@ class ManagedProjectsOverview extends Component {
           return null;
         }
         return (
-          <Project
-            key={project.title}
-            title={project.title}
-            description={project.description}
-            img={project.imgs[0]}
-            projectInfo={project}
-          />
+          <>
+            <button onClick={history.push("/test/ProjectAdd")}></button>
+            <Project
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              img={project.imgs[0]}
+              projectInfo={project}
+            />
+          </>
         );
       });
     }
