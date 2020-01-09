@@ -14,6 +14,7 @@ export const fetchAllProjectsFailed = () => {
   };
 };
 
+// try to catch empty error
 // helper function
 let setProjects = (projectType, projects, allProjectList, dispatch) => {
   let pTitles = Object.keys(projects);
@@ -22,12 +23,16 @@ let setProjects = (projectType, projects, allProjectList, dispatch) => {
   })
   Promise.all(currProjects).then(res => {
     res.forEach(project => {
-      allProjectList.push(project.data);
+      if (project.data) {
+        allProjectList.push(project.data);
+      }
     })
     dispatch(setAllProjects(allProjectList));
   })
 }
 
+/* check if Projects.json or ArchivedProjects.json exists first 
+ - need some sort of function for when active or archvied projects is empty*/
 export const initAllProjects = () => {
   return (dispatch) => {
     let allProjects = [];
