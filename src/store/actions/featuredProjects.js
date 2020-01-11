@@ -26,7 +26,9 @@ export const initFeaturedProjects = () => {
           .then((res) => {
             let featuredProjects = [];
             res.forEach((item) => {
-              featuredProjects.push(item.data);
+              if(item.data !== null) {
+                featuredProjects.push(item.data);
+              }
             })
             dispatch(setFeaturedProjects(featuredProjects));
           })
