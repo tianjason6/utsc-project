@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from "../../axios-projects";
 import styles from "./ArchiveStatus.module.css";
+import * as archiveStatus from "../../store/actions/archiveStatus";
 
 class ArchiveButton extends Component {
     constructor(props) {
@@ -12,34 +12,12 @@ class ArchiveButton extends Component {
     }
 
     render() {
+        const archive = (<button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(true, this.state.projectTitle) }}> Archive </button>)
+        const unArchive = (<button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(false, this.state.projectTitle) }}> Activate </button> /**/)
         return (
             <div>
-                <button className={styles.ContentButton} onClick={() => {
-                    axios.get("Projects/" + this.state.projectTitle + ".json").then(res => {
-                        const archiving = res.data;
-                        Promise.resolve(archiving).then(projectData => {
-                            axios.put("ArchivedProjects/" + this.state.projectTitle + ".json", projectData).then(res => {
-                                console.log("response to putting in archives: ", res)
-                                axios.delete("Projects/" + this.state.projectTitle + ".json").then(res => {
-                                    console.log("response to deleting in projects: ", res);
-                                })
-                            })
-                        })
-                    })
-                }}> Archive </button>
-                <button className={styles.ContentButton} onClick={() => {
-                    axios.get("ArchivedProjects/" + this.state.projectTitle + ".json").then(res => {
-                        const archiving = res.data;
-                        Promise.resolve(archiving).then(projectData => {
-                            axios.put("Projects/" + this.state.projectTitle + ".json", projectData).then(res => {
-                                console.log("response to putting in projects: ", res)
-                                axios.delete("ArchivedProjects/" + this.state.projectTitle + ".json").then(res => {
-                                    console.log("response to deleting in archives: ", res);
-                                })
-                            })
-                        })
-                    })
-                }}> Activate </button>
+                {archive}
+                {unArchive}
             </div>
         )
     }
@@ -48,8 +26,15 @@ class ArchiveButton extends Component {
 const mapStateToProps = (state) => {
     return {
         loggedInUser: state.loggedInUserReducer.loggedInUser,
-        project: state.projectReducer.project
+        project: state.projectReducer.project,
+        isArchived: state.archiveStatusReducer.status
     }
 }
 
-export default connect(mapStateToProps, null)(ArchiveButton);
+const mapDispatchToProps = dispatch => {
+    return {
+        changeArchiveStatus: (status, pTitle) => dispatch(archiveStatus.changeArchiveStatus(status, pTitle))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArchiveButton);

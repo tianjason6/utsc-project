@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AllProjects.module.css";
+import axios from "../../axios-projects";
 import Project from '../Project/Project';
+import * as archiveStatus from "../../store/actions/archiveStatus";
 import * as allProjectsActions from '../../store/actions/allProjects';
 
 class AllProjects extends Component {
   componentDidMount() {
     this.props.onInitAllProjects();
+    this.props.allProjects.forEach(project => {
+      const pTitle = project.data.title
+      axios.get("Projects/" + pTitle + ".json").then(res => {
+        const archiving = res.data;
+        Promise.resolve(archiving).then(projectData => {
+          if (projectData === null) {
+            this.props.addArchiveStatus(true, pTitle)
+          } else {
+            this.props.addArchiveStatus(false, pTitle)
+          }
+        })
+      })
+    })
   }
 
   render() {
@@ -17,7 +32,7 @@ class AllProjects extends Component {
             <h1 className={styles.Title}>All Projects</h1>
             <section className={styles.Wrap}>
               {this.props.allProjects.map((project) => {
-                return <Project key={project.title} title={project.title} description={project.description} img={project.imgs[0]} projectInfo={project} />
+                return <Project key={project.data.title} title={project.data.title} description={project.data.description} img={project.data.imgs[0]} projectInfo={project.data} />
               })}
             </section>
           </div>
@@ -30,13 +45,15 @@ class AllProjects extends Component {
 const mapStateToProps = state => {
   return {
     allProjects: state.allProjectsReducer.projects,
-    error: state.allProjectsReducer.error
+    error: state.allProjectsReducer.error,
+    isArchived: state.archiveStatusReducer.status
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitAllProjects: () => dispatch(allProjectsActions.initAllProjects())
+    onInitAllProjects: () => dispatch(allProjectsActions.initAllProjects()),
+    addArchiveStatus: (status, pTitle) => dispatch(archiveStatus.addArchiveStatus(status, pTitle))
   };
 };
 
