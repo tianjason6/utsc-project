@@ -14,19 +14,26 @@ export const fetchProjectFailed = () => {
   }
 }
 
-export const initProject = (projectTitle) => {
+export const initProject = (projectTitle, status) => {
   return (dispatch) => {
-
-    axios.get('Projects/' + projectTitle + '.json')
+    let projectLocation = "";
+    if (status) {
+      projectLocation = "ArchivedProjects/";
+    } else {
+      projectLocation = "Projects/";
+    }
+    axios.get(projectLocation + projectTitle + '.json')
       .then(res => {
-        axios.get('Users/' + res.data.owner + '.json')
-        .then(res => {
-            dispatch({
+        if (res.data) {
+          axios.get('Users/' + res.data.owner + '.json')
+            .then(res => {
+              dispatch({
                 type: actionTypes.FETCH_USER,
                 user: res.data
+              });
             });
-          });
-        dispatch(setProject(res.data));
+          dispatch(setProject(res.data));
+        }
       })
       .catch(error => {
         dispatch(fetchProjectFailed());

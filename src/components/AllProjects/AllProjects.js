@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AllProjects.module.css";
-import axios from "../../axios-projects";
 import Project from '../Project/Project';
 import * as archiveStatus from "../../store/actions/archiveStatus";
 import * as allProjectsActions from '../../store/actions/allProjects';
@@ -13,7 +12,6 @@ class AllProjects extends Component {
   }
 
   render() {
-    console.log("AllProjects archive status", this.props.isArchived)
     return (
       <div className={styles.Background}>
         <div className={styles.Content}>

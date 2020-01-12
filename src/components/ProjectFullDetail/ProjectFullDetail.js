@@ -28,22 +28,12 @@ class ProjectFullDetail extends Component {
   };
 
   componentDidMount() {
-    this.props.onInitProject(this.state.projectTitle);
+    const projectStatus = this.props.isArchived[this.state.projectTitle]
+    this.props.onInitProject(this.state.projectTitle, projectStatus);
 
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
-
-    axios.get("Projects/" + this.state.projectTitle + ".json").then(res => {
-      const archiving = res.data;
-      Promise.resolve(archiving).then(projectData => {
-        if (projectData === null) {
-          this.props.addArchiveStatus(true, this.state.projectTitle)
-        } else {
-          this.props.addArchiveStatus(false, this.state.projectTitle)
-        }
-      })
-    })
   }
 
   componentDidUpdate() {
@@ -68,8 +58,6 @@ class ProjectFullDetail extends Component {
   }
 
   render() {
-
-    console.log("full project detail props", this.props.project);
     let projectOwnerInfo = "Loading...";
     if (this.props.projectOwner != undefined) {
       projectOwnerInfo = (
@@ -168,7 +156,7 @@ const mapStateToProps = state => {
     error: state.projectsReducer.error,
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
     loggedInUser: state.loggedInUserReducer.loggedInUser,
-    isArchived: state.archiveStatusReducer.isArchived
+    isArchived: state.archiveStatusReducer.status
   };
 };
 
