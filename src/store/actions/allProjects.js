@@ -14,7 +14,6 @@ export const fetchAllProjectsFailed = () => {
   };
 };
 
-// helper function
 let setProjects = (projectType, projects, allProjectList, dispatch) => {
   let pTitles = Object.keys(projects);
   let currProjects = pTitles.map(projectTitle => {

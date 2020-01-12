@@ -41,3 +41,21 @@ export const addArchiveStatus = (status, pTitle) => {
         pTitle: pTitle
     }
 }
+
+export const setArchiveStatus = (projects) => {
+    return (dispatch) => {
+        projects.forEach(project => {
+            const pTitle = project.data.title
+            axios.get("Projects/" + pTitle + ".json").then(res => {
+                const archiving = res.data;
+                Promise.resolve(archiving).then(projectData => {
+                    if (projectData === null) {
+                        dispatch(addArchiveStatus(true, pTitle))
+                    } else {
+                        dispatch(addArchiveStatus(false, pTitle))
+                    }
+                })
+            })
+        })
+    }
+}

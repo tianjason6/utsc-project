@@ -9,22 +9,11 @@ import * as allProjectsActions from '../../store/actions/allProjects';
 class AllProjects extends Component {
   componentDidMount() {
     this.props.onInitAllProjects();
-    this.props.allProjects.forEach(project => {
-      const pTitle = project.data.title
-      axios.get("Projects/" + pTitle + ".json").then(res => {
-        const archiving = res.data;
-        Promise.resolve(archiving).then(projectData => {
-          if (projectData === null) {
-            this.props.addArchiveStatus(true, pTitle)
-          } else {
-            this.props.addArchiveStatus(false, pTitle)
-          }
-        })
-      })
-    })
+    this.props.setArchiveStatus(this.props.allProjects);
   }
 
   render() {
+    console.log("AllProjects archive status", this.props.isArchived)
     return (
       <div className={styles.Background}>
         <div className={styles.Content}>
@@ -53,7 +42,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onInitAllProjects: () => dispatch(allProjectsActions.initAllProjects()),
-    addArchiveStatus: (status, pTitle) => dispatch(archiveStatus.addArchiveStatus(status, pTitle))
+    setArchiveStatus: (projects) => dispatch(archiveStatus.setArchiveStatus(projects))
   };
 };
 

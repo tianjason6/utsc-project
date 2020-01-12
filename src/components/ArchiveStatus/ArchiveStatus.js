@@ -12,12 +12,10 @@ class ArchiveButton extends Component {
     }
 
     render() {
-        const archive = (<button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(true, this.state.projectTitle) }}> Archive </button>)
-        const unArchive = (<button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(false, this.state.projectTitle) }}> Activate </button> /**/)
         return (
             <div>
-                {archive}
-                {unArchive}
+                <button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(true, this.state.projectTitle) }}> Archive </button>
+                <button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(false, this.state.projectTitle) }}> Activate </button>
             </div>
         )
     }
@@ -25,8 +23,6 @@ class ArchiveButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggedInUser: state.loggedInUserReducer.loggedInUser,
-        project: state.projectReducer.project,
         isArchived: state.archiveStatusReducer.status
     }
 }
