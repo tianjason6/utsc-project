@@ -4,10 +4,13 @@ import styles from './ProjectFullDetail.module.css';
 import * as projectActions from '../../store/actions/project';
 import * as userActions from '../../store/actions/user';
 import Modal from '../Modal/Modal';
+import axios from '../../axios-projects';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
 import ArchiveStatus from '../ArchiveStatus/ArchiveStatus';
 
+
+import * as archiveStatus from "../../store/actions/archiveStatus";
 import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
 
 class ProjectFullDetail extends Component {
@@ -30,6 +33,17 @@ class ProjectFullDetail extends Component {
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
+
+    axios.get("Projects/" + this.state.projectTitle + ".json").then(res => {
+      const archiving = res.data;
+      Promise.resolve(archiving).then(projectData => {
+        if (projectData === null) {
+          this.props.addArchiveStatus(true, this.state.projectTitle)
+        } else {
+          this.props.addArchiveStatus(false, this.state.projectTitle)
+        }
+      })
+    })
   }
 
   componentDidUpdate() {
@@ -54,6 +68,8 @@ class ProjectFullDetail extends Component {
   }
 
   render() {
+
+    console.log("full project detail props", this.props.project);
     let projectOwnerInfo = "Loading...";
     if (this.props.projectOwner != undefined) {
       projectOwnerInfo = (
@@ -151,16 +167,19 @@ const mapStateToProps = state => {
     projectOwner: state.userReducer.user,
     error: state.projectsReducer.error,
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
-    loggedInUser: state.loggedInUserReducer.loggedInUser
+    loggedInUser: state.loggedInUserReducer.loggedInUser,
+    isArchived: state.archiveStatusReducer.isArchived
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
+    onInitProject: (projectTitle, status) => dispatch(projectActions.initProject(projectTitle, status)),
 
     fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
-    leaveJoinedProjects: (username, joinedProjects, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(username, joinedProjects, removeProject))
+    leaveJoinedProjects: (username, joinedProjects, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(username, joinedProjects, removeProject)),
+
+    addArchiveStatus: (status, pTitle) => dispatch(archiveStatus.addArchiveStatus(status, pTitle))
   }
 }
 
