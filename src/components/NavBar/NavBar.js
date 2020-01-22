@@ -7,8 +7,6 @@ import styles from "./NavBar.module.css";
 
 class NavBar extends Component {
   render() {
-    console.log("auth: ", this.props.auth);
-
     return (
       <div className={styles.Background}>
         <div className={styles.Content}>

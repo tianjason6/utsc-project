@@ -46,8 +46,6 @@ let LoginForm = props => {
     if (isError) {
       throw new SubmissionError(error);
     } else {
-      console.log("Valid Submission");
-      console.log(values);
       props.onInitSignIn(values.email, values.password);
     }
   };

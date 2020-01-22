@@ -34,16 +34,12 @@ class Login extends Component {
       this.changeView(views.SIGN_UP_SUCCESS);
 
     } else if (this.props.signUpError === null && this.state.view !== views.SIGN_UP_SUCCESS) {
-      console.log('checking signUpError')
-      console.log(this.props.signUpError)
       this.changeView(views.LOGIN);
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('prevProps', prevProps, 
-       'prevState', prevState,
-      'snapshot', snapshot)
+
     if (this.props.signUpError === false && this.state.view !== views.SIGN_UP_SUCCESS) {
       this.changeView(views.SIGN_UP_SUCCESS);
 

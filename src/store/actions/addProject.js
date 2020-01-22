@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-projects";
+import history from "../../history";
 
 export const projectAdd = (title, description, imgs, authUser) => {
   return dispatch => {
@@ -24,7 +25,7 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
 
     // Getting the username (without email extension)
     for (let i = 0; i < authUser.length; i++) {
-      if (authUser.charAt(i) == "@") {
+      if (authUser.charAt(i) === "@") {
         username = authUser.substring(0, i);
         break;
       }
@@ -33,16 +34,20 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
     // Fetching the project names
     axios.get("Projects/" + title + ".json").then(res => {
       projectData = res.data;
-      if (projectData == null) {
+      if (projectData === null) {
         // If project does not exist, put request
         putProject(title, description, username, imgs);
         // Fetching the user values
         axios.get("Users/" + username + ".json").then(res => {
           userData = res.data;
-          if (userData != null) {
+          if (userData !== null) {
             // If user exists, update with current values
-            projectsManaged = userData.projectsManaged;
-            projectsJoined = userData.projectsJoined;
+            projectsManaged = userData.projectsManaged
+              ? userData.projectsManaged
+              : [];
+            projectsJoined = userData.projectsJoined
+              ? userData.projectsJoined
+              : [];
             projectAdmin = userData.isAdmin;
             projectsManaged.push(title);
             putUser(
@@ -75,14 +80,24 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
     authUser,
     projectAdmin,
     projectsJoined,
-    projectsManaged
+    projectsManaged,
   ) {
-    axios.put("Users/" + username + ".json", {
-      email: authUser,
-      isAdmin: projectAdmin,
-      projectsManaged: projectsManaged,
-      projectsJoined: projectsJoined,
-      username: username
-    });
+    axios
+      .put("Users/" + username + ".json", {
+        email: authUser,
+        isAdmin: projectAdmin,
+        projectsManaged: projectsManaged,
+        projectsJoined: projectsJoined,
+        username: username
+      })
+      .then(() => {
+        alert("success");
+        history.push('/test/ManagedProjects')
+      })
+      .catch(error => {
+        alert("Failed");
+        history.push('/test/ManagedProjects')
+        console.error(error);
+      });
   }
 };
