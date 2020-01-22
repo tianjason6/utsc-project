@@ -11,7 +11,6 @@ const initialState = {
 const submit = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.SUBMISSION_LOADING:
-                console.log("SUBMISSION LOADING");
             return {
                 ...state,
                 loading: true,

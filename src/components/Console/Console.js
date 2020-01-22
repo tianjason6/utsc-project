@@ -1,36 +1,41 @@
-import React, { Component } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import styles from './Console.module.css';
-import { connect } from 'react-redux';
-import ConsoleSideMenu from '../ConsoleSideMenu/ConsoleSideMenu';
-import ManagedProjects from '../ManagedProjects/ManagedProjects';
-import ConsoleLogout from '../ConsoleLogout/ConsoleLogout';
-import JoinedProjects from '../JoinedProjects/JoinedProjects';
-import Timeline from '../Timeline/Timeline';
+import React, { Component } from "react";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import styles from "./Console.module.css";
+import { connect } from "react-redux";
+import ConsoleSideMenu from "../ConsoleSideMenu/ConsoleSideMenu";
+import ManagedProjects from "../ManagedProjects/ManagedProjects";
+import ConsoleLogout from "../ConsoleLogout/ConsoleLogout";
+import ProjectFullDetailEdit from "../ProjectFullDetailEdit/ProjectFullDetailEdit";
+import ProjectAdd from "../ProjectAdd/ProjectAdd";
+import JoinedProjects from "../JoinedProjects/JoinedProjects";
+import Timeline from "../Timeline/Timeline";
 
-import RouteError from '../RouteError/RouteError';
+import RouteError from "../RouteError/RouteError";
 
 class Console extends Component {
   render() {
-
     return (
       <div className={styles.Content}>
         <ConsoleSideMenu></ConsoleSideMenu>
         <div className={styles.ConsoleDisplay}>
           {
             <Switch>
+              <Route path="/test/ProjectAdd" component={ProjectAdd} />
               <Route path="/test/ManagedProjects" component={ManagedProjects} />
               <Route path="/test/JoinedProjects" component={JoinedProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
-              <Route path="/test/EditMyProjectFullDetail" component={ConsoleLogout} />
-              <Route path='/test/Timeline' component={Timeline}/>
-              
+              <Route
+                path="/test/EditMyProjectFullDetail"
+                component={ProjectFullDetailEdit}
+              />
+              <Route path="/test/Timeline" component={Timeline} />
+
               <Redirect to="/test/Timeline" />
             </Switch>
           }
         </div>
       </div>
-    )
+    );
   }
 }
 

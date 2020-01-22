@@ -1,138 +1,179 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import styles from './ProjectFullDetail.module.css';
-import * as projectActions from '../../store/actions/project';
-import * as userActions from '../../store/actions/user';
-import Modal from '../Modal/Modal';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import styles from "./ProjectFullDetail.module.css";
+import * as projectActions from "../../store/actions/project";
+import Modal from "../Modal/Modal";
 
-import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
+import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
 
-import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
+import * as userJoinedProjectsAction from "../../store/actions/joinedProjects";
 
 class ProjectFullDetail extends Component {
-
   constructor(props) {
     super(props);
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
-      mainImgURL: '',
-      projectTitle: this.params.get('projectTitle').replace('%20', ' '),
+      mainImgURL: "",
+      projectTitle: this.params.get("projectTitle").replace("%20", " "),
       showModal: false,
-      projectOwner: ''
-    }
-  };
+      projectOwner: ""
+    };
+  }
 
   componentDidMount() {
     this.props.onInitProject(this.state.projectTitle);
 
-    if(this.props.loggedInUser) {
+    if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
   }
 
   componentDidUpdate() {
-    if(this.state.mainImgURL === '' && this.props.project.imgs !== undefined) {
-      this.setState({mainImgURL: this.props.project.imgs[0]});
+    if (this.state.mainImgURL === "" && this.props.project.imgs !== undefined) {
+      this.setState({ mainImgURL: this.props.project.imgs[0] });
     }
   }
 
-  selectPicture = (imgURL) => {
+  selectPicture = imgURL => {
     this.setState({ mainImgURL: imgURL });
-  }
+  };
 
   showModal = () => {
-    this.setState({ showModal: true});
-  }
-  closeModal = ()  => {
-    this.setState({showModal: false});
-  }
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
 
   leaveProject = () => {
-    this.props.leaveJoinedProjects(this.props.loggedInUser.username, this.props.loggedInUser.projectsJoined, this.props.project.title);
-  }
+    this.props.leaveJoinedProjects(
+      this.props.loggedInUser.username,
+      this.props.loggedInUser.projectsJoined,
+      this.props.project.title
+    );
+  };
 
   render() {
     let projectOwnerInfo = "Loading...";
-    if(this.props.projectOwner != undefined){
-      projectOwnerInfo=(
+    if (this.props.projectOwner != undefined) {
+      projectOwnerInfo = (
         <div>
           <h2> {this.state.projectTitle} </h2>
-          <div><b>Project Owner:</b> {this.props.project.owner}</div>
-          <div><b>Email:</b> {this.props.projectOwner.email}</div>
+          <div>
+            <b>Project Owner:</b> {this.props.project.owner}
+          </div>
+          <div>
+            <b>Email:</b> {this.props.projectOwner.email}
+          </div>
           <br />
-          <div><b>Description:</b></div>
+          <div>
+            <b>Description:</b>
+          </div>
           <div>{this.props.project.description}</div>
         </div>
       );
     }
 
     let modalButton = (
-      <button className={styles.ContentButton} onClick={this.showModal} >Loading.....</button>
+      <button className={styles.ContentButton} onClick={this.showModal}>
+        Loading.....
+      </button>
     );
     let modalContent = (
       <div>
         <div>Loading.....</div>
-        <button className={styles.ContentButton} onClick={this.closeModal}>Exit</button>
+        <button className={styles.ContentButton} onClick={this.closeModal}>
+          Exit
+        </button>
       </div>
     );
-    
+
     let foundProject = undefined;
-    
+
     foundProject = this.props.userJoinedProjects.find(project => {
       return project.title === this.props.project.title;
     });
-    
 
-    if(foundProject != undefined) {
+    if (foundProject != undefined) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
-          <div>There will be no going back, unless the project owner accepts you again</div>
-          <button className={[styles.ContentButton, styles.YesButton].join(' ')} onClick={this.leaveProject}>Yes</button>
-          <button className={[styles.ContentButton, styles.NoButton].join(' ')} onClick={this.closeModal}>NO</button>
+          <div>
+            There will be no going back, unless the project owner accepts you
+            again
+          </div>
+          <button
+            className={[styles.ContentButton, styles.YesButton].join(" ")}
+            onClick={this.leaveProject}
+          >
+            Yes
+          </button>
+          <button
+            className={[styles.ContentButton, styles.NoButton].join(" ")}
+            onClick={this.closeModal}
+          >
+            NO
+          </button>
         </div>
       );
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal}>Leave Project</button>
+        <button className={styles.ContentButton} onClick={this.showModal}>
+          Leave Project
+        </button>
       );
     } else {
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal} >Join Project</button>
+        <button className={styles.ContentButton} onClick={this.showModal}>
+          Join Project
+        </button>
       );
       modalContent = (
         <div>
           <div>{projectOwnerInfo}</div>
-          <button className={styles.ContentButton}onClick={this.closeModal}>Exit</button>
+          <button className={styles.ContentButton} onClick={this.closeModal}>
+            Exit
+          </button>
         </div>
       );
     }
 
     return (
-      <div className={styles.Content}>
+      <div className={styles.ProjectFullDetail}>
         <div className={styles.TitleImgs}>
           <h1>{this.props.project.title}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
-          <img className={styles.imgEnlarge} src={this.state.mainImgURL} alt="Main Img"></img>
+          <img
+            className={styles.imgEnlarge}
+            src={this.state.mainImgURL}
+            alt="Main Img"
+          ></img>
           <div className={styles.imgSelect}>
-            {
-              this.props.project.imgs ? 
-              this.props.project.imgs.map((imgURL, i) => {
-                return  <img key={i} className={styles.imgItem} src={imgURL} alt={imgURL} onMouseEnter={() => this.selectPicture(imgURL)}></img>
-              })
-              : null
-            }
-
+            {this.props.project.imgs
+              ? this.props.project.imgs.map((imgURL, i) => {
+                  return (
+                    <img
+                      key={i}
+                      className={styles.imgItem}
+                      src={imgURL}
+                      alt={imgURL}
+                      onMouseEnter={() => this.selectPicture(imgURL)}
+                    ></img>
+                  );
+                })
+              : null}
           </div>
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-        <Modal show={this.state.showModal} closeModal={this.closeModal} >
-          {modalContent}
+        <ProjectOwnerDetail owner={this.props.project.owner} />
+        <Modal show={this.state.showModal} closeModal={this.closeModal}>
+          <div>{projectOwnerInfo}</div>
+          <button onClick={this.closeModal}>Exit</button>
         </Modal>
-        {modalButton}
+        <button onClick={this.showModal}>Join Project</button>
       </div>
-    )
+    );
   }
 }
 
@@ -148,11 +189,20 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: (projectTitle) => dispatch(projectActions.initProject(projectTitle)),
+    onInitProject: projectTitle =>
+      dispatch(projectActions.initProject(projectTitle)),
 
-    fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
-    leaveJoinedProjects: (username, joinedProjects, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(username, joinedProjects, removeProject))
-  }
-}
+    fetchJoinedProjects: userName =>
+      dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
+    leaveJoinedProjects: (username, joinedProjects, removeProject) =>
+      dispatch(
+        userJoinedProjectsAction.leaveJoinedProjects(
+          username,
+          joinedProjects,
+          removeProject
+        )
+      )
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectFullDetail);

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./ManagedProjectsOverview.module.css";
 import Project from "../Project/Project";
-
 import * as userManagedProjectsActions from "../../store/actions/userManagedProjects";
+import RouteError from "../RouteError/RouteError";
+import history from "../../history";
 
 class ManagedProjectsOverview extends Component {
   componentDidMount() {
@@ -18,13 +19,15 @@ class ManagedProjectsOverview extends Component {
           return null;
         }
         return (
-          <Project
-            key={project.title}
-            title={project.title}
-            description={project.description}
-            img={project.imgs[0]}
-            projectInfo={project}
-          />
+          <>
+            <Project
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              img={project.imgs[0]}
+              projectInfo={project}
+            />
+          </>
         );
       });
     }
@@ -32,7 +35,10 @@ class ManagedProjectsOverview extends Component {
     return (
       <div className={styles.Background}>
         <div className={styles.OngoingProjects}>
-          <h1>Managed Projects</h1>
+          <h1>Managed Projects
+            <button onClick={() => {history.push("/test/ProjectAdd")}}>Create a new project</button>
+          </h1>
+          
           {managedProjects === undefined ? (
             <h1>You aren't managing any projects right now!</h1>
           ) : (
