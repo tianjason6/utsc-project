@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-projects";
+import { addArchiveStatus } from "./archiveStatus";
 
 export const setAllProjects = projects => {
   return {
@@ -23,6 +24,11 @@ let setProjects = (projectType, projects, allProjectList, dispatch) => {
     res.forEach(project => {
       if (project.data) {
         allProjectList.push(project);
+        if (projectType === "Projects/") {
+          dispatch(addArchiveStatus(false, project.data.title));
+        } else {
+          dispatch(addArchiveStatus(true, project.data.title));
+        }
       }
     })
     dispatch(setAllProjects(allProjectList));
@@ -31,7 +37,7 @@ let setProjects = (projectType, projects, allProjectList, dispatch) => {
 
 export const initAllProjects = () => {
   return (dispatch) => {
-    let allProjects = [];
+    let allProjects = []; // allProjects prop
     axios.get("Projects.json").then(res => {
       setProjects("Projects/", res.data, allProjects, dispatch);
     }).then(

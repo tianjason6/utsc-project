@@ -19,6 +19,7 @@ import timelineReducer from './store/reducers/timeline';
 import loggedInUserReducer from './store/reducers/loggedInUser';
 import allProjectsReducer from './store/reducers/allProjects';
 import archiveStatusReducer from './store/reducers/archiveStatus';
+import modalReducer from './store/reducers/modal';
 
 import './index.css';
 import App from './App';
@@ -39,7 +40,8 @@ const rootReducer = combineReducers({
   userManagedProjectsReducer: userManagedProjectsReducer,
   userReducer: userReducer,
   allProjectsReducer: allProjectsReducer,
-  archiveStatusReducer: archiveStatusReducer
+  archiveStatusReducer: archiveStatusReducer,
+  modalReducer: modalReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

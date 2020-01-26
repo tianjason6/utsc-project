@@ -33,3 +33,13 @@ export const initFeaturedProjects = () => {
       })
   }
 }
+
+export const removeFeaturedProject = (newFeaturedList) => {
+  return dispatch => {
+    axios.put("FeaturedProjects.json", newFeaturedList)
+      .then(
+        dispatch(setFeaturedProjects(newFeaturedList))
+      )
+      .catch(console.log("undefined new featured list"));
+  }
+}

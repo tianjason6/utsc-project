@@ -8,7 +8,6 @@ import styles from "./NavBar.module.css";
 class NavBar extends Component {
   render() {
     console.log("auth: ", this.props.auth);
-
     return (
       <div className={styles.Background}>
         <div className={styles.Content}>
@@ -36,14 +35,14 @@ class NavBar extends Component {
                 <div className={styles.NavItem}>Login</div>
               </a>
             ) : (
-              <NavLink
-                className={styles.Account}
-                activeClassName={styles.ActiveTab}
-                to={"/Console"}
-              >
-                <p>{this.props.auth.email[0]}</p>
-              </NavLink>
-            )}
+                <NavLink
+                  className={styles.Account}
+                  activeClassName={styles.ActiveTab}
+                  to={"/Console"}
+                >
+                  <p>{this.props.auth.email[0]}</p>
+                </NavLink>
+              )}
           </div>
 
           <div className={styles.Burger} onClick={this.props.toggleDrawer}>
