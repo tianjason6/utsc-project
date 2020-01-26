@@ -28,7 +28,7 @@ class ProjectFullDetail extends Component {
   };
 
   componentDidMount() {
-    const projectStatus = this.props.isArchived[this.state.projectTitle]
+    const projectStatus = this.props.isArchived[this.state.projectTitle];
     this.props.onInitProject(this.state.projectTitle, projectStatus);
 
     if (this.props.loggedInUser) {
@@ -116,7 +116,7 @@ class ProjectFullDetail extends Component {
     let archiveButton = undefined;
     if (this.props.loggedInUser) {
       if (this.props.loggedInUser.isAdmin === true) {
-        archiveButton = (<ArchiveStatus projectTitle={this.props.title} />)
+        archiveButton = (<ArchiveStatus projectTitle={this.state.projectTitle} />)
       }
     }
 
