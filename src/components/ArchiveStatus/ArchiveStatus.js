@@ -34,9 +34,9 @@ class ArchiveButton extends Component {
 
     archiveButton() {
         if (!this.props.isArchived[this.state.projectTitle]) {
-            return <button className={styles.ContentButton} onClick={() => { this.isFeatured(this.state.projectTitle) }}> Archive </button>
+            return <button id={"archive" + this.state.projectTitle} className={styles.ContentButton} onClick={() => { this.isFeatured(this.state.projectTitle) }}> Archive </button>
         } else {
-            return <button className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(false, this.state.projectTitle) }}> Activate </button>
+            return <button id={"activate" + this.state.projectTitle} className={styles.ContentButton} onClick={() => { this.props.changeArchiveStatus(false, this.state.projectTitle) }}> Activate </button>
         }
     }
 

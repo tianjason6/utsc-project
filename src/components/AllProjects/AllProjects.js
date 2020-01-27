@@ -18,7 +18,6 @@ class AllProjects extends Component {
   }
 
   render() {
-    console.log("all projects props", this.props);
     return (
       <div className={styles.Background}>
         <div className={styles.Content}>

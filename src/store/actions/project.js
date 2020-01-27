@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
+import * as archiveStatus from './archiveStatus';
 
 export const setProject = (project) => {
   return {
@@ -19,8 +20,10 @@ export const initProject = (projectTitle, status) => {
     let projectLocation = "";
     if (status) {
       projectLocation = "ArchivedProjects/";
+      dispatch(archiveStatus.addArchiveStatus(true, projectTitle));
     } else {
       projectLocation = "Projects/";
+      dispatch(archiveStatus.addArchiveStatus(false, projectTitle));
     }
     axios.get(projectLocation + projectTitle + '.json')
       .then(res => {

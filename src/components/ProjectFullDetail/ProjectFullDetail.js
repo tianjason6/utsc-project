@@ -28,8 +28,7 @@ class ProjectFullDetail extends Component {
   };
 
   componentDidMount() {
-    const projectStatus = this.props.isArchived[this.state.projectTitle];
-    this.props.onInitProject(this.state.projectTitle, projectStatus);
+    this.props.onInitProject(this.state.projectTitle, this.props.isArchived[this.state.projectTitle]);
 
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
@@ -167,7 +166,7 @@ const mapDispatchToProps = dispatch => {
     fetchJoinedProjects: (userName) => dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
     leaveJoinedProjects: (username, joinedProjects, removeProject) => dispatch(userJoinedProjectsAction.leaveJoinedProjects(username, joinedProjects, removeProject)),
 
-    addArchiveStatus: (status, pTitle) => dispatch(archiveStatus.addArchiveStatus(status, pTitle))
+    addArchiveStatus: (status, pTitle) => dispatch(archiveStatus.addArchiveStatus(status, pTitle)),
   }
 }
 

@@ -8,7 +8,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_ARCHIVE_STATUS:
-            let newStatus = state.status
+            let newStatus = { ...state.status }
             newStatus[action.pTitle] = action.status
             return {
                 ...state,
