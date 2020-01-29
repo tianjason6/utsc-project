@@ -65,7 +65,7 @@ class ProjectFullDetail extends Component {
 
   render() {
     let projectOwnerInfo = "Loading...";
-    if (this.props.projectOwner != undefined) {
+    if (this.props.projectOwner !== undefined) {
       projectOwnerInfo = (
         <div>
           <h2> {this.state.projectTitle} </h2>
@@ -104,7 +104,7 @@ class ProjectFullDetail extends Component {
       return project.title === this.props.project.title;
     });
 
-    if (foundProject != undefined) {
+    if (foundProject !== undefined) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
