@@ -8,7 +8,7 @@ import axios from '../../axios-projects';
 
 import ProjectOwnerDetail from './ProjectOwnerDetail/ProjectOwnerDetail';
 import ArchiveStatus from '../ArchiveStatus/ArchiveStatus';
-
+import FeaturedModal from '../AllProjects/FeaturedModal/FeaturedModal';
 
 import * as archiveStatus from "../../store/actions/archiveStatus";
 import * as userJoinedProjectsAction from '../../store/actions/joinedProjects';
@@ -141,6 +141,9 @@ class ProjectFullDetail extends Component {
         <Modal show={this.state.showModal} closeModal={this.closeModal} >
           {modalContent}
         </Modal>
+        <Modal show={this.props.showModal} closeModal={!this.props.showModal} style={styles.modalStyle}>
+          <FeaturedModal />
+        </Modal>
         {modalButton}
         {archiveButton}
       </div>
@@ -155,7 +158,10 @@ const mapStateToProps = state => {
     error: state.projectsReducer.error,
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
     loggedInUser: state.loggedInUserReducer.loggedInUser,
-    isArchived: state.archiveStatusReducer.status
+    isArchived: state.archiveStatusReducer.status,
+
+    showModal: state.modalReducer.showModal,
+    modalProps: state.modalReducer.modalProps
   };
 };
 

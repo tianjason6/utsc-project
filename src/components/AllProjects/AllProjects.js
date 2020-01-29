@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AllProjects.module.css";
-import axios from "../../axios-projects";
 
-import Project from '../Project/Project';
-import * as allProjectsActions from '../../store/actions/allProjects';
-import Modal from '../Modal/Modal';
-import FeaturedModal from './FeaturedModal/FeaturedModal';
+import Project from "../Project/Project";
+import * as allProjectsActions from "../../store/actions/allProjects";
+import * as modalActions from "../../store/actions/modal";
+import Modal from "../Modal/Modal";
+import FeaturedModal from "./FeaturedModal/FeaturedModal";
 
 class AllProjects extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.onInitAllProjects();
   }
@@ -23,12 +19,26 @@ class AllProjects extends Component {
         <div className={styles.Content}>
           <div className={styles.AllProjects}>
             <h1 className={styles.Title}>All Projects</h1>
-            <Modal show={this.props.showModal} closeModal={!this.props.showModal} style={styles.modalStyle}>
+            <Modal
+              show={this.props.showModal}
+              closeModal={() => {
+                this.props.hideModal();
+              }}
+              style={styles.modalStyle}
+            >
               <FeaturedModal />
             </Modal>
             <section className={styles.Wrap}>
-              {this.props.allProjects.map((project) => {
-                return <Project key={project.data.title} title={project.data.title} description={project.data.description} img={project.data.imgs[0]} projectInfo={project.data} />
+              {this.props.allProjects.map(project => {
+                return (
+                  <Project
+                    key={project.data.title}
+                    title={project.data.title}
+                    description={project.data.description}
+                    img={project.data.imgs[0]}
+                    projectInfo={project.data}
+                  />
+                );
               })}
             </section>
           </div>
@@ -50,8 +60,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitAllProjects: () => dispatch(allProjectsActions.initAllProjects())
+    onInitAllProjects: () => dispatch(allProjectsActions.initAllProjects()),
+    hideModal: () => dispatch(modalActions.hideModal())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(AllProjects);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  pure: false
+})(AllProjects);
