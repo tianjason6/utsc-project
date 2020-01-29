@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import styles from "./AllProjects.module.css";
 
 import Project from "../Project/Project";
-import * as allProjectsActions from "../../store/actions/allProjects";
-import * as modalActions from "../../store/actions/modal";
 import Modal from "../Modal/Modal";
 import FeaturedModal from "./FeaturedModal/FeaturedModal";
+
+import * as allProjectsActions from "../../store/actions/allProjects";
+import * as modalActions from "../../store/actions/modal";
 
 class AllProjects extends Component {
   componentDidMount() {
