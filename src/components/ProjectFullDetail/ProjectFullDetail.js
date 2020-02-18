@@ -186,10 +186,6 @@ class ProjectFullDetail extends Component {
         <p className={styles.Description}>{this.props.project.description}</p>
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
           {modalContent}
-          {/* incoming change underneath */}
-          <div>{projectOwnerInfo}</div>
-          <button onClick={this.closeModal}>Exit</button>
-          {/* incoming change above */}
         </Modal>
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
@@ -203,7 +199,6 @@ class ProjectFullDetail extends Component {
         </Modal>
         {modalButton}
         {archiveButton}
-        <button onClick={this.showModal}>Join Project</button>
       </div>
     );
   }
