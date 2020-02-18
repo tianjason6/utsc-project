@@ -1,1 +1,5 @@
 node_modules
+
+# Habit from C09
+*-lock.json
+.jshintrc
