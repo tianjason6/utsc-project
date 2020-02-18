@@ -5,7 +5,6 @@ import * as authActions from './auth';
 import * as loggedInUserAction from './loggedInUser';
 
 export const signIn = (authData) => {
-  console.log(authData);
   return {
     type: actionTypes.SIGN_IN,
     authData: authData
@@ -20,7 +19,6 @@ export const signInFailed = (errorMessage) => {
 }
 
 export const signInReset = () => {
-  console.log('inside sign in action')
   return (dispatch) => {
     dispatch({
       type: actionTypes.SIGN_IN_RESET,
@@ -52,7 +50,6 @@ export const initSignIn = (email, password) => {
       returnSecureToken: true
     })
       .then((res) => {
-        console.log('login res: ', res.data)
         let authData = res.data
         let authHeaders = res.headers
 
@@ -60,8 +57,6 @@ export const initSignIn = (email, password) => {
           idToken: res.data.idToken
         })
           .then((res) => {
-            console.log('user info res: ' + res.data)
-            console.log(res.data);
             let userData = res.data.users[0];
             if (userData.emailVerified === false) {
               let e = Error('Email not verified');
@@ -77,14 +72,11 @@ export const initSignIn = (email, password) => {
             dispatch(signInSuccess(authData.idToken, authData.localId));
             dispatch(authActions.checkTokenTimeout (authData.expiresIn));
             // need to add admin dispatch
-            console.log('dispatching authactions', authData)
             dispatch(authActions.login(authData.email, authData.idToken, authHeaders.expires, authData.isAdmin))
             dispatch(loggedInUserAction.fetchLoggedInUser(authData.email.split('@')[0]));
           })
           .catch((error) => {
-            console.log('get user data error')
-            console.log(error)
-            console.log(error.message)
+            console.error(error)
             try {
               dispatch(signInFailed(error.response.data.error.message));
             } catch {
@@ -93,8 +85,7 @@ export const initSignIn = (email, password) => {
           });
       })
       .catch((error) => {
-        console.log(error)
-        console.log(error.response)
+        console.error(error)
         dispatch(signInFailed(error.response.data.error.message));
       });
   }

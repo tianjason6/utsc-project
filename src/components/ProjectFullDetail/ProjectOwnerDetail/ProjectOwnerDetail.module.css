@@ -1,0 +1,20 @@
+.line {
+  border: 2px solid black;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.projectOwnerDetail {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.projectOwnerDetail .heading {
+  font-size: 35px;
+}
+
+.projectOwnerDetail .description {
+  font-size: 21px;
+}
+/*# sourceMappingURL=ProjectOwnerDetail.module.css.map */

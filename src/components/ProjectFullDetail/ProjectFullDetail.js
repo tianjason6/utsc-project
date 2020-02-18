@@ -157,7 +157,7 @@ class ProjectFullDetail extends Component {
     }
 
     return (
-      <div className={styles.Content}>
+      <div className={styles.ProjectFullDetail}>
         <div className={styles.TitleImgs}>
           <h1>{this.props.project.title}</h1>
           {this.props.error ? <p>Error loading project</p> : null}
@@ -186,7 +186,12 @@ class ProjectFullDetail extends Component {
         <p className={styles.Description}>{this.props.project.description}</p>
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
           {modalContent}
+          {/* incoming change underneath */}
+          <div>{projectOwnerInfo}</div>
+          <button onClick={this.closeModal}>Exit</button>
+          {/* incoming change above */}
         </Modal>
+        <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
           show={this.props.showModal}
           closeModal={() => {
@@ -198,6 +203,7 @@ class ProjectFullDetail extends Component {
         </Modal>
         {modalButton}
         {archiveButton}
+        <button onClick={this.showModal}>Join Project</button>
       </div>
     );
   }
