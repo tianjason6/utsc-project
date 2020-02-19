@@ -17,7 +17,6 @@ class ArchiveButton extends Component {
     axios
       .get("FeaturedProjects.json")
       .then(res => {
-        console.log("featured project get: ", res.data);
         const featuredList = res.data;
         if (featuredList.length > 0) {
           for (let i = featuredList.length; i--; ) {
@@ -32,7 +31,7 @@ class ArchiveButton extends Component {
         }
       })
       .catch(() => {
-        console.log(
+        console.error(
           "FeaturedProjects.json cannot be accessed or does not exist"
         );
       });
@@ -48,8 +47,7 @@ class ArchiveButton extends Component {
             this.isFeatured(this.state.projectTitle);
           }}
         >
-          {" "}
-          Archive{" "}
+          Archive
         </button>
       );
     } else {
@@ -61,8 +59,7 @@ class ArchiveButton extends Component {
             this.props.changeArchiveStatus(false, this.state.projectTitle);
           }}
         >
-          {" "}
-          Activate{" "}
+          Activate
         </button>
       );
     }

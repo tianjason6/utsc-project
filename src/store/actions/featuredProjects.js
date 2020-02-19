@@ -39,6 +39,6 @@ export const removeFeaturedProject = newFeaturedList => {
     axios
       .put("FeaturedProjects.json", newFeaturedList)
       .then(dispatch(initFeaturedProjects()))
-      .catch(console.log("undefined new featured list"));
+      .catch(console.error("undefined new featured list"));
   };
 };
