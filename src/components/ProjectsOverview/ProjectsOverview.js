@@ -20,8 +20,8 @@ class ProjectsOverview extends Component {
           <section className={styles.Wrap}>
             {this.props.featuredProjects.map((featuredProject) => {
               return <Project key={featuredProject.title} title={featuredProject.title} description={featuredProject.description} img={featuredProject.imgs[0]} projectInfo={featuredProject} />
-            }) }
-        </section>
+            })}
+          </section>
         </div>
       </div>
 

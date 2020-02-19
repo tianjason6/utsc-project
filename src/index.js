@@ -8,7 +8,6 @@ import thunk from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import projectsReducer from "./store/reducers/projects";
 import projectReducer from "./store/reducers/project";
-import projectAddReducer from "./store/reducers/projectAdd";
 import featuredProjectsReducer from "./store/reducers/featuredProjects";
 import signUpReducer from "./store/reducers/signUp";
 import signInReducer from "./store/reducers/signIn";
@@ -18,7 +17,12 @@ import userManagedProjectsReducer from "./store/reducers/userManagedProjects";
 import userJoinedProjectsReducer from "./store/reducers/joinedProjects";
 import timelineReducer from "./store/reducers/timeline";
 import loggedInUserReducer from "./store/reducers/loggedInUser";
+import allProjectsReducer from "./store/reducers/allProjects";
+import archiveStatusReducer from "./store/reducers/archiveStatus";
+import modalReducer from "./store/reducers/modal";
+import projectAddReducer from "./store/reducers/projectAdd";
 import submitReducer from "./store/reducers/submit";
+
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -37,6 +41,9 @@ const rootReducer = combineReducers({
   userJoinedProjectsReducer: userJoinedProjectsReducer,
   userManagedProjectsReducer: userManagedProjectsReducer,
   userReducer: userReducer,
+  allProjectsReducer: allProjectsReducer,
+  archiveStatusReducer: archiveStatusReducer,
+  modalReducer: modalReducer,
   submitReducer: submitReducer
 });
 

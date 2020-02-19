@@ -18,7 +18,7 @@ class ViewProjects extends Component {
           <section className={styles.Wrap}>
             {this.props.error ? <p>Error loading projects</p> : null}
             {this.props.projects.map((item) => {
-              return <Project key={item.project.title} title={item.project.title} description={item.project.description} img={item.project.imgs[0]} projectInfo={item.project}/>
+              return <Project key={item.project.title} title={item.project.title} description={item.project.description} img={item.project.imgs[0]} projectInfo={item.project} />
             })}
           </section>
         </div>

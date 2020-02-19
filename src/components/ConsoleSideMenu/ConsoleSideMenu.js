@@ -5,6 +5,35 @@ import { NavLink } from "react-router-dom";
 
 class ConsoleSideMenu extends Component {
   render() {
+    let isSuperUser = undefined;
+    if (this.props.currUser.loggedInUser !== null) {
+      isSuperUser = this.props.currUser.loggedInUser.isAdmin;
+    }
+    const superUserLink = (
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/AllProjects"}
+      >
+        All Projects
+      </NavLink>
+    );
+    const nonSuperUserLink = [
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/ManagedProjects"}
+      >
+        Managed Projects
+      </NavLink>,
+      <NavLink
+        className={styles.Option}
+        activeClassName={styles.OptionActive}
+        to={"/test/JoinedProjects"}
+      >
+        Joined Projects
+      </NavLink>
+    ];
     return (
       <div className={styles.Content}>
         <NavLink
@@ -14,20 +43,7 @@ class ConsoleSideMenu extends Component {
         >
           Timeline
         </NavLink>
-        <NavLink
-          className={styles.Option}
-          activeClassName={styles.OptionActive}
-          to={"/test/ManagedProjects"}
-        >
-          Managed Projects
-        </NavLink>
-        <NavLink
-          className={styles.Option}
-          activeClassName={styles.OptionActive}
-          to={"/test/JoinedProjects"}
-        >
-          Joined Projects
-        </NavLink>
+        {isSuperUser === false ? nonSuperUserLink : superUserLink}
         <NavLink
           className={styles.Option}
           activeClassName={styles.OptionActive}
@@ -41,12 +57,12 @@ class ConsoleSideMenu extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    auth: state.authReducer,
+    currUser: state.loggedInUserReducer
+  };
 };
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { pure: false }
-)(ConsoleSideMenu);
+export default connect(mapStateToProps, null, null, { pure: false })(
+  ConsoleSideMenu
+);

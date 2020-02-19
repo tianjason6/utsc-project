@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./ProjectFullDetail.module.css";
 import * as projectActions from "../../store/actions/project";
+import * as userActions from "../../store/actions/user";
 import Modal from "../Modal/Modal";
+import axios from "../../axios-projects";
 
 import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
+import ArchiveStatus from "../ArchiveStatus/ArchiveStatus";
+import FeaturedModal from "../AllProjects/FeaturedModal/FeaturedModal";
 
+import * as archiveStatus from "../../store/actions/archiveStatus";
 import * as userJoinedProjectsAction from "../../store/actions/joinedProjects";
+import * as modalActions from "../../store/actions/modal";
 
 class ProjectFullDetail extends Component {
   constructor(props) {
@@ -22,7 +28,10 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidMount() {
-    this.props.onInitProject(this.state.projectTitle);
+    this.props.onInitProject(
+      this.state.projectTitle,
+      this.props.isArchived[this.state.projectTitle]
+    );
 
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
@@ -56,7 +65,7 @@ class ProjectFullDetail extends Component {
 
   render() {
     let projectOwnerInfo = "Loading...";
-    if (this.props.projectOwner != undefined) {
+    if (this.props.projectOwner !== undefined) {
       projectOwnerInfo = (
         <div>
           <h2> {this.state.projectTitle} </h2>
@@ -95,7 +104,7 @@ class ProjectFullDetail extends Component {
       return project.title === this.props.project.title;
     });
 
-    if (foundProject != undefined) {
+    if (foundProject !== undefined) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
@@ -138,6 +147,15 @@ class ProjectFullDetail extends Component {
       );
     }
 
+    let archiveButton = undefined;
+    if (this.props.loggedInUser) {
+      if (this.props.loggedInUser.isAdmin === true) {
+        archiveButton = (
+          <ArchiveStatus projectTitle={this.state.projectTitle} />
+        );
+      }
+    }
+
     return (
       <div className={styles.ProjectFullDetail}>
         <div className={styles.TitleImgs}>
@@ -166,12 +184,21 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-        <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
-          <div>{projectOwnerInfo}</div>
-          <button onClick={this.closeModal}>Exit</button>
+          {modalContent}
         </Modal>
-        <button onClick={this.showModal}>Join Project</button>
+        <ProjectOwnerDetail owner={this.props.project.owner} />
+        <Modal
+          show={this.props.showModal}
+          closeModal={() => {
+            this.props.hideModal();
+          }}
+          style={styles.modalStyle}
+        >
+          <FeaturedModal />
+        </Modal>
+        {modalButton}
+        {archiveButton}
       </div>
     );
   }
@@ -183,14 +210,18 @@ const mapStateToProps = state => {
     projectOwner: state.userReducer.user,
     error: state.projectsReducer.error,
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
-    loggedInUser: state.loggedInUserReducer.loggedInUser
+    loggedInUser: state.loggedInUserReducer.loggedInUser,
+    isArchived: state.archiveStatusReducer.status,
+
+    showModal: state.modalReducer.showModal,
+    modalProps: state.modalReducer.modalProps
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitProject: projectTitle =>
-      dispatch(projectActions.initProject(projectTitle)),
+    onInitProject: (projectTitle, status) =>
+      dispatch(projectActions.initProject(projectTitle, status)),
 
     fetchJoinedProjects: userName =>
       dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
@@ -201,7 +232,12 @@ const mapDispatchToProps = dispatch => {
           joinedProjects,
           removeProject
         )
-      )
+      ),
+
+    addArchiveStatus: (status, pTitle) =>
+      dispatch(archiveStatus.addArchiveStatus(status, pTitle)),
+
+    hideModal: () => dispatch(modalActions.hideModal())
   };
 };
 

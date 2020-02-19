@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-projects';
+import * as archiveStatus from './archiveStatus';
 
 export const setProject = (project) => {
   return {
@@ -14,19 +15,28 @@ export const fetchProjectFailed = () => {
   }
 }
 
-export const initProject = (projectTitle) => {
+export const initProject = (projectTitle, status) => {
   return (dispatch) => {
-
-    axios.get('Projects/' + projectTitle + '.json')
+    let projectLocation = "";
+    if (status) {
+      projectLocation = "ArchivedProjects/";
+      dispatch(archiveStatus.addArchiveStatus(true, projectTitle));
+    } else {
+      projectLocation = "Projects/";
+      dispatch(archiveStatus.addArchiveStatus(false, projectTitle));
+    }
+    axios.get(projectLocation + projectTitle + '.json')
       .then(res => {
-        axios.get('Users/' + res.data.owner + '.json')
-        .then(res => {
-            dispatch({
+        if (res.data) {
+          axios.get('Users/' + res.data.owner + '.json')
+            .then(res => {
+              dispatch({
                 type: actionTypes.FETCH_USER,
                 user: res.data
+              });
             });
-          });
-        dispatch(setProject(res.data));
+          dispatch(setProject(res.data));
+        }
       })
       .catch(error => {
         dispatch(fetchProjectFailed());

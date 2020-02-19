@@ -12,9 +12,11 @@ const reducer = (state = initialState, action) => {
 
       for (let key in action.projects) {
         let project = action.projects[key];
-        projects.push({
-          project
-        });
+        if (project) {
+          projects.push({
+            project
+          });
+        }
       }
       return {
         ...state,

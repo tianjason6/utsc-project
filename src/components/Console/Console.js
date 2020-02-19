@@ -9,7 +9,7 @@ import ProjectFullDetailEdit from "../ProjectFullDetailEdit/ProjectFullDetailEdi
 import ProjectAdd from "../ProjectAdd/ProjectAdd";
 import JoinedProjects from "../JoinedProjects/JoinedProjects";
 import Timeline from "../Timeline/Timeline";
-
+import AllProjects from "../AllProjects/AllProjects";
 import RouteError from "../RouteError/RouteError";
 
 class Console extends Component {
@@ -23,13 +23,13 @@ class Console extends Component {
               <Route path="/test/ProjectAdd" component={ProjectAdd} />
               <Route path="/test/ManagedProjects" component={ManagedProjects} />
               <Route path="/test/JoinedProjects" component={JoinedProjects} />
+              <Route path="/test/AllProjects" component={AllProjects} />
               <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
               <Route
                 path="/test/EditMyProjectFullDetail"
                 component={ProjectFullDetailEdit}
               />
               <Route path="/test/Timeline" component={Timeline} />
-
               <Redirect to="/test/Timeline" />
             </Switch>
           }
