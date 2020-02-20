@@ -45,7 +45,7 @@ class ProjectFullDetail extends Component {
   }
 
   addToJoinProject(){
-    this.props.userJoinedProjects(this.props.project.title);
+    this.props.userJoinedProjects("HIII");
   }
 
   selectPicture = imgURL => {
@@ -229,9 +229,7 @@ const mapDispatchToProps = dispatch => {
 
     addToJoinProject: (projectTitle) =>
       dispatch(
-        userJoinedProjectsAction.setUserJoinedProjects(
-          {projects: projectTitle}
-        )
+        userJoinedProjectsAction.setUserJoinedProjects(projectTitle)
       ),
 
     fetchJoinedProjects: userName =>
