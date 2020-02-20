@@ -20,6 +20,7 @@ class JoinedProjects extends Component {
         let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 
         if(this.props.userJoinedProjects.length != 0 ){
+            console.log("this si the props", this.props.userJoinedProjects);
             userJoinedProjects = this.props.userJoinedProjects.map( project => {
                 return(
                     <div>
