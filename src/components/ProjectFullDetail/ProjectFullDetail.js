@@ -44,9 +44,12 @@ class ProjectFullDetail extends Component {
     }
   }
 
-  addToJoinProject(){
-    this.props.userJoinedProjects("HIII");
-  }
+  addToJoinProject = () => {
+    this.props.addToJoinProject(
+      // this.props.project.title
+      console.log("HIIII", this.props.project.title)
+    );
+  };
 
   selectPicture = imgURL => {
     this.setState({ mainImgURL: imgURL });
@@ -104,10 +107,12 @@ class ProjectFullDetail extends Component {
 
     let foundProject = undefined;
 
+    // foundProject = this.props.userJoinedProjects.includes(this.props.project.title);
     foundProject = this.props.userJoinedProjects.find(project => {
       return project.title === this.props.project.title;
     });
 
+    //chanegd from underfined
     if (foundProject !== undefined) {
       modalContent = (
         <div>
@@ -229,7 +234,9 @@ const mapDispatchToProps = dispatch => {
 
     addToJoinProject: (projectTitle) =>
       dispatch(
-        userJoinedProjectsAction.setUserJoinedProjects(projectTitle)
+        userJoinedProjectsAction.setUserJoinedProjects(
+          projectTitle
+        )
       ),
 
     fetchJoinedProjects: userName =>
