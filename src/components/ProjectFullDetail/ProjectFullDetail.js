@@ -44,6 +44,10 @@ class ProjectFullDetail extends Component {
     }
   }
 
+  addToJoinProject(){
+    this.props.userJoinedProjects(this.props.project.title);
+  }
+
   selectPicture = imgURL => {
     this.setState({ mainImgURL: imgURL });
   };
@@ -140,8 +144,8 @@ class ProjectFullDetail extends Component {
       modalContent = (
         <div>
           <div>{projectOwnerInfo}</div>
-          <button className={styles.ContentButton} onClick={this.closeModal}>
-            Exit
+          <button className={styles.ContentButton} onClick={this.addToJoinProject}>
+            Join
           </button>
         </div>
       );
@@ -223,6 +227,13 @@ const mapDispatchToProps = dispatch => {
     onInitProject: (projectTitle, status) =>
       dispatch(projectActions.initProject(projectTitle, status)),
 
+    addToJoinProject: (projectTitle) =>
+      dispatch(
+        userJoinedProjectsAction.setUserJoinedProjects(
+          {projects: projectTitle}
+        )
+      ),
+
     fetchJoinedProjects: userName =>
       dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
     leaveJoinedProjects: (username, joinedProjects, removeProject) =>
@@ -233,7 +244,6 @@ const mapDispatchToProps = dispatch => {
           removeProject
         )
       ),
-
     addArchiveStatus: (status, pTitle) =>
       dispatch(archiveStatus.addArchiveStatus(status, pTitle)),
 
