@@ -20,6 +20,7 @@ class ProjectFullDetail extends Component {
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
+      projectExists: false,
       mainImgURL: "",
       projectTitle: this.params.get("projectTitle").replace("%20", " "),
       showModal: false,
@@ -28,6 +29,7 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidMount() {
+    
     this.props.onInitProject(
       this.state.projectTitle,
       this.props.isArchived[this.state.projectTitle]
@@ -36,6 +38,7 @@ class ProjectFullDetail extends Component {
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
+    this.foundProject2();
   }
 
   componentDidUpdate() {
@@ -45,11 +48,18 @@ class ProjectFullDetail extends Component {
   }
 
   addToJoinProject = () => {
-    this.props.addToJoinProject(
-      this.props.project.title
-    );
-    console.log("HIIII", this.props.project);
-    this.closeModal();
+    console.log(this.props.project);
+    console.log("User: ", this.props.loggedInUser.username)
+    this.props.saveProject(this.props.project, 
+      this.props.loggedInUser.username);
+
+    // this.props.addToJoinProject(
+    //   this.props.project
+    // );
+    //this.setState({ projectExists: this.props.userJoinedProjects.includes(this.props.project)});
+    // this.foundProject2();
+    // console.log("HIIII", this.props.project);
+    // this.closeModal();
   };
 
   selectPicture = imgURL => {
@@ -70,6 +80,15 @@ class ProjectFullDetail extends Component {
       this.props.project.title
     );
   };
+
+  foundProject2 = () => {
+    console.log("Projects: ", this.props.userJoinedProjects);
+    //if (this.props.userJoinedProjects.length === 0) console.log("IHIS");
+   // console.log(this.props.project);
+   console.log(this.state.projectExists);
+    return () => this.setState({ projectExists: this.props.userJoinedProjects.includes(this.props.project)});
+    //return () => this.props.userJoinedProjects.includes(this.props.project);
+  }
 
   render() {
     let projectOwnerInfo = "Loading...";
@@ -108,13 +127,13 @@ class ProjectFullDetail extends Component {
 
     let foundProject = undefined;
 
-    foundProject = this.props.userJoinedProjects.includes(this.props.project.title);
+    foundProject = () => this.props.userJoinedProjects.includes(this.props.project);
     // foundProject = this.props.userJoinedProjects.find(project => {
     //   return project.title === this.props.project.title;
     // });
 
     //chanegd from underfined
-    if (foundProject !== false) {
+    if (this.state.projectExists === true) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
@@ -240,7 +259,13 @@ const mapDispatchToProps = dispatch => {
         )
       ),
       
-
+    saveProject: (project, username) => 
+          dispatch(
+            userJoinedProjectsAction.saveProject(
+              project,
+              username
+            )
+          ), 
     fetchJoinedProjects: userName =>
       dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
     leaveJoinedProjects: (username, joinedProjects, removeProject) =>

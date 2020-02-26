@@ -9,6 +9,26 @@ export const setUserJoinedProjects = (projects) =>{
         projects: projects
     }
 }
+
+export const saveProject = (project, username) => {
+   //console.log("Project: ", project)
+    return (dispatch) => {
+        console.log("Prpject: ", project, "Username: ", username);
+        axios.get(('Users/' + username  + '/projectsJoined.json'))
+        .then(res => {
+            if (res.data === null) {
+                axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
+            }
+            // else {
+            //     axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
+            // }
+            console.log("Response: ", res)
+        })
+     //   axios.put(('Users/' + username  + '/projectsJoined.json'), project)
+    }
+        
+    
+}
 export const userLogout = () => {
     return (dispatch) => {
         dispatch(setUserJoinedProjects([]));

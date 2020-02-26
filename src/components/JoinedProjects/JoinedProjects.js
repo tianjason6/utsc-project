@@ -21,8 +21,10 @@ class JoinedProjects extends Component {
 
         if(this.props.userJoinedProjects.length != 0 ){
             console.log("this si the props", this.props.userJoinedProjects);
-            userJoinedProjects = this.props.userJoinedProjects.map( project => {
+            userJoinedProjects = () => this.props.userJoinedProjects.map( project => {
+                console.log("OUHFUHSFD");
                 return(
+                    
                     <div>
                         <Project key={project.title}
                         title={project.title}
