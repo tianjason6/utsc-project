@@ -15,26 +15,27 @@ class JoinedProjects extends Component {
             this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
         }
     }
+
+
     
     render(){
         let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 
-        if(this.props.userJoinedProjects.length != 0 ){
+        if(this.props.userJoinedProjects.length != 0){
             console.log("this si the props", this.props.userJoinedProjects);
-            userJoinedProjects = () => this.props.userJoinedProjects.map( project => {
-                console.log("OUHFUHSFD");
-                return(
-                    
-                    <div>
-                        <Project key={project.title}
-                        title={project.title}
-                        description={project.description}
-                        img={project.imgs[0]}
-                        projectInfo={project} />
-                    </div>
-                    
-                );
-            });
+            return(
+                <div>
+                    {this.props.userJoinedProjects.map((project) => (
+                        <div>
+                            <Project key={project.title}
+                            title={project.title}
+                            description={project.description}
+                            img={project.imgs[0]}
+                            projectInfo={project} />
+                        </div>
+                    ))}
+                </div>
+            );
         }
         
         
