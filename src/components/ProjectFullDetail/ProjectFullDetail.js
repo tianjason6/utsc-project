@@ -127,13 +127,12 @@ class ProjectFullDetail extends Component {
 
     let foundProject = undefined;
 
-    foundProject = () => this.props.userJoinedProjects.includes(this.props.project);
-    // foundProject = this.props.userJoinedProjects.find(project => {
-    //   return project.title === this.props.project.title;
-    // });
+    foundProject = this.props.userJoinedProjects.find(project => {
+      return project.title === this.props.project.title;
+    });
 
     //chanegd from underfined
-    if (this.state.projectExists === true) {
+    if (foundProject !== undefined) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>

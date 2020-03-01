@@ -19,9 +19,9 @@ export const saveProject = (project, username) => {
             if (res.data === null) {
                 axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
             }
-            // else {
-            //     axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
-            // }
+            else {
+                axios.put(('Users/' + username  + '/projectsJoined.json'), [...res.data, project.title])
+            }
             console.log("Response: ", res)
         })
      //   axios.put(('Users/' + username  + '/projectsJoined.json'), project)
