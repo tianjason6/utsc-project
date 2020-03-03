@@ -52,7 +52,7 @@ class ProjectFullDetail extends Component {
     console.log("User: ", this.props.loggedInUser.username)
     this.props.saveProject(this.props.project, 
       this.props.loggedInUser.username);
-
+    this.closeModal();
     // this.props.addToJoinProject(
     //   this.props.project
     // );
