@@ -13,7 +13,7 @@ export const setUserJoinedProjects = (projects) =>{
 export const saveProject = (project, username, joinedProjects) => {
    //console.log("Project: ", project)
     return (dispatch) => {
-        const newArray = [...joinedProjects, project];
+        const newArray = [...joinedProjects, project.title];
         console.log("Prpject: ", project, "Username: ", username);
         axios.put(('Users/' + username  + '/projectsJoined.json'), newArray)
         .then(res => {
