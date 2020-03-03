@@ -53,13 +53,6 @@ class ProjectFullDetail extends Component {
     this.props.saveProject(this.props.project, 
       this.props.loggedInUser.username);
     this.closeModal();
-    // this.props.addToJoinProject(
-    //   this.props.project
-    // );
-    //this.setState({ projectExists: this.props.userJoinedProjects.includes(this.props.project)});
-    // this.foundProject2();
-    // console.log("HIIII", this.props.project);
-    // this.closeModal();
   };
 
   selectPicture = imgURL => {

@@ -17,8 +17,6 @@ class JoinedProjects extends Component {
         }
     }
 
-
-    
     render(){
         let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 

@@ -21,6 +21,8 @@ export const saveProject = (project, username) => {
             }
             else {
                 axios.put(('Users/' + username  + '/projectsJoined.json'), [...res.data, project.title])
+                dispatch(setUserJoinedProjects([...res.data, project.title]));
+                dispatch(loggedInUserAction.fetchLoggedInUser(username));
             }
             console.log("Response: ", res)
         })
