@@ -20,6 +20,7 @@ class ProjectFullDetail extends Component {
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
+      foundProject: false,
       projectExists: false,
       mainImgURL: "",
       projectTitle: this.params.get("projectTitle").replace("%20", " "),
@@ -29,7 +30,8 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidMount() {
-    
+    //this.checkProject( this.state.project ) 
+
     this.props.onInitProject(
       this.state.projectTitle,
       this.props.isArchived[this.state.projectTitle]
@@ -38,7 +40,6 @@ class ProjectFullDetail extends Component {
     if (this.props.loggedInUser) {
       this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
-    this.foundProject2();
   }
 
   componentDidUpdate() {
@@ -47,11 +48,15 @@ class ProjectFullDetail extends Component {
     }
   }
 
+  // checkProject = (project) => { 
+  //   this.setState({ foundProject: this.props.userJoinedProjects.find(project)})
+    
+  // }
   addToJoinProject = () => {
     console.log(this.props.project);
     console.log("User: ", this.props.loggedInUser.username)
     this.props.saveProject(this.props.project, 
-      this.props.loggedInUser.username);
+      this.props.loggedInUser.username, this.props.loggedInUser.projectsJoined);
     this.closeModal();
   };
 
@@ -74,14 +79,6 @@ class ProjectFullDetail extends Component {
     );
   };
 
-  foundProject2 = () => {
-    console.log("Projects: ", this.props.userJoinedProjects);
-    //if (this.props.userJoinedProjects.length === 0) console.log("IHIS");
-   // console.log(this.props.project);
-   console.log(this.state.projectExists);
-    return () => this.setState({ projectExists: this.props.userJoinedProjects.includes(this.props.project)});
-    //return () => this.props.userJoinedProjects.includes(this.props.project);
-  }
 
   render() {
     console.log("props", this.props);
@@ -266,11 +263,12 @@ const mapDispatchToProps = dispatch => {
         )
       ),
       
-    saveProject: (project, username) => 
+    saveProject: (project, username, joinedProjects) => 
           dispatch(
             userJoinedProjectsAction.saveProject(
               project,
-              username
+              username, 
+              joinedProjects
             )
           ), 
     fetchJoinedProjects: userName =>

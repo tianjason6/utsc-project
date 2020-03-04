@@ -10,11 +10,13 @@ export const setUserJoinedProjects = (projects) =>{
     }
 }
 
-export const saveProject = (project, username) => {
+export const saveProject = (project, username, joinedProjects) => {
    //console.log("Project: ", project)
     return (dispatch) => {
+        
+        const newArray = joinedProjects === undefined ? [project] : [...joinedProjects, project];
         console.log("Prpject: ", project, "Username: ", username);
-        axios.get(('Users/' + username  + '/projectsJoined.json'))
+        axios.get(('Users/' + username  + '/projectsJoined.json')) 
         .then(res => {
             if (res.data === null) {
                 axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
@@ -33,7 +35,10 @@ export const saveProject = (project, username) => {
 
                 
             }
-            console.log("Response: ", res)
+            dispatch(setUserJoinedProjects(newArray));
+            // updating the logged in user
+            dispatch(loggedInUserAction.fetchLoggedInUser(username));
+            //console.log("Response: ", res)
         })
      //   axios.put(('Users/' + username  + '/projectsJoined.json'), project)
     }
