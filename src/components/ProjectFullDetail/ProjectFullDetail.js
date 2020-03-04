@@ -84,6 +84,8 @@ class ProjectFullDetail extends Component {
   }
 
   render() {
+    console.log("props", this.props);
+    console.log("state", this.state);
     let projectOwnerInfo = "Loading...";
     if (this.props.projectOwner !== undefined) {
       projectOwnerInfo = (
@@ -121,11 +123,19 @@ class ProjectFullDetail extends Component {
     let foundProject = undefined;
 
     foundProject = this.props.userJoinedProjects.find(project => {
-      return project.title === this.props.project.title;
+      return project.title === this.state.projectTitle;
     });
 
-    //chanegd from underfined
-    if (foundProject !== undefined) {
+    console.log("a", this.props.joinedProjects, "b", this.state.projectTitle);
+    // foundProject = this.props.userJoinedProjects.includes(this.state.projectTitle)
+    let found = false;
+    this.props.userJoinedProjects.forEach(project => {
+      if(this.state.projectTitle === project.title){
+        found = true;
+      }
+    });
+
+    if (foundProject !== undefined && found) {
       modalContent = (
         <div>
           <h3>Are you sure you want to leave project?</h3>
@@ -207,6 +217,11 @@ class ProjectFullDetail extends Component {
         <p className={styles.Description}>{this.props.project.description}</p>
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
           {modalContent}
+          {/* {this.props.userJoinedProjects.includes(this.props.title) ? 
+          {modalContent}
+          :
+          {modalButton}
+          } */}
         </Modal>
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
