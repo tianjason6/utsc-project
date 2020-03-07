@@ -46,14 +46,15 @@ class Project extends Component {
         <div className={styles.Content}>
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
-          <button
-            className={styles.ViewProject}
-            onClick={this.routeProjectFullDetail}
-          >
-            View Project
-          </button>
-          {archiveButton}
+
         </div>
+        <button
+          className={styles.ViewProject}
+          onClick={this.routeProjectFullDetail}
+        >
+          View Project
+        </button>
+        {archiveButton}
       </>
     );
 

@@ -104,8 +104,8 @@
   font-size: 18px;
 }
 
-.Box div button.ViewProject {
-  width: 100%;
+.Box button.ViewProject {
+  width: 80%;
   height: 60px;
   background-color: rgb(247, 103, 36);
   transition: background-color 0.2s ease;
@@ -114,9 +114,11 @@
   font-size: 28px;
   font-weight: bold;
   color: white;
+  
+ 
 }
 
-.Box div button.ViewProject:hover {
+.Box button.ViewProject:hover {
   background-color: rgb(163, 62, 15);
   cursor: pointer;
 }
