@@ -20,6 +20,18 @@
   padding-bottom: 30px;
 }
 
+.button {
+  width: 100%;
+  height: 60px;
+  background-color: rgb(247, 103, 36);
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px darkgrey;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
 @media (max-width: 1450px) {
   .OngoingProjects {
     height: 95.5%;

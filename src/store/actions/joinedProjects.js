@@ -23,6 +23,17 @@ export const saveProject = (project, username, joinedProjects) => {
             }
             else {
                 axios.put(('Users/' + username  + '/projectsJoined.json'), [...res.data, project.title])
+                .then(res => {
+                    axios.get(('Users/' + username  + '/projectsJoined.json'))
+                    .then(res => {
+                        // console.log("res data", res.data);
+                        dispatch(setUserJoinedProjects([...res.data]));
+                        // dispatch(loggedInUserAction.fetchLoggedInUser(username));
+                    })
+
+                })
+
+                
             }
             dispatch(setUserJoinedProjects(newArray));
             // updating the logged in user
@@ -47,9 +58,15 @@ export const leaveJoinedProjects = (username, joinedProjects, removeProject) => 
         });
         axios.put(('Users/' + username  + '/projectsJoined.json'), removedJoinedProjectArray)
         .then(res => {
-            dispatch(setUserJoinedProjects(removedJoinedProjectArray));
-            // updating the logged in user
-            dispatch(loggedInUserAction.fetchLoggedInUser(username));
+            axios.get(('Users/' + username  + '/projectsJoined.json'))
+                .then(res => {
+                    console.log("leave res data", res.data);
+                    dispatch(setUserJoinedProjects([...res.data]));
+                    // dispatch(loggedInUserAction.fetchLoggedInUser(username));
+                })
+            // dispatch(setUserJoinedProjects(removedJoinedProjectArray));
+            // // updating the logged in user
+            // dispatch(loggedInUserAction.fetchLoggedInUser(username));
         });
     }
 }
