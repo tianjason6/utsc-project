@@ -9,12 +9,11 @@ const timelineItem = (props) => (
                 <p className={styles.timelineDetails}>{props.date} at {props.time} </p>
             </div>
             <div className={styles.timelineBody}>
-                <h2 className={styles.timelineTitle}>{props.title}</h2>
+                <h3 className={styles.timelineTitle}>{props.title}</h3>
                 <p className={styles.timelineContent} >{props.content}</p>
-            </div>
-            { props.attachment &&
+                { props.attachment &&
                     <img className={styles.timelineImg} src={"https://firebasestorage.googleapis.com/v0/b/utsc-projects.appspot.com/o/timeline%2F" + props.id +"?alt=media"} /> }
-            
+            </div>
         </div>
     </div>
 );

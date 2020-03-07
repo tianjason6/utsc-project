@@ -44,12 +44,10 @@
 }
 .timelineContent{
     width: 100%;
-    text-align: center;
     overflow-wrap: break-word;
 }
 
 .timelineImg{
     max-width: 30vw;
     height: auto;
-    padding-bottom: 20px;
 }
