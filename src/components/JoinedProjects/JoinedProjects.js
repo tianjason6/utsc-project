@@ -23,9 +23,9 @@ class JoinedProjects extends Component {
         if(this.props.userJoinedProjects.length != 0){
             // console.log("this si the props", this.props.userJoinedProjects);
             return(
-                <div>
+                <div className={styles}>
                     {this.props.userJoinedProjects.map((project) => (   
-                        <div>
+                        <div className={styles}>
                             {project.imgs !== undefined ? 
                                 <Project key={project.title}
                                 title={project.title}
