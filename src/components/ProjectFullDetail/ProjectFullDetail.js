@@ -124,7 +124,6 @@ class ProjectFullDetail extends Component {
     });
 
     console.log("a", this.props.joinedProjects, "b", this.state.projectTitle);
-    // foundProject = this.props.userJoinedProjects.includes(this.state.projectTitle)
     let found = false;
     this.props.userJoinedProjects.forEach(project => {
       if(this.state.projectTitle === project.title){
@@ -155,15 +154,19 @@ class ProjectFullDetail extends Component {
         </div>
       );
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal}>
-          Leave Project
-        </button>
+        <div className={styles.button_container}>
+            <button className={styles.ContentButton} onClick={this.showModal}>
+              Leave Project
+            </button>
+        </div>
       );
     } else {
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal}>
-          Join Project
-        </button>
+        <div className={styles.button_container}>
+          <button className={styles.ContentButton} onClick={this.showModal}>
+            Join Project
+          </button>
+        </div>
       );
       modalContent = (
         <div>
@@ -212,13 +215,9 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
+        
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
-          {modalContent}
-          {/* {this.props.userJoinedProjects.includes(this.props.title) ? 
-          {modalContent}
-          :
-          {modalButton}
-          } */}
+            {modalContent}
         </Modal>
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
