@@ -29,6 +29,9 @@ class Project extends Component {
   render() {
     let editProject = [styles.Box];
     let archiveButton = undefined;
+    let description = this.props.description.length > 500 ? this.props.description.slice(0, 500) + "..." : this.props.description;
+
+    
     if (this.props.loggedInUser) {
       if (this.props.loggedInUser.isAdmin === true) {
         archiveButton = <ArchiveStatus projectTitle={this.props.title} />;
@@ -45,7 +48,7 @@ class Project extends Component {
         </div>
         <div className={styles.Content}>
           <h1>{this.props.title}</h1>
-          <p>{this.props.description}</p>
+          <p>{description}</p>
 
         </div>
         <button
