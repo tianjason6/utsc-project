@@ -214,7 +214,7 @@ class ProjectFullDetail extends Component {
           </div>
         </div>
         <h1>Description</h1>
-        <p className={styles.Description}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{this.props.project.description}</p>
+        <p className={styles.Description}>{this.props.project.description}</p>
         
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
             {modalContent}
