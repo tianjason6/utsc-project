@@ -84,13 +84,6 @@
   }
 }
 
-/* @media (max-width: 550px) {
-  .Box div img {
-    width: 400px;
-    height: 400px;
-  }
-} */
-
 .Box div.Content {
   padding-top: 20px;
   padding-left: 20px;
@@ -115,8 +108,6 @@
   font-size: 28px;
   font-weight: bold;
   color: white;
-  
- 
 }
 
 .Box button.ViewProject:hover {

@@ -11,24 +11,20 @@ export const setUserJoinedProjects = (projects) =>{
 }
 
 export const saveProject = (project, username, joinedProjects) => {
-   //console.log("Project: ", project)
     return (dispatch) => {
         
         const newArray = joinedProjects === undefined ? [project] : [...joinedProjects, project];
-        console.log("Prpject: ", project, "Username: ", username);
         axios.get(('Users/' + username  + '/projectsJoined.json')) 
-        .then(res => {
-            if (res.data === null) {
+        .then(joined => {
+            if (joined.data === null) {
                 axios.put(('Users/' + username  + '/projectsJoined.json'), [project.title])
             }
             else {
-                axios.put(('Users/' + username  + '/projectsJoined.json'), [...res.data, project.title])
-                .then(res => {
+                axios.put(('Users/' + username  + '/projectsJoined.json'), [...joined.data, project.title])
+                .then(joined => {
                     axios.get(('Users/' + username  + '/projectsJoined.json'))
-                    .then(res => {
-                        // console.log("res data", res.data);
-                        dispatch(setUserJoinedProjects([...res.data]));
-                        // dispatch(loggedInUserAction.fetchLoggedInUser(username));
+                    .then(joined => {
+                        dispatch(setUserJoinedProjects([...joined.data]));
                     })
 
                 })
@@ -38,9 +34,7 @@ export const saveProject = (project, username, joinedProjects) => {
             dispatch(setUserJoinedProjects(newArray));
             // updating the logged in user
             dispatch(loggedInUserAction.fetchLoggedInUser(username));
-            //console.log("Response: ", res)
         })
-     //   axios.put(('Users/' + username  + '/projectsJoined.json'), project)
     }
         
     
@@ -62,11 +56,7 @@ export const leaveJoinedProjects = (username, joinedProjects, removeProject) => 
                 .then(res => {
                     console.log("leave res data", res.data);
                     dispatch(setUserJoinedProjects([...res.data]));
-                    // dispatch(loggedInUserAction.fetchLoggedInUser(username));
                 })
-            // dispatch(setUserJoinedProjects(removedJoinedProjectArray));
-            // // updating the logged in user
-            // dispatch(loggedInUserAction.fetchLoggedInUser(username));
         });
     }
 }
