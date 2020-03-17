@@ -134,7 +134,7 @@ class ProjectFullDetail extends Component {
     if (foundProject !== undefined && found) {
       modalContent = (
         <div>
-          <h3>Are you sure you want to leave project?</h3>
+          <h2>Are you sure you want to leave project?</h2>
           <div>
             There will be no going back, unless the project owner accepts you
             again
@@ -149,7 +149,7 @@ class ProjectFullDetail extends Component {
             className={[styles.ContentButton, styles.NoButton].join(" ")}
             onClick={this.closeModal}
           >
-            NO
+            No
           </button>
         </div>
       );
