@@ -16,6 +16,13 @@ class NavBar extends Component {
           <div className={styles.NavItemsGroup}>
             <NavLink
               activeClassName={styles.ActiveTab}
+              to={"/ReduxProject"}
+              exact
+            >
+              <div className={styles.NavItem}>Redux</div>
+            </NavLink>
+            <NavLink
+              activeClassName={styles.ActiveTab}
               to={"/ViewProjects"}
               exact
             >
@@ -34,14 +41,14 @@ class NavBar extends Component {
                 <div className={styles.NavItem}>Login</div>
               </a>
             ) : (
-              <NavLink
-                className={styles.Account}
-                activeClassName={styles.ActiveTab}
-                to={"/Console"}
-              >
-                <p>{this.props.auth.email[0]}</p>
-              </NavLink>
-            )}
+                <NavLink
+                  className={styles.Account}
+                  activeClassName={styles.ActiveTab}
+                  to={"/Console"}
+                >
+                  <p>{this.props.auth.email[0]}</p>
+                </NavLink>
+              )}
           </div>
 
           <div className={styles.Burger} onClick={this.props.toggleDrawer}>

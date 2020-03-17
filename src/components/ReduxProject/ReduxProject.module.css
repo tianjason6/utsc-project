@@ -1,0 +1,34 @@
+.Background {
+  background-color: white;
+}
+
+.Container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.PlayersBox {
+  margin: 0 1.5rem;
+  padding: 1.5rem;
+  border: solid 0.125rem black;
+  display: flex;
+  flex-direction: column;
+}
+
+.PlayerBoxContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.PlayerBox {
+  padding: 1.5rem;
+  margin: 0.5rem;
+  border: solid 0.125rem black;
+  flex: 1 0 40%;
+}

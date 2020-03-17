@@ -22,6 +22,8 @@ import archiveStatusReducer from "./store/reducers/archiveStatus";
 import modalReducer from "./store/reducers/modal";
 import projectAddReducer from "./store/reducers/projectAdd";
 import submitReducer from "./store/reducers/submit";
+import colorsReducer from "./store/reducers/colors";
+import playersReducer from "./store/reducers/players";
 
 import "./index.css";
 import App from "./App";
@@ -44,7 +46,9 @@ const rootReducer = combineReducers({
   allProjectsReducer: allProjectsReducer,
   archiveStatusReducer: archiveStatusReducer,
   modalReducer: modalReducer,
-  submitReducer: submitReducer
+  submitReducer: submitReducer,
+  colorsReducer: colorsReducer,
+  playersReducer: playersReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

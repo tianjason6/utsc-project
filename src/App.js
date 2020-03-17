@@ -14,6 +14,7 @@ import ContactUs from './components/ContactUs/ContactUs';
 import RouteError from './components/RouteError/RouteError';
 import ProjectFullDetail from './components/ProjectFullDetail/ProjectFullDetail';
 import ViewProjects from './components/ViewProjects/ViewProjects';
+import ReduxProject from './components/ReduxProject';
 import Console from './components/Console/Console';
 
 import  * as authActions from './store/actions/auth';
@@ -31,6 +32,7 @@ class App extends Component {
         
         <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
         
+        <Route path="/ReduxProject" component={ReduxProject} />
         <Route path="/ViewProjects" component={ViewProjects} />
         <Route path="/ProjectFullDetail" component={ProjectFullDetail} />
         <Route path="/About" component={About} />
