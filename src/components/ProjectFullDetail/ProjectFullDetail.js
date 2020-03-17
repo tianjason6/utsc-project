@@ -134,7 +134,9 @@ class ProjectFullDetail extends Component {
     if (foundProject !== undefined && found) {
       modalContent = (
         <div>
-          <h2>Are you sure you want to leave project?</h2>
+          <h2>
+            Are you sure you want to leave project?
+          </h2>
           <div>
             There will be no going back, unless the project owner accepts you
             again
