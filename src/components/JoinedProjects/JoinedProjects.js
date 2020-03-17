@@ -13,26 +13,31 @@ class JoinedProjects extends Component {
     componentDidMount(){
         if (this.props.loggedInUser) {
             this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
+            this.props.fetchJoinedProjects(this.props.userJoinedProjects);
         }
     }
-    
-    render(){
-        let userJoinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
 
-        if(this.props.userJoinedProjects.length != 0 ){
-            userJoinedProjects = this.props.userJoinedProjects.map( project => {
-                return(
-                    <div>
-                        <Project key={project.title}
-                        title={project.title}
-                        description={project.description}
-                        img={project.imgs[0]}
-                        projectInfo={project} />
-                    </div>
-                    
-                );
+    render(){
+        let joinedProjects = <h1 className={styles.emptyMsg}>You haven't joined any projects! Go join some!</h1>;
+        
+        if (this.props.userJoinedProjects.length !== 0) {
+            joinedProjects = this.props.userJoinedProjects.map(project => {
+              if (project === null) {
+                return null;
+              }
+              return (
+                <>
+                  <Project
+                    key={project.title}
+                    title={project.title}
+                    description={project.description}
+                    img={project.imgs[0]}
+                    projectInfo={project}
+                  />
+                </>
+              );
             });
-        }
+          }
         
         
         return(
@@ -41,7 +46,7 @@ class JoinedProjects extends Component {
                     <div className={styles.OngoingProjects}>
                         <h1>Joined Projects</h1>
                         <section className={styles.Wrap}>
-                            {userJoinedProjects}
+                            {joinedProjects}
                         </section>
                     </div>
                 </div>

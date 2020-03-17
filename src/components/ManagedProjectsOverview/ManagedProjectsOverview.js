@@ -36,7 +36,7 @@ class ManagedProjectsOverview extends Component {
       <div className={styles.Background}>
         <div className={styles.OngoingProjects}>
           <h1>Managed Projects
-            <button onClick={() => {history.push("/test/ProjectAdd")}}>Create a new project</button>
+            <button className={styles.button} onClick={() => {history.push("/test/ProjectAdd")}}>Create a new project</button>
           </h1>
           
           {managedProjects === undefined ? (

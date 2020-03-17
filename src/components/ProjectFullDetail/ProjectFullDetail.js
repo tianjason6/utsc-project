@@ -20,6 +20,8 @@ class ProjectFullDetail extends Component {
     this.params = new URLSearchParams(this.props.location.search);
 
     this.state = {
+      foundProject: false,
+      projectExists: false,
       mainImgURL: "",
       projectTitle: this.params.get("projectTitle").replace("%20", " "),
       showModal: false,
@@ -28,6 +30,8 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidMount() {
+    //this.checkProject( this.state.project ) 
+
     this.props.onInitProject(
       this.state.projectTitle,
       this.props.isArchived[this.state.projectTitle]
@@ -43,6 +47,18 @@ class ProjectFullDetail extends Component {
       this.setState({ mainImgURL: this.props.project.imgs[0] });
     }
   }
+
+  // checkProject = (project) => { 
+  //   this.setState({ foundProject: this.props.userJoinedProjects.find(project)})
+    
+  // }
+  addToJoinProject = () => {
+    console.log(this.props.project);
+    console.log("User: ", this.props.loggedInUser.username)
+    this.props.saveProject(this.props.project, 
+      this.props.loggedInUser.username, this.props.loggedInUser.projectsJoined);
+    this.closeModal();
+  };
 
   selectPicture = imgURL => {
     this.setState({ mainImgURL: imgURL });
@@ -63,7 +79,10 @@ class ProjectFullDetail extends Component {
     );
   };
 
+
   render() {
+    console.log("props", this.props);
+    console.log("state", this.state);
     let projectOwnerInfo = "Loading...";
     if (this.props.projectOwner !== undefined) {
       projectOwnerInfo = (
@@ -101,13 +120,23 @@ class ProjectFullDetail extends Component {
     let foundProject = undefined;
 
     foundProject = this.props.userJoinedProjects.find(project => {
-      return project.title === this.props.project.title;
+      return project.title === this.state.projectTitle;
     });
 
-    if (foundProject !== undefined) {
+    console.log("a", this.props.joinedProjects, "b", this.state.projectTitle);
+    let found = false;
+    this.props.userJoinedProjects.forEach(project => {
+      if(this.state.projectTitle === project.title){
+        found = true;
+      }
+    });
+
+    if (foundProject !== undefined && found) {
       modalContent = (
         <div>
-          <h3>Are you sure you want to leave project?</h3>
+          <h2>
+            Are you sure you want to leave project?
+          </h2>
           <div>
             There will be no going back, unless the project owner accepts you
             again
@@ -122,26 +151,30 @@ class ProjectFullDetail extends Component {
             className={[styles.ContentButton, styles.NoButton].join(" ")}
             onClick={this.closeModal}
           >
-            NO
+            No
           </button>
         </div>
       );
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal}>
-          Leave Project
-        </button>
+        <div className={styles.button_container}>
+            <button className={styles.ContentButton} onClick={this.showModal}>
+              Leave Project
+            </button>
+        </div>
       );
     } else {
       modalButton = (
-        <button className={styles.ContentButton} onClick={this.showModal}>
-          Join Project
-        </button>
+        <div className={styles.button_container}>
+          <button className={styles.ContentButton} onClick={this.showModal}>
+            Join Project
+          </button>
+        </div>
       );
       modalContent = (
         <div>
           <div>{projectOwnerInfo}</div>
-          <button className={styles.ContentButton} onClick={this.closeModal}>
-            Exit
+          <button className={styles.ContentButton} onClick={this.addToJoinProject}>
+            Join
           </button>
         </div>
       );
@@ -184,8 +217,9 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
+        
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
-          {modalContent}
+            {modalContent}
         </Modal>
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
@@ -223,6 +257,21 @@ const mapDispatchToProps = dispatch => {
     onInitProject: (projectTitle, status) =>
       dispatch(projectActions.initProject(projectTitle, status)),
 
+    addToJoinProject: (projectTitle) =>
+      dispatch(
+        userJoinedProjectsAction.setUserJoinedProjects(
+          projectTitle
+        )
+      ),
+      
+    saveProject: (project, username, joinedProjects) => 
+          dispatch(
+            userJoinedProjectsAction.saveProject(
+              project,
+              username, 
+              joinedProjects
+            )
+          ), 
     fetchJoinedProjects: userName =>
       dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
     leaveJoinedProjects: (username, joinedProjects, removeProject) =>
@@ -233,7 +282,6 @@ const mapDispatchToProps = dispatch => {
           removeProject
         )
       ),
-
     addArchiveStatus: (status, pTitle) =>
       dispatch(archiveStatus.addArchiveStatus(status, pTitle)),
 

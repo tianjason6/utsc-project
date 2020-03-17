@@ -1,8 +1,9 @@
 .line {
   border: 2px solid black;
-  width: 80%;
-  margin-right: 10%;
-  margin-left: 10%;
+  align-content: center;
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%; 
 }
 
 .projectOwnerDetail {
