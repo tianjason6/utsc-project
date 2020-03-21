@@ -15,6 +15,7 @@ import RouteError from './components/RouteError/RouteError';
 import ProjectFullDetail from './components/ProjectFullDetail/ProjectFullDetail';
 import ViewProjects from './components/ViewProjects/ViewProjects';
 import Console from './components/Console/Console';
+import CLogin from './components/ClaraLogin/CLogin';
 
 import  * as authActions from './store/actions/auth';
 
@@ -30,7 +31,7 @@ class App extends Component {
       <Switch>
         
         <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
-        
+        <Route path="/CLogin" component={CLogin} />
         <Route path="/ViewProjects" component={ViewProjects} />
         <Route path="/ProjectFullDetail" component={ProjectFullDetail} />
         <Route path="/About" component={About} />
@@ -45,9 +46,9 @@ class App extends Component {
     
     return (
       <div>
-        <Layout>
-          {routes}
-        </Layout>
+        {/* <Layout> */}
+        <Route path="/" component={CLogin} />
+        {/* </Layout> */}
       </div>
     );
   }
