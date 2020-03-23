@@ -7,7 +7,7 @@ import { faLaptopCode, faDollarSign, faFire, faHeart } from '@fortawesome/free-s
 
 import Layout from './components/Layout/Layout';
 // import LongInfo from './components/LongInfo/LongInfo';
-
+import Login from './components/NewLogin/NewLogin'
 import LandingPage from './components/LandingPage/LandingPage';
 import About from './components/About/About';
 import ContactUs from './components/ContactUs/ContactUs';
@@ -17,6 +17,7 @@ import ViewProjects from './components/ViewProjects/ViewProjects';
 import Console from './components/Console/Console';
 
 import  * as authActions from './store/actions/auth';
+import NewLogin from './components/NewLogin/NewLogin';
 
 
 library.add(faLaptopCode, faDollarSign, faFire, faHeart);
@@ -45,9 +46,10 @@ class App extends Component {
     
     return (
       <div>
-        <Layout>
+        {/* <Layout>
           {routes}
-        </Layout>
+        </Layout> */}
+        <NewLogin />
       </div>
     );
   }
