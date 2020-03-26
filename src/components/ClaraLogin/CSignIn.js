@@ -8,7 +8,8 @@ import { Field, reduxForm } from "redux-form";
 
 import {
   BrowserRouter as Router,
-  Link as LinkTo
+  Link as LinkTo,
+  Redirect 
 } from "react-router-dom";
 
 import * as firebase from "firebase";
@@ -27,41 +28,32 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-function CLogin() {
+function CSignIn() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [repPass, setRepPass] = useState("");
   const [error, setError] = useState("");
 
   const changeEmail = e => {
     setEmail(e.target.value);
+    setError("")
   };
 
   const changePass = e => {
     setPass(e.target.value);
-  };
-
-  const changerepPass = e => {
-    setRepPass(e.target.value);
+    setError("")
   };
 
   const createUser = () => {
-    if (repPass === pass) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, pass)
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode == "auth/weak-password") {
-            setError("The password is too weak.");
-          } else {
-            setError(errorMessage);
-          }
-        });
-    } else {
-      setError("repeated pass doesnt match");
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        setError(errorMessage)
+        // ...
+    });
+    if(error === ""){
+        console.log("hehehe")
+        return <Redirect to="/profile"/>
     }
   };
 
@@ -84,7 +76,7 @@ function CLogin() {
           spacing={2}
         >
           <Grid item>
-            <Typography variant="h4">Sign Up</Typography>
+            <Typography variant="h4">Sign In</Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -104,15 +96,6 @@ function CLogin() {
               onChange={changePass}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="r-pass"
-              label="Repeat Password"
-              variant="outlined"
-              onChange={changerepPass}
-            />
-          </Grid>
           <Grid item>
             <Button onClick={createUser} variant="contained" color="primary">
               Submit
@@ -120,9 +103,9 @@ function CLogin() {
           </Grid>
 
           <Router>
-            <LinkTo to="/signin">
+            <LinkTo to="/">
               <Link component="button" variant="body2">
-                Sign In
+                Create Account
               </Link>
             </LinkTo>
           </Router>
@@ -134,4 +117,4 @@ function CLogin() {
   );
 }
 
-export default CLogin;
+export default CSignIn;
