@@ -1,19 +1,13 @@
 import React, { useState, useRef } from 'react'
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container"
-import Link from "@material-ui/core/Link";
+import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import { green, purple, red } from "@material-ui/core/colors";
 import * as firebase from 'firebase';
-
-import {
-  BrowserRouter as Router,
-  Link as LinkTo,
-  Redirect 
-} from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 const invalidPass = 'auth/invalid-pass';
 var firebaseConfig = {
@@ -29,20 +23,18 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig)
 }
 
-export default function NewLogin(props) {
+export default function NewSignin() {
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeat, setRepeat] = useState("");
   const [errorMessage, setError] = useState("");
   const emailField = useRef();  
-
   
   const authUser = () => {
-    if (repeat !== password) setError("Password/Repeat Password do not match!");
-    else{
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => { 
-        props.history.push("/signin")
+        var current = firebase.auth().currentUser;
+        setUser(current.uid);
       })
       .catch(function(error){
         var errorCode = error.code;
@@ -55,7 +47,7 @@ export default function NewLogin(props) {
         setError(errorMessage);
         console.log(errorCode, errorMessage);
       });
-    }
+    
   }
   const handleEmail = (e) => { 
     setEmail(e.target.value);
@@ -63,11 +55,10 @@ export default function NewLogin(props) {
   const handlePassword = (e) => { 
     setPassword(e.target.value);
   }
-  const handleRepeat = (e) => { 
-    setRepeat(e.target.value);
-  }
   return (
     <div>
+        {user !== "" ? <h3>User Signed in {user}</h3>
+        :
         <Grid
           container
           fullWidth
@@ -87,7 +78,7 @@ export default function NewLogin(props) {
             <br />
             <br />
             <Grid item>
-              <Typography variant="h4">Sign Up</Typography>
+              <Typography variant="h4">Sign In</Typography>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -108,27 +99,15 @@ export default function NewLogin(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="r-pass"
-                label="Repeat Password"
-                onChange={handleRepeat}
-                variant="outlined"
-              />
-            </Grid>
               <Typography variant="caption" color="red">{errorMessage}</Typography>
             <Grid item>
-              <Button variant="contained" onClick={authUser}color="primary">
+              <Button variant="contained" onClick={authUser}color="green">
                 Submit
               </Button>
             </Grid>
           </Grid>
-          
-          <LinkTo to="/signin">
-            <Link variant="body2"spacing={2}>Already have an account, click here.</Link>
-          </LinkTo>
-        </Grid>
+        </Grid>}
       </div>
+
   )
 }

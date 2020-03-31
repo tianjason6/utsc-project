@@ -18,6 +18,8 @@ import Console from './components/Console/Console';
 
 import  * as authActions from './store/actions/auth';
 import NewLogin from './components/NewLogin/NewLogin';
+import NewSignin from './components/NewLogin/NewSignin';
+import Profile from './components/NewLogin/Profile';
 
 
 library.add(faLaptopCode, faDollarSign, faFire, faHeart);
@@ -49,7 +51,11 @@ class App extends Component {
         {/* <Layout>
           {routes}
         </Layout> */}
-        <NewLogin />
+        <Switch>
+          <Route path="/profile" component={Profile} />
+          <Route path="/signin" component={NewSignin} />
+          <Route path="/" exact component={NewLogin} />
+        </Switch>
       </div>
     );
   }
