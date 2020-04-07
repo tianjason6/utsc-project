@@ -9,7 +9,7 @@ import { Field, reduxForm } from "redux-form";
 import {
   BrowserRouter as Router,
   Link as LinkTo,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 import * as firebase from "firebase";
@@ -22,15 +22,13 @@ var firebaseConfig = {
   projectId: "utsc-projects",
   storageBucket: "utsc-projects.appspot.com",
   messagingSenderId: "109791671007",
-  appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
+  appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a",
 };
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-
-
-function Profile() {
+function Profile(props) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
 
@@ -38,45 +36,20 @@ function Profile() {
     firebase
       .auth()
       .signOut()
-      .then(function() {
-        // Sign-out successful.
+      .then(function () {
+        props.history.push('/signin')
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // An error happened.
         setError(error);
+        console.log(error)
       });
+
   };
 
-let content = (<div>kinda wack</div>);
+  
 
-
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log("qegqdhd")
-      if (user) {
-        setName(user);
-        content = (
-          <div>
-            <Grid item>
-              <Typography variant="h4">Welcome {name}</Typography>
-            </Grid>
-            <Grid item>
-              <Button onClick={logout} variant="contained" color="primary">
-                LogOut
-              </Button>
-            </Grid>
-          </div>
-        );
-      } else {
-          console.log("no login");
-          setName("no user has signed in");
-          content = (
-            <div>
-              <Typography variant="h4">{name}</Typography>
-            </div>
-          );
-      }
-    });
-
+  var user = firebase.auth().currentUser;
 
   return (
     <div>
@@ -97,8 +70,30 @@ let content = (<div>kinda wack</div>);
           spacing={2}
         >
           {/* {check} */}
-          {content}
-          {name}
+          {user ? (
+            <div>
+              <Grid item>
+                <Typography variant="h4">Welcome {user.email}</Typography>
+              </Grid>
+              <Grid item>
+                <Button onClick={logout} variant="contained" color="primary">
+                  LogOut
+                </Button>
+              </Grid>
+            </div>
+          ) : (
+            <div>
+              <Typography variant="h4">
+                no user has signed in...
+                <LinkTo to="/signin">
+                  <Link component="button" variant="body2">
+                    Sign In Here
+                  </Link>
+                </LinkTo>
+              </Typography>
+            </div>
+          )}
+
           <Typography variant="h6">{error}</Typography>
         </Grid>
       </Grid>

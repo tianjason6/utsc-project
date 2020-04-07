@@ -44,7 +44,7 @@ class App extends Component {
           <Route path="/profile" component={Profile} />
           {/* fix this late riognwejkgwejkgnwe */}
           <Route path="/login" component={CLogin} />
-          <Route exact path="/" component={Profile} /> 
+          <Route exact path="/" component={CSignIn} /> 
 
           {/* <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
         <Route path="/CLogin" component={CLogin} />

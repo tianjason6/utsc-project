@@ -4,8 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
-import { Field, reduxForm } from "redux-form";
-
+// import hsitory from ''
 import {
   BrowserRouter as Router,
   Link as LinkTo
@@ -65,6 +64,41 @@ function CLogin() {
     }
   };
 
+  var actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be whitelisted in the Firebase Console.
+    // url: 'http://utsc-projects.web.app/profile',
+    url: 'http://localhost:3000/signin',
+    // This must be true.
+    handleCodeInApp: true,
+    // iOS: {
+    //   bundleId: 'com.example.ios'
+    // },
+    // android: {
+    //   packageName: 'com.example.android',
+    //   installApp: true,
+    //   minimumVersion: '12'
+    // },
+    // dynamicLinkDomain: 'example.page.link'
+  };
+  
+
+  const sendEmail =()=>{
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+    .then(function() {
+      // The link was successfully sent. Inform the user.
+      // Save the email locally so you don't need to ask the user for it again
+      // if they open the link on the same device.
+      setError("verify your email")
+      window.localStorage.setItem('emailForSignIn', email);
+    })
+    .catch(function(error) {
+    //    setError(error)
+        console.log(error)
+    });
+  
+  }
+
   return (
     <div>
       <Grid
@@ -100,6 +134,7 @@ function CLogin() {
               fullWidth
               id="pass"
               label="Password"
+              type = "password"
               variant="outlined"
               onChange={changePass}
             />
@@ -109,23 +144,24 @@ function CLogin() {
               fullWidth
               id="r-pass"
               label="Repeat Password"
+              type = "password"
               variant="outlined"
               onChange={changerepPass}
             />
           </Grid>
           <Grid item>
-            <Button onClick={createUser} variant="contained" color="primary">
+            <Button onClick={sendEmail} variant="contained" color="primary">
               Submit
             </Button>
           </Grid>
 
-          <Router>
+          {/* <Router> */}
             <LinkTo to="/signin">
               <Link component="button" variant="body2">
                 Sign In
               </Link>
             </LinkTo>
-          </Router>
+          {/* </Router> */}
           
         </Grid>
         <Typography variant="h6">{error}</Typography>

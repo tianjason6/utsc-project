@@ -4,12 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
-import { Field, reduxForm } from "redux-form";
+import { Fields, reduxForm } from "redux-form";
 
 import {
   BrowserRouter as Router,
   Link as LinkTo,
-  Redirect 
+  Redirect,
+  // History
 } from "react-router-dom";
 
 import * as firebase from "firebase";
@@ -28,7 +29,23 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-function CSignIn() {
+// Confirm the link is a sign-in with email link.
+if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+    var email = window.localStorage.getItem('emailForSignIn');
+    if (!email) {
+      email = window.prompt('Please provide your email for confirmation');
+    }
+    // The client SDK will parse the code from the link for you.
+    firebase.auth().signInWithEmailLink(email, window.location.href)
+      .then(function(result) {
+        window.localStorage.removeItem('emailForSignIn');
+      })
+      .catch(function(error) {
+      });
+  }
+  
+
+function CSignIn(props) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
@@ -52,10 +69,21 @@ function CSignIn() {
         // ...
     });
     if(error === ""){
-        console.log("hehehe")
-        return <Redirect to="/profile"/>
+        authChange();
     }
   };
+  
+
+  const authChange =()=>{
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            console.log(user.emailVerified)
+            let userid = firebase.auth().currentUser.email;
+            console.log(userid)
+            props.history.push('/profile', userid)
+        }
+      });
+  }
 
   return (
     <div>
@@ -86,11 +114,13 @@ function CSignIn() {
               variant="outlined"
               onChange={changeEmail}
             />
+            
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
               id="pass"
+              type = "password"
               label="Password"
               variant="outlined"
               onChange={changePass}
@@ -102,13 +132,13 @@ function CSignIn() {
             </Button>
           </Grid>
 
-          <Router>
-            <LinkTo to="/">
+          {/* <Router> */}
+            <LinkTo to="/login">
               <Link component="button" variant="body2">
                 Create Account
               </Link>
             </LinkTo>
-          </Router>
+          {/* </Router> */}
           
         </Grid>
         <Typography variant="h6">{error}</Typography>
