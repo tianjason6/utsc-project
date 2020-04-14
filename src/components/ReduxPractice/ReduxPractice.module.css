@@ -1,0 +1,38 @@
+.Content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+.Lobby {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: auto;
+  width: 50%;
+  height: 500px;
+  background-color: lightgray;
+  border-color: black;
+  border: solid;
+  border-radius: 5px;
+  border-width: 2px;
+}
+
+.Lobby h1 {
+  margin: 10px auto;
+}
+
+.playerContainer {
+  display: flex;
+  height: 60%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.playerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

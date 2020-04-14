@@ -24,6 +24,9 @@ class NavBar extends Component {
             <NavLink activeClassName={styles.ActiveTab} to={"/About"}>
               <div className={styles.NavItem}>About</div>
             </NavLink>
+            <NavLink activeClassName={styles.ActiveTab} to={"/ReduxPractice"} >
+              <div className={styles.NavItem}>Redux Pract</div>
+            </NavLink>
 
             <NavLink activeClassName={styles.ActiveTab} to={"/ContactUs"}>
               <div className={styles.NavItem}>Contact Us</div>
@@ -34,14 +37,14 @@ class NavBar extends Component {
                 <div className={styles.NavItem}>Login</div>
               </a>
             ) : (
-              <NavLink
-                className={styles.Account}
-                activeClassName={styles.ActiveTab}
-                to={"/Console"}
-              >
-                <p>{this.props.auth.email[0]}</p>
-              </NavLink>
-            )}
+                <NavLink
+                  className={styles.Account}
+                  activeClassName={styles.ActiveTab}
+                  to={"/Console"}
+                >
+                  <p>{this.props.auth.email[0]}</p>
+                </NavLink>
+              )}
           </div>
 
           <div className={styles.Burger} onClick={this.props.toggleDrawer}>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLaptopCode, faDollarSign, faFire, faHeart } from '@fortawesome/free-solid-svg-icons';
-
+import ReduxPractice from './components/ReduxPractice/ReduxPractice';
 import Layout from './components/Layout/Layout';
 // import LongInfo from './components/LongInfo/LongInfo';
 
@@ -16,33 +16,34 @@ import ProjectFullDetail from './components/ProjectFullDetail/ProjectFullDetail'
 import ViewProjects from './components/ViewProjects/ViewProjects';
 import Console from './components/Console/Console';
 
-import  * as authActions from './store/actions/auth';
+import * as authActions from './store/actions/auth';
 
 
 library.add(faLaptopCode, faDollarSign, faFire, faHeart);
 
 class App extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.autoSignIn();
   }
   render() {
     let routes = (
       <Switch>
-        
-        <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
-        
+
+        <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError} />
+
         <Route path="/ViewProjects" component={ViewProjects} />
         <Route path="/ProjectFullDetail" component={ProjectFullDetail} />
         <Route path="/About" component={About} />
         <Route path="/ContactUs" component={ContactUs} />
         {this.props.auth.signedIn ? <Route path="/Console" component={Console} /> : null}
         <Route path="/" exact component={LandingPage} />
+        <Route path="/ReduxPractice" component={ReduxPractice} />
         <Route path="/RouteError" component={RouteError} />
         <Redirect to="/RouteError" />
       </Switch>
     );
 
-    
+
     return (
       <div>
         <Layout>

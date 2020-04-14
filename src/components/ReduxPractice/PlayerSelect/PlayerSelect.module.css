@@ -1,0 +1,13 @@
+.Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 300px;
+  background-color: rgb(223, 223, 223);
+  border-color: black;
+  border: solid;
+  border-radius: 4px;
+  border-width: 1px;
+}
