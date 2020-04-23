@@ -29,7 +29,7 @@ class App extends Component {
     let routes = (
       <Switch>
         
-        <Route path="/test" component={this.props.auth.signedIn ? Console : RouteError}  />
+        <Route path="/Main" component={this.props.auth.signedIn ? Console : RouteError}  />
         
         <Route path="/ViewProjects" component={ViewProjects} />
         <Route path="/ProjectFullDetail" component={ProjectFullDetail} />

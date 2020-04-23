@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import styles from './SignUpForm.module.css';
-import axios from '../../axios-projects';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div className={label === 'Email' ? [styles.Field, styles.EmailField].join(' ') : styles.Field}>

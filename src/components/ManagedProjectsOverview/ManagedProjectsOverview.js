@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styles from "./ManagedProjectsOverview.module.css";
 import Project from "../Project/Project";
 import * as userManagedProjectsActions from "../../store/actions/userManagedProjects";
-import RouteError from "../RouteError/RouteError";
 import history from "../../history";
 
 class ManagedProjectsOverview extends Component {

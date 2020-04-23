@@ -8,7 +8,7 @@ class ProjectAdd extends Component {
   render() {
     if (this.props.authUserEmail == null) {
       alert("Please login to create a project");
-      history.push("/test/myProjects");
+      history.push("/Main/myProjects");
     }
     return (
       <div>

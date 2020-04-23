@@ -27,16 +27,16 @@ class Drawer extends Component {
         <NavLink onClick={this.props.closeDrawer} to={"/Console"}>
           Console
       </NavLink>
-        <NavLink onClick={this.props.closeDrawer} to={"/test/TimeLine"}>
+        <NavLink onClick={this.props.closeDrawer} to={"/Main/TimeLine"}>
           Timeline
       </NavLink>
-        <NavLink onClick={this.props.closeDrawer} to={"/test/ManagedProjects"}>
+        <NavLink onClick={this.props.closeDrawer} to={"/Main/ManagedProjects"}>
           Managed Projects
       </NavLink>
-        <NavLink onClick={this.props.closeDrawer} to={"/test/JoinedProjects"}>
+        <NavLink onClick={this.props.closeDrawer} to={"/Main/JoinedProjects"}>
           Joined Projects
       </NavLink>
-        <NavLink onClick={this.props.closeDrawer} to={"/test/ConsoleLogout"}>
+        <NavLink onClick={this.props.closeDrawer} to={"/Main/ConsoleLogout"}>
           Logout
       </NavLink>
       </>)

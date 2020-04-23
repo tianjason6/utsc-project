@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import styles from "./ProjectOwnerDetail.module.css";
 
 class ProjectOwnerDetail extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     // all user information in props
     const owner = this.props.user;

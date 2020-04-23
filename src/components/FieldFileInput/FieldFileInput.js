@@ -1,8 +1,4 @@
 import React from 'react';
-
-import image from '../../assests/images/albumcovers.jpg';
-import image2 from '../../assests/images/xblue.jpg';
-
 import styles from './FieldFileInput.module.css';
 
 class FieldFileInput extends React.Component {
@@ -30,9 +26,8 @@ class FieldFileInput extends React.Component {
     }
 
     render(){
-        const {input: { value }} = this.props;
         //these are all of our props. add more if we included more :))))))
-        const {input, label, required, meta} = this.props;
+        const {label, meta} = this.props;
         return(
             <div className={styles.inputItem}>
                 
@@ -45,7 +40,7 @@ class FieldFileInput extends React.Component {
                     meta={meta}
                 />
                 <label for='file' className={this.props.className} >{label}</label>
-                <img id='img1' className={styles.image} />
+                <img id='img1' className={styles.image} alt={"FileImage"}/>
             </div>
         )
     }

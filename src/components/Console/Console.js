@@ -20,17 +20,17 @@ class Console extends Component {
         <div className={styles.ConsoleDisplay}>
           {
             <Switch>
-              <Route path="/test/ProjectAdd" component={ProjectAdd} />
-              <Route path="/test/ManagedProjects" component={ManagedProjects} />
-              <Route path="/test/JoinedProjects" component={JoinedProjects} />
-              <Route path="/test/AllProjects" component={AllProjects} />
-              <Route path="/test/ConsoleLogout" component={ConsoleLogout} />
+              <Route path="/Main/ProjectAdd" component={ProjectAdd} />
+              <Route path="/Main/ManagedProjects" component={ManagedProjects} />
+              <Route path="/Main/JoinedProjects" component={JoinedProjects} />
+              <Route path="/Main/AllProjects" component={AllProjects} />
+              <Route path="/Main/ConsoleLogout" component={ConsoleLogout} />
               <Route
-                path="/test/EditMyProjectFullDetail"
+                path="/Main/EditMyProjectFullDetail"
                 component={ProjectFullDetailEdit}
               />
-              <Route path="/test/Timeline" component={Timeline} />
-              <Redirect to="/test/Timeline" />
+              <Route path="/Main/Timeline" component={Timeline} />
+              <Redirect to="/Main/Timeline" />
             </Switch>
           }
         </div>

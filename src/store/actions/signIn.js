@@ -86,7 +86,7 @@ export const initSignIn = (email, password) => {
       })
       .catch((error) => {
         console.error(error)
-        dispatch(signInFailed(error.response.data.error.message));
+        dispatch(signInFailed(error.message));
       });
   }
 }

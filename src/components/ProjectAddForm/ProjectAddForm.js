@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Field, reduxForm, SubmissionError } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import styles from "./ProjectAddForm.module.css";
 import RenderImageField from "./ProjectAddImageField";
 import * as projectActions from "../../store/actions/addProject";
 import { connect } from "react-redux";
 import axios from "../../axios-projects";
-import firebase from "firebase";
-import { firebaseConfig, maxFileSize, imgUrl } from "../../firebaseConst.js";
+import firebase from "firebase/app";
+import { firebaseConfig, imgUrl } from "../../firebaseConst.js";
 
 class ProjectAddForm extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ProjectAddForm extends Component {
       img1: "",
       img2: "",
       img3: "",
-      img4: ""
+      img4: "",
     };
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.config = this.config.bind(this);
@@ -28,7 +28,7 @@ class ProjectAddForm extends Component {
     let storageRef = firebase.storage().ref();
     let ref, file;
     let index = 1;
-    this.state.imgs.map(item => {
+    this.state.imgs.forEach((item) => {
       if (item !== "") {
         file = this.state["img" + index];
         ref = storageRef.child(title + "/img" + index + ".jpg");
@@ -77,10 +77,10 @@ class ProjectAddForm extends Component {
     }
   }
 
-  ProjectAddForm = values => {
+  ProjectAddForm = (values) => {
     let projectData = null;
     // Fetching the project names
-    axios.get("Projects/" + values.title + ".json").then(res => {
+    axios.get("Projects/" + values.title + ".json").then((res) => {
       projectData = res.data;
       if (projectData != null) {
         // If project does not exist, put request
@@ -151,7 +151,7 @@ class ProjectAddForm extends Component {
                   onChange={this.updateFile4}
                   id="4"
                 />
-                <div className={styles.containerSmall}></div>
+                <div className={styles.containerSmall} />
               </div>
             </span>
           </div>
@@ -176,18 +176,15 @@ class ProjectAddForm extends Component {
     );
   }
 }
-const validate = values => {
+const validate = (values) => {
   let error = {};
-  let isError = false;
 
   if (!("title" in values)) {
     error.title = "Required";
-    isError = true;
   }
 
   if (!("description" in values)) {
     error.description = "Required";
-    isError = true;
   }
   return error;
 };
@@ -195,22 +192,25 @@ const validate = values => {
 ProjectAddForm = reduxForm({
   // a unique name for the form
   form: "ProjectAddForm",
-  validate
+  validate,
 })(ProjectAddForm);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    authUserEmail: state.authReducer.email
+    authUserEmail: state.authReducer.email,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onInitProjectAdd: (title, description, imgs, authUserEmail) =>
       dispatch(
         projectActions.initProjectAdd(title, description, imgs, authUserEmail)
-      )
+      ),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectAddForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectAddForm);

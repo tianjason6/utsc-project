@@ -18,6 +18,7 @@ export const fetchLoggedInUser = (username) => {
     return (dispatch) => {
         axios.get('Users/' + username + '.json')
         .then(res => {
+            console.log('setLoggedInUser', res.data)
             dispatch(setLoggedInUser(res.data));
         });
     }

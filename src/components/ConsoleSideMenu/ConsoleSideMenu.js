@@ -13,33 +13,35 @@ class ConsoleSideMenu extends Component {
       <NavLink
         className={styles.Option}
         activeClassName={styles.OptionActive}
-        to={"/test/AllProjects"}
+        to={"/Main/AllProjects"}
       >
         All Projects
       </NavLink>
     );
     const nonSuperUserLink = [
       <NavLink
+        key={"navLink1"}
         className={styles.Option}
         activeClassName={styles.OptionActive}
-        to={"/test/ManagedProjects"}
+        to={"/Main/ManagedProjects"}
       >
         Managed Projects
       </NavLink>,
       <NavLink
+        key={"navLink2"}
         className={styles.Option}
         activeClassName={styles.OptionActive}
-        to={"/test/JoinedProjects"}
+        to={"/Main/JoinedProjects"}
       >
         Joined Projects
-      </NavLink>
+      </NavLink>,
     ];
     return (
       <div className={styles.Content}>
         <NavLink
           className={styles.Option}
           activeClassName={styles.OptionActive}
-          to={"/test/TimeLine"}
+          to={"/Main/TimeLine"}
         >
           Timeline
         </NavLink>
@@ -47,7 +49,7 @@ class ConsoleSideMenu extends Component {
         <NavLink
           className={styles.Option}
           activeClassName={styles.OptionActive}
-          to={"/test/ConsoleLogout"}
+          to={"/Main/ConsoleLogout"}
         >
           Logout
         </NavLink>
@@ -56,13 +58,16 @@ class ConsoleSideMenu extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.authReducer,
-    currUser: state.loggedInUserReducer
+    currUser: state.loggedInUserReducer,
   };
 };
 
-export default connect(mapStateToProps, null, null, { pure: false })(
-  ConsoleSideMenu
-);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { pure: false }
+)(ConsoleSideMenu);

@@ -4,7 +4,6 @@ import styles from "./ProjectFullDetail.module.css";
 import * as projectActions from "../../store/actions/project";
 import * as userActions from "../../store/actions/user";
 import Modal from "../Modal/Modal";
-import axios from "../../axios-projects";
 
 import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
 import ArchiveStatus from "../ArchiveStatus/ArchiveStatus";
@@ -25,12 +24,12 @@ class ProjectFullDetail extends Component {
       mainImgURL: "",
       projectTitle: this.params.get("projectTitle").replace("%20", " "),
       showModal: false,
-      projectOwner: ""
+      projectOwner: "",
     };
   }
 
   componentDidMount() {
-    //this.checkProject( this.state.project ) 
+    //this.checkProject( this.state.project )
 
     this.props.onInitProject(
       this.state.projectTitle,
@@ -38,7 +37,11 @@ class ProjectFullDetail extends Component {
     );
 
     if (this.props.loggedInUser) {
-      this.props.fetchJoinedProjects(this.props.loggedInUser.projectsJoined);
+      console.log(
+        "init joined projects",
+        this.props.loggedInUser.projectsJoined
+      );
+      this.props.initJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
   }
 
@@ -48,19 +51,26 @@ class ProjectFullDetail extends Component {
     }
   }
 
-  // checkProject = (project) => { 
+  // checkProject = (project) => {
   //   this.setState({ foundProject: this.props.userJoinedProjects.find(project)})
-    
+
   // }
   addToJoinProject = () => {
     console.log(this.props.project);
-    console.log("User: ", this.props.loggedInUser.username)
-    this.props.saveProject(this.props.project, 
-      this.props.loggedInUser.username, this.props.loggedInUser.projectsJoined);
-    this.closeModal();
+    // console.log("User: ", this.props.loggedInUser.username)
+    if (this.props.auth.signedIn === true) {
+      this.props.saveProject(
+        this.props.project,
+        this.props.loggedInUser.username,
+        this.props.loggedInUser.projectsJoined
+      );
+      this.closeModal();
+    } else {
+      alert("Please sign in");
+    }
   };
 
-  selectPicture = imgURL => {
+  selectPicture = (imgURL) => {
     this.setState({ mainImgURL: imgURL });
   };
 
@@ -78,7 +88,6 @@ class ProjectFullDetail extends Component {
       this.props.project.title
     );
   };
-
 
   render() {
     console.log("props", this.props);
@@ -119,14 +128,14 @@ class ProjectFullDetail extends Component {
 
     let foundProject = undefined;
 
-    foundProject = this.props.userJoinedProjects.find(project => {
+    foundProject = this.props.userJoinedProjects.find((project) => {
       return project.title === this.state.projectTitle;
     });
 
     console.log("a", this.props.joinedProjects, "b", this.state.projectTitle);
     let found = false;
-    this.props.userJoinedProjects.forEach(project => {
-      if(this.state.projectTitle === project.title){
+    this.props.userJoinedProjects.forEach((project) => {
+      if (this.state.projectTitle === project.title) {
         found = true;
       }
     });
@@ -134,9 +143,7 @@ class ProjectFullDetail extends Component {
     if (foundProject !== undefined && found) {
       modalContent = (
         <div>
-          <h2>
-            Are you sure you want to leave project?
-          </h2>
+          <h2>Are you sure you want to leave project?</h2>
           <div>
             There will be no going back, unless the project owner accepts you
             again
@@ -157,9 +164,9 @@ class ProjectFullDetail extends Component {
       );
       modalButton = (
         <div className={styles.button_container}>
-            <button className={styles.ContentButton} onClick={this.showModal}>
-              Leave Project
-            </button>
+          <button className={styles.ContentButton} onClick={this.showModal}>
+            Leave Project
+          </button>
         </div>
       );
     } else {
@@ -173,7 +180,10 @@ class ProjectFullDetail extends Component {
       modalContent = (
         <div>
           <div>{projectOwnerInfo}</div>
-          <button className={styles.ContentButton} onClick={this.addToJoinProject}>
+          <button
+            className={styles.ContentButton}
+            onClick={this.addToJoinProject}
+          >
             Join
           </button>
         </div>
@@ -198,7 +208,7 @@ class ProjectFullDetail extends Component {
             className={styles.imgEnlarge}
             src={this.state.mainImgURL}
             alt="Main Img"
-          ></img>
+          />
           <div className={styles.imgSelect}>
             {this.props.project.imgs
               ? this.props.project.imgs.map((imgURL, i) => {
@@ -209,7 +219,7 @@ class ProjectFullDetail extends Component {
                       src={imgURL}
                       alt={imgURL}
                       onMouseEnter={() => this.selectPicture(imgURL)}
-                    ></img>
+                    />
                   );
                 })
               : null}
@@ -217,9 +227,9 @@ class ProjectFullDetail extends Component {
         </div>
         <h1>Description</h1>
         <p className={styles.Description}>{this.props.project.description}</p>
-        
+
         <Modal show={this.state.showModal} closeModal={this.closeModal}>
-            {modalContent}
+          {modalContent}
         </Modal>
         <ProjectOwnerDetail owner={this.props.project.owner} />
         <Modal
@@ -238,7 +248,7 @@ class ProjectFullDetail extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     project: state.projectReducer.project,
     projectOwner: state.userReducer.user,
@@ -246,34 +256,28 @@ const mapStateToProps = state => {
     userJoinedProjects: state.userJoinedProjectsReducer.projects,
     loggedInUser: state.loggedInUserReducer.loggedInUser,
     isArchived: state.archiveStatusReducer.status,
-
+    auth: state.authReducer,
     showModal: state.modalReducer.showModal,
-    modalProps: state.modalReducer.modalProps
+    modalProps: state.modalReducer.modalProps,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onInitProject: (projectTitle, status) =>
       dispatch(projectActions.initProject(projectTitle, status)),
 
     addToJoinProject: (projectTitle) =>
+      dispatch(userJoinedProjectsAction.setUserJoinedProjects(projectTitle)),
+
+    saveProject: (project, username, joinedProjects) =>
       dispatch(
-        userJoinedProjectsAction.setUserJoinedProjects(
-          projectTitle
-        )
+        userJoinedProjectsAction.saveProject(project, username, joinedProjects)
       ),
-      
-    saveProject: (project, username, joinedProjects) => 
-          dispatch(
-            userJoinedProjectsAction.saveProject(
-              project,
-              username, 
-              joinedProjects
-            )
-          ), 
-    fetchJoinedProjects: userName =>
-      dispatch(userJoinedProjectsAction.initJoinedProjects(userName)),
+    initJoinedProjects: (joinedProjectTitles) =>
+      dispatch(
+        userJoinedProjectsAction.initJoinedProjects(joinedProjectTitles)
+      ),
     leaveJoinedProjects: (username, joinedProjects, removeProject) =>
       dispatch(
         userJoinedProjectsAction.leaveJoinedProjects(
@@ -285,8 +289,11 @@ const mapDispatchToProps = dispatch => {
     addArchiveStatus: (status, pTitle) =>
       dispatch(archiveStatus.addArchiveStatus(status, pTitle)),
 
-    hideModal: () => dispatch(modalActions.hideModal())
+    hideModal: () => dispatch(modalActions.hideModal()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectFullDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectFullDetail);

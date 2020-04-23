@@ -92,11 +92,11 @@ export const initProjectAdd = (title, description, imgs, authUser) => {
       })
       .then(() => {
         alert("success");
-        history.push('/test/ManagedProjects')
+        history.push('/Main/ManagedProjects')
       })
       .catch(error => {
         alert("Failed");
-        history.push('/test/ManagedProjects')
+        history.push('/Main/ManagedProjects')
         console.error(error);
       });
   }

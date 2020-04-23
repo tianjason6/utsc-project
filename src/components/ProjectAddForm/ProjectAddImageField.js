@@ -1,12 +1,12 @@
 import React from "react";
-import { maxFileSize, imgUrl } from "../../firebaseConst.js";
+import { maxFileSize } from "../../firebaseConst.js";
 import styles from "./ProjectAddForm.module.css";
 
 class ProjectAddImageField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: ""
+      img: "",
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -33,20 +33,17 @@ class ProjectAddImageField extends React.Component {
   }
 
   render() {
-    const {
-      input: { value }
-    } = this.props;
     const { input, id } = this.props;
     return (
       <div className={styles.containerSmall}>
-        <img className={styles.imgItem} src={this.state.img} alt=""></img>
+        <img className={styles.imgItem} src={this.state.img} alt="" />
         <input
           type="file"
           className={styles.imgItem}
           onChange={this.onChange}
           accept="image/*"
           id={id}
-        ></input>
+        />
         <h3>Upload Image</h3>
       </div>
     );

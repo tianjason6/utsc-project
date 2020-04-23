@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import history from "./history";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import projectsReducer from "./store/reducers/projects";
@@ -20,7 +20,6 @@ import loggedInUserReducer from "./store/reducers/loggedInUser";
 import allProjectsReducer from "./store/reducers/allProjects";
 import archiveStatusReducer from "./store/reducers/archiveStatus";
 import modalReducer from "./store/reducers/modal";
-import projectAddReducer from "./store/reducers/projectAdd";
 import submitReducer from "./store/reducers/submit";
 
 import "./index.css";

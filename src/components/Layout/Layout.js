@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from './Layout.css';
 import NavBar from '../NavBar/NavBar';
 import Drawer from '../Drawer/Drawer';
 import Footer from '../Footer/Footer';
