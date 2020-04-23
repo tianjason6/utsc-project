@@ -12,7 +12,6 @@ export const setUserJoinedProjects = (projects) => {
 
 export const saveProject = (project, username, joinedProjectTitles) => {
   return async (dispatch) => {
-    console.log("joinedProjectTitles herre1", joinedProjectTitles);
     let joinedProjects = await Promise.all(
       joinedProjectTitles.map((joinedProjectTitle) => {
         return axios.get("Projects/" + joinedProjectTitle + ".json");
@@ -42,12 +41,9 @@ export const saveProject = (project, username, joinedProjectTitles) => {
             axios
               .get("Users/" + username + "/projectsJoined.json")
               .then((res) => {
-                console.log("res.data", res.data);
-                // dispatch(setUserJoinedProjects([...res.data]));
               });
           });
       }
-      console.log("newArray", newArray);
       dispatch(setUserJoinedProjects(newArray));
       // updating the logged in user
       dispatch(loggedInUserAction.fetchLoggedInUser(username));
@@ -87,7 +83,6 @@ export const leaveJoinedProjects = (
             joinedProjects = joinedProjects.map((joinedProject) => {
               return joinedProject.data;
             });
-            console.log("leave res data", joinedProjects);
             dispatch(setUserJoinedProjects([...joinedProjects]));
           });
       });
@@ -95,7 +90,6 @@ export const leaveJoinedProjects = (
 };
 
 export const initJoinedProjects = (projectsJoinedTitles) => {
-  console.log("here2", projectsJoinedTitles);
   //get user
   return (dispatch) => {
     if (projectsJoinedTitles) {

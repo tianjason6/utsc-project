@@ -37,10 +37,6 @@ class ProjectFullDetail extends Component {
     );
 
     if (this.props.loggedInUser) {
-      console.log(
-        "init joined projects",
-        this.props.loggedInUser.projectsJoined
-      );
       this.props.initJoinedProjects(this.props.loggedInUser.projectsJoined);
     }
   }
@@ -51,13 +47,7 @@ class ProjectFullDetail extends Component {
     }
   }
 
-  // checkProject = (project) => {
-  //   this.setState({ foundProject: this.props.userJoinedProjects.find(project)})
-
-  // }
   addToJoinProject = () => {
-    console.log(this.props.project);
-    // console.log("User: ", this.props.loggedInUser.username)
     if (this.props.auth.signedIn === true) {
       this.props.saveProject(
         this.props.project,
@@ -90,8 +80,6 @@ class ProjectFullDetail extends Component {
   };
 
   render() {
-    console.log("props", this.props);
-    console.log("state", this.state);
     let projectOwnerInfo = "Loading...";
     if (this.props.projectOwner !== undefined) {
       projectOwnerInfo = (
@@ -132,7 +120,6 @@ class ProjectFullDetail extends Component {
       return project.title === this.state.projectTitle;
     });
 
-    console.log("a", this.props.joinedProjects, "b", this.state.projectTitle);
     let found = false;
     this.props.userJoinedProjects.forEach((project) => {
       if (this.state.projectTitle === project.title) {

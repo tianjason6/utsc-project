@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styles from "./Console.module.css";
 import { connect } from "react-redux";
 import ConsoleSideMenu from "../ConsoleSideMenu/ConsoleSideMenu";
@@ -10,7 +10,6 @@ import ProjectAdd from "../ProjectAdd/ProjectAdd";
 import JoinedProjects from "../JoinedProjects/JoinedProjects";
 import Timeline from "../Timeline/Timeline";
 import AllProjects from "../AllProjects/AllProjects";
-import RouteError from "../RouteError/RouteError";
 
 class Console extends Component {
   render() {
