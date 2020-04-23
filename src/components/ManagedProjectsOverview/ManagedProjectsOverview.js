@@ -13,12 +13,12 @@ class ManagedProjectsOverview extends Component {
   render() {
     let managedProjects;
     if (this.props.userManagedProjects.length !== 0) {
-      managedProjects = this.props.userManagedProjects.map(project => {
-        if (project === null) {
-          return null;
-        }
-        return (
-          <>
+      managedProjects = this.props.userManagedProjects
+        .map((project) => {
+          if (project === null) {
+            return null;
+          }
+          return (
             <Project
               key={project.title}
               title={project.title}
@@ -26,18 +26,28 @@ class ManagedProjectsOverview extends Component {
               img={project.imgs[0]}
               projectInfo={project}
             />
-          </>
-        );
-      });
+          );
+        })
+        .filter((data) => {
+          return data !== null;
+        });
     }
 
     return (
       <div className={styles.Background}>
         <div className={styles.OngoingProjects}>
-          <h1>Managed Projects
-            <button className={styles.button} onClick={() => {history.push("/test/ProjectAdd")}}>Create a new project</button>
+          <h1>
+            Managed Projects
+            <button
+              className={styles.button}
+              onClick={() => {
+                history.push("/test/ProjectAdd");
+              }}
+            >
+              Create a new project
+            </button>
           </h1>
-          
+
           {managedProjects === undefined ? (
             <h1>You aren't managing any projects right now!</h1>
           ) : (
@@ -49,21 +59,26 @@ class ManagedProjectsOverview extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     authEmail: state.authReducer.email,
     error: state.featuredProjectsReducer.error,
-    userManagedProjects: state.userManagedProjectsReducer.projects
+    userManagedProjects: state.userManagedProjectsReducer.projects,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onInitUserManagedProjects: username =>
-      dispatch(userManagedProjectsActions.initUserManagedProjects(username))
+    onInitUserManagedProjects: (username) =>
+      dispatch(userManagedProjectsActions.initUserManagedProjects(username)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, {
-  pure: false
-})(ManagedProjectsOverview);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  {
+    pure: false,
+  }
+)(ManagedProjectsOverview);

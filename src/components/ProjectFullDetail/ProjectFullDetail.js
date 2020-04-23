@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./ProjectFullDetail.module.css";
 import * as projectActions from "../../store/actions/project";
-import * as userActions from "../../store/actions/user";
 import Modal from "../Modal/Modal";
 
 import ProjectOwnerDetail from "./ProjectOwnerDetail/ProjectOwnerDetail";
@@ -29,8 +28,6 @@ class ProjectFullDetail extends Component {
   }
 
   componentDidMount() {
-    //this.checkProject( this.state.project )
-
     this.props.onInitProject(
       this.state.projectTitle,
       this.props.isArchived[this.state.projectTitle]
@@ -38,6 +35,9 @@ class ProjectFullDetail extends Component {
 
     if (this.props.loggedInUser) {
       this.props.initJoinedProjects(this.props.loggedInUser.projectsJoined);
+      setTimeout(() => {
+        this.setState({ mainImgURL: this.props.project.imgs[0] });
+      }, 1000);
     }
   }
 
