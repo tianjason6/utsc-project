@@ -11,3 +11,34 @@
   border-radius: 4px;
   border-width: 1px;
 }
+
+
+.Red {
+  background-color: red;
+}
+.Orange {
+  background-color: orange;
+}
+.Yellow
+{
+  background-color: yellow;
+}
+.Green {
+  background-color: green;
+}
+.Blue {
+  background-color: blue;
+}
+.Indigo {
+  background-color: indigo;
+}
+.Violet {
+  background-color: violet;
+}
+.DefaultColor {
+  background-color: rgb(223, 223, 223); 
+}
+
+
+
+
