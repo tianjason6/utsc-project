@@ -50,6 +50,10 @@ function Profile(props) {
   
 
   var user = firebase.auth().currentUser;
+  if(user){
+
+    console.log(user.emailVerified);
+  }
 
   return (
     <div>

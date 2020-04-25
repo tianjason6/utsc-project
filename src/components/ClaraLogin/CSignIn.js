@@ -4,14 +4,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
-import { Fields, reduxForm } from "redux-form";
+import { Field, reduxForm, SubmissionError } from "redux-form";
 
-import {
-  BrowserRouter as Router,
-  Link as LinkTo,
-  Redirect,
-  // History
-} from "react-router-dom";
+import { BrowserRouter as Router, Link as LinkTo } from "react-router-dom";
 
 import * as firebase from "firebase";
 import Link from "@material-ui/core/Link";
@@ -23,70 +18,73 @@ var firebaseConfig = {
   projectId: "utsc-projects",
   storageBucket: "utsc-projects.appspot.com",
   messagingSenderId: "109791671007",
-  appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a"
+  appId: "1:109791671007:web:23cdd1c32c44ea59bd6f6a",
 };
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Confirm the link is a sign-in with email link.
-if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    var email = window.localStorage.getItem('emailForSignIn');
-    if (!email) {
-      email = window.prompt('Please provide your email for confirmation');
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <>
+    <TextField
+      fullWidth
+      id={label}
+      label={label}
+      variant="outlined"
+      {...input}
+      type={type}
+    />
+
+    {touched && error && <span>{error}</span>}
+  </>
+);
+
+let CSignIn = (props) => {
+  let [errorM, setErrorM] = useState("");
+  const { handleSubmit } = props; //hmmhmhmhmhmhmhmhmhm ask
+
+  const submit = (values) => {
+    let error = {};
+    let isError = false;
+
+    if (!("email" in values)) {
+      error.email = "Required";
+      isError = true;
     }
-    // The client SDK will parse the code from the link for you.
-    firebase.auth().signInWithEmailLink(email, window.location.href)
-      .then(function(result) {
-        window.localStorage.removeItem('emailForSignIn');
-      })
-      .catch(function(error) {
-      });
-  }
-  
 
-function CSignIn(props) {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [error, setError] = useState("");
+    if (!("password" in values)) {
+      error.password = "Required";
+      isError = true;
+    }
 
-  const changeEmail = e => {
-    setEmail(e.target.value);
-    setError("")
-  };
-
-  const changePass = e => {
-    setPass(e.target.value);
-    setError("")
-  };
-
-  const createUser = () => {
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        setError(errorMessage)
-        // ...
-    });
-    if(error === ""){
-        authChange();
+    if (isError) {
+      setErrorM("enter email and/or password")
+    } else {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(values.email, values.password)
+        .catch(function (error) {
+          isError = true;
+          setErrorM(error.message);
+        });
+      if (isError === false) {
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            let userid = firebase.auth().currentUser;
+            if (userid && userid.emailVerified) {
+              props.history.push("/profile");
+            } else {
+              setErrorM("verify yo email");
+            }
+          }
+        });
+      }
     }
   };
-  
-
-  const authChange =()=>{
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            console.log(user.emailVerified)
-            let userid = firebase.auth().currentUser.email;
-            console.log(userid)
-            props.history.push('/profile', userid)
-        }
-      });
-  }
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(submit)}>
       <Grid
         container
         fullWidth
@@ -107,44 +105,43 @@ function CSignIn(props) {
             <Typography variant="h4">Sign In</Typography>
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="email"
+            <Field
+              name="email"
+              type="email"
+              component={renderField}
               label="Email"
-              variant="outlined"
-              onChange={changeEmail}
             />
-            
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="pass"
-              type = "password"
+            <Field
+              name="password"
+              type="password"
+              component={renderField}
               label="Password"
-              variant="outlined"
-              onChange={changePass}
             />
           </Grid>
+
+          {<div>{errorM}</div>}
           <Grid item>
-            <Button onClick={createUser} variant="contained" color="primary">
+            <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
           </Grid>
 
-          {/* <Router> */}
-            <LinkTo to="/login">
-              <Link component="button" variant="body2">
-                Create Account
-              </Link>
-            </LinkTo>
-          {/* </Router> */}
-          
+          <LinkTo to="/login">
+            <Link component="button" variant="body2">
+              Create Account
+            </Link>
+          </LinkTo>
         </Grid>
-        <Typography variant="h6">{error}</Typography>
       </Grid>
-    </div>
+      }
+    </form>
   );
-}
+};
+
+CSignIn = reduxForm({
+  form: "CSignIn",
+})(CSignIn);
 
 export default CSignIn;
