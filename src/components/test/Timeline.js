@@ -6,8 +6,10 @@ import * as timelineAction from "../../store/actions/timeline";
 
 import TimelineItem from "./TimelineItem/TimelineItem";
 
-import Modal from "../Modal/Modal";
 
+
+// this is a new line 
+// just to see what happens
 import AddToTimelineForm from "./AddTimelineForm/AddTimelineForm";
 
 class Timeline extends Component {
