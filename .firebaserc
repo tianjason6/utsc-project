@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "utscprojects",
+    "default": "utscprojects"
+  }
+}
