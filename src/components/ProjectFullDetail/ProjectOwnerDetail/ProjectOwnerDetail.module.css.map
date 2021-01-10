@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AACA,AAAA,KAAK,CAAC;EACJ,MAAM,EAAE,eAAe;EACvB,KAAK,EAAE,GAAG;EACV,YAAY,EAJA,GAAG;EAKf,WAAW,EALC,GAAG;CAMhB;;AAED,AAAA,mBAAmB,CAAC;EAClB,YAAY,EATA,GAAG;EAUf,WAAW,EAVC,GAAG;CAiBhB;;AATD,AAGE,mBAHiB,CAGjB,QAAQ,CAAC;EACP,SAAS,EAAE,IAAI;CAChB;;AALH,AAME,mBANiB,CAMjB,YAAY,CAAC;EACX,SAAS,EAAE,IAAI;CAChB",
-    "sources": [
-        "ProjectOwnerDetail.module.scss"
-    ],
-    "names": [],
-    "file": "ProjectOwnerDetail.module.css"
-}
