@@ -1,15 +1,15 @@
 {
-  "main.css": "/static/css/main.64e900cf.chunk.css",
-  "main.js": "/static/js/main.849b5488.chunk.js",
-  "main.js.map": "/static/js/main.849b5488.chunk.js.map",
-  "static/js/1.29aeb0a8.chunk.js": "/static/js/1.29aeb0a8.chunk.js",
-  "static/js/1.29aeb0a8.chunk.js.map": "/static/js/1.29aeb0a8.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/ProjectFullDetailEdit.module.css": "/static/media/night-sky.d1028cf1.jpg",
-  "static/media/Project.module.css": "/static/media/addProject.ece614f0.svg",
-  "static/css/main.64e900cf.chunk.css.map": "/static/css/main.64e900cf.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.d170db88c8b88fc5133e5d35f8566e5e.js": "/precache-manifest.d170db88c8b88fc5133e5d35f8566e5e.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/utsc-project/static/css/main.1f382cfc.chunk.css",
+  "main.js": "/utsc-project/static/js/main.57812239.chunk.js",
+  "main.js.map": "/utsc-project/static/js/main.57812239.chunk.js.map",
+  "static/js/1.569cce25.chunk.js": "/utsc-project/static/js/1.569cce25.chunk.js",
+  "static/js/1.569cce25.chunk.js.map": "/utsc-project/static/js/1.569cce25.chunk.js.map",
+  "runtime~main.js": "/utsc-project/static/js/runtime~main.e1cb4b83.js",
+  "runtime~main.js.map": "/utsc-project/static/js/runtime~main.e1cb4b83.js.map",
+  "static/media/ProjectFullDetailEdit.module.css": "/utsc-project/static/media/night-sky.d1028cf1.jpg",
+  "static/media/Project.module.css": "/utsc-project/static/media/addProject.ece614f0.svg",
+  "static/css/main.1f382cfc.chunk.css.map": "/utsc-project/static/css/main.1f382cfc.chunk.css.map",
+  "index.html": "/utsc-project/index.html",
+  "precache-manifest.6bbb0661d597315de7bcf82646547053.js": "/utsc-project/precache-manifest.6bbb0661d597315de7bcf82646547053.js",
+  "service-worker.js": "/utsc-project/service-worker.js"
 }
