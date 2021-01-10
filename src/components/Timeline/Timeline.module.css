@@ -1,0 +1,70 @@
+.Background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.container {
+    margin-top: 40px;
+    width: 85%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+.addTimeline {
+    text-decoration: none;
+    border: solid 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(247, 103, 36);
+    border-radius: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.addTimelineBtn:hover{
+    background-color: rgb(255, 139, 81);
+    cursor: pointer;
+}
+
+.addTimelineBtn {
+    width: 30%;
+    margin: 0 0 20px 0;;
+    height: 40px;
+    background-color: rgb(247, 103, 36);
+    transition: background-color 0.2s ease;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px darkgrey;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+}
+
+.modalStyle{
+    height: 100%;
+    width: 100%;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+}
+.paginationItem{
+    padding: 5px 10px 5px 10px;
+
+    margin-bottom: 10px;
+    background-color: rgb(247, 103, 36);
+    color: white
+}
+.activePaginationItem {
+    background-color: rgb(160, 60, 15);
+}
+
+.paginationItem:hover{
+    cursor: pointer;
+    background-color: rgb(160, 60, 15);
+}

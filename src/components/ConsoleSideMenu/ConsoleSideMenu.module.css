@@ -1,0 +1,89 @@
+.Content {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+@media (min-width: 1611px) {
+  .Content {
+    flex-direction: column;
+    width: 15vw;
+    min-height: 100%;
+    border-right: 2px solid black;
+    padding-top: 30px;
+  }
+}
+
+@media (max-width: 1610px) {
+  .Content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 99vw;
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .Content {
+    width: 98vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .Content {
+    width: 97vw;
+  }
+}
+
+@media (max-width: 660px) {
+  .Content {
+    width: 96vw;
+  }
+}
+
+/* for option items */
+
+.Content .Option:hover {
+  border-bottom: 4px solid rgb(247, 103, 36);
+  color: rgb(247, 103, 36);
+  cursor: pointer;
+}
+
+.Content .OptionActive {
+  border-bottom: 4px solid rgb(247, 103, 36);
+  color: rgb(247, 103, 36);
+}
+
+@media (max-width: 500px) {
+  .Content {
+    display: none;
+  }
+
+  .Content a {
+    display: none;
+  }
+
+  .Content .Option {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  .Content a {
+    text-decoration: none;
+  }
+
+  .Content .Option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 50px;
+    width: 80%;
+    font-size: 23px;
+    border-radius: 5px;
+    color: black;
+  }
+}

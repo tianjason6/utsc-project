@@ -1,0 +1,191 @@
+.Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ProjectFullDetail .TitleImgs {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  padding-bottom: 20px;
+  padding-top: 5%;
+}
+
+.ProjectFullDetail .imgEnlarge {
+  background-image: url("../../assests/images/night-sky.jpg");
+  width: 600px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid black;
+}
+
+@media (max-width: 900px) {
+  .ProjectFullDetail .imgEnlarge {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ProjectFullDetail .imgEnlarge {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ProjectFullDetail .imgEnlarge {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 300px) {
+  .ProjectFullDetail .imgEnlarge {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.ProjectFullDetail .imgSelect {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.ProjectFullDetail .imgSelect {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.ProjectFullDetail .imgSelect .imgItem {
+  background-image: url("../../assests/images/night-sky.jpg");
+  border: 2px solid black;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 500px) {
+  .ProjectFullDetail .imgSelect .imgItem {
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+.ProjectFullDetail .imgSelect .imgItem:hover {
+  border: 2px solid rgb(247, 103, 36);
+}
+
+.ProjectFullDetail h1 {
+  font-size: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ProjectFullDetail p {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  text-align: justify;
+  padding-left: 10px;
+  font-size: 26px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1250px) {
+  .ProjectFullDetail p {
+    width: 800px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ProjectFullDetail p {
+    width: 680px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ProjectFullDetail p {
+    width: 500px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ProjectFullDetail p {
+    width: 300px;
+    font-size: 14px;
+  }
+
+  .ProjectFullDetail h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 300px) {
+  .ProjectFullDetail p {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .ProjectFullDetail h1 {
+    font-size: 35px;
+  }
+}
+
+.ContentButton {
+  width: 70%;
+  height: 60px;
+  background-color: rgb(247, 103, 36);
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px darkgrey;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ContentButton:hover {
+  background-color: rgb(163, 62, 15);
+  cursor: pointer;
+}
+
+.YesButton {
+  background-color: rgb(119, 189, 79);
+}
+.YesButton:hover {
+  background-color: rgb(141, 209, 39);
+}
+.NoButton {
+  background-color: rgb(230, 32, 32);
+}
+.NoButton:hover {
+  background-color: rgb(175, 0, 0);
+}

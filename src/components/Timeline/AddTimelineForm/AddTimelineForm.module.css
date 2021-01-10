@@ -1,0 +1,121 @@
+.background {
+    top:0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+
+    margin-top: 100px;
+    padding-bottom: 110px;
+}
+
+.banner{
+    display: flex;
+    justify-content: center;
+    top: 10vw;
+    width: 50%;
+    display:flex;
+    align-items: center;
+    text-align: center;
+}
+
+.formItem{
+    display: flex;
+    flex-direction: row;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+
+    border-radius: 10px;
+}
+
+.title{
+    width: 95%;
+}
+
+.content{
+    width: 95%;
+    height: 20vh;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.error {
+    color: red;
+}
+
+.active{
+    background-color: rgb(0, 217, 255);
+}
+
+.chooseFile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 130px;
+    min-height: 40px;
+    width: 100%;
+
+    background-color: rgb(247, 103, 36);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.chooseFile:hover{
+    cursor: pointer;
+    background-color: rgb(160, 60, 15);
+}
+textarea {
+    resize: none;
+}
+
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    min-width: 60px;
+    width: 40%; 
+    min-height: 40px;
+    background-color: rgb(247, 103, 36);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: none;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: rgb(160, 60, 15);
+}
+@media (max-height: 800px) {
+    .background{
+        padding-top: 100px;
+    }
+}
+@media (max-height: 500px) {
+    .background{
+        padding-top: 200px;
+    }
+}
+@media (max-width: 700px) {
+    .background{
+        padding-top: 100px;
+    }
+}
+@media (max-width: 550px) {
+    .background{
+        padding-top: 200px;
+    }
+}
